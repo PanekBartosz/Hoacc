@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter;
+  background: linear-gradient(rgba(30, 170, 241, 0.5),rgba(87, 222, 240, 0));
+  --font-black: #000000;
+  --font-white: #FFFFFF;
+}
+
+body {
+  @apply overflow-x-hidden overflow-y-auto h-screen w-screen
+}
