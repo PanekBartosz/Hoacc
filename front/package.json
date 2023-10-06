@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "typed.js": "^2.0.16",
     "vue": "^3.3.4"
   },
   "devDependencies": {

@@ -3,12 +3,19 @@
 @tailwind utilities;
 
 :root {
-  font-family: Inter;
+  font-family: Arial;
   background: linear-gradient(rgba(30, 170, 241, 0.5),rgba(87, 222, 240, 0));
   --font-black: #000000;
   --font-white: #FFFFFF;
+  --font-grey: rgba(0, 0, 0, 0.4);
 }
 
 body {
-  @apply overflow-x-hidden overflow-y-auto h-screen w-screen
+  @apply h-screen w-screen
+}
+
+@layer base {
+  .font-outline-2 {
+    -webkit-text-stroke: 2px black;
+  }
 }

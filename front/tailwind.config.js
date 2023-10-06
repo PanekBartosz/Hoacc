@@ -8,8 +8,15 @@ export default {
     extend: {
       colors: {
         "font-black": "var(--font-black)",
-        "font-white": "var(--font-white)"
-      }
+        "font-white": "var(--font-white)",
+        "font-grey": "var(--font-grey)"
+      },
+      boxShadow: {
+        'custom': '4px 4px 4px rgba(0, 0, 0, 0.25)',
+      },
+      filter: {
+        'logo': '4px 4px 4px rgba(0, 0, 0, 0.25)',
+      },
     },
   },
   plugins: [],
