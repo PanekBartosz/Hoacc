@@ -3,7 +3,10 @@ import StartingPage from './components/StartingPage.vue'
 </script>
 
 <template>
-  <StartingPage />
+  <div>
+    <StartingPage />
+  </div>
+  <router-view></router-view>
 </template>
 
 <style scoped>
