@@ -1,15 +1,38 @@
 <script setup lang="ts">
+import { ref, watch } from 'vue'
 import Logo from './Logo.vue'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
+const localStorageKey = 'isVisibleState' // Key for storing in localStorage
+let initialIsVisible = localStorage.getItem(localStorageKey)
+const isVisible = ref(true)
+
 const navigateToHome = () => {
+  isVisible.value = true
+  localStorage.setItem(localStorageKey, JSON.stringify(true))
+  router.push({ name: 'Home' })
   router.push('/')
 }
 
 const navigateToAbout = () => {
+  router.push({ name: 'About' })
   router.push('/about')
+}
+const navigateToLogin = () => {
+  isVisible.value = false
+  localStorage.setItem(localStorageKey, JSON.stringify(false))
+  router.push('/login')
+}
+
+watch(() => router.currentRoute.value, () => {
+  initialIsVisible = localStorage.getItem(localStorageKey)
+  isVisible.value = initialIsVisible !== null ? JSON.parse(initialIsVisible) : true
+})
+
+const isActiveRoute = (routeName) => {
+  return router.currentRoute.value.name === routeName;
 }
 
 </script>
@@ -17,23 +40,21 @@ const navigateToAbout = () => {
 <template>
   <div class="p-5">
     <Logo @click="navigateToHome"/>
-    <div class="text-right xxs:mt-5 flex justify-end">
-      <div class="flex items-center md:mr-[50px]">
-        <button @click="navigateToHome" class="text-[16px] mt-7 xxs:mt-0 sm:mr-6 focus:text-white mr-3 font-bold sm:text-[32px] sm:focus:text-transparent  sm:focus:font-outline-2">
-          HOME
-        </button>
-        <button @click="navigateToAbout" class="text-[16px] mt-7 xxs:mt-0 sm:mr-6 focus:text-white mr-3 font-bold sm:text-[32px] sm:focus:text-transparent  sm:focus:font-outline-2">
-          ABOUT US
-        </button>
-        <button class="px-2 py-0 mt-7 xxs:mt-0 sm:px-4 sm:py-1 font-semibold rounded-lg text-lg shadow-custom bg-white 
-            text-font-black hover:bg-black hover:text-white transition duration-300 ease-in-out">
-          LOG IN
-        </button>      
+    <div v-if="isVisible">
+      <div class="text-right xxs:mt-5 flex justify-end">
+        <div class="flex items-center md:mr-[50px]">
+          <button @click="navigateToHome" :class="{ 'text-white': isActiveRoute('Home') }" class="text-[16px] mt-7 xxs:mt-0 sm:mr-6 mr-3 font-bold sm:text-[32px]">
+            HOME
+          </button>
+          <button @click="navigateToAbout" :class="{ 'text-white': isActiveRoute('About') }" class="text-[16px] mt-7 xxs:mt-0 sm:mr-6 mr-3 font-bold sm:text-[32px]">
+            ABOUT US
+          </button>
+          <button @click="navigateToLogin"  class="px-2 py-0 mt-7 xxs:mt-0 sm:px-4 sm:py-1 font-semibold rounded-lg text-lg shadow-custom bg-white 
+              text-font-black hover:bg-black hover:text-white transition duration-300 ease-in-out">
+            LOG IN
+          </button>      
+        </div>
       </div>
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>
