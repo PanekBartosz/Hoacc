@@ -5,7 +5,7 @@
     <div class="flex min-h-[90vh] justify-center items-center">
       <div class="w-90 xs:w-80 sm:w-50 lg:w-30 bg-white rounded-2xl shadow-lg flex flex-col justify-center p-6 lg:p-8">
         <div class="sm:w-full sm:max-w-sm">
-          <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          <h2 class="mt-2 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
             Sign up
           </h2>
         </div>
@@ -61,7 +61,7 @@
           <p class="mt-10 text-center text-sm text-gray-500">
             Already have account?
             {{ ' ' }}
-            <a href="#" class="font-semibold leading-6 text-button-blue hover:text-button-blue-hover">
+            <a href="/login" class="font-semibold leading-6 text-button-blue hover:text-button-blue-hover">
               Login
             </a>
           </p>
