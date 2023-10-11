@@ -19,7 +19,9 @@ export default {
         "font-black": "var(--font-black)",
         "font-white": "var(--font-white)",
         "font-grey": "var(--font-grey)",
-        "font-logo": "var(--font-logo)"
+        "font-logo": "var(--font-logo)",
+        "button-blue": "#1EAAF1",
+        "button-blue-hover": "#6CC9F8",
       },
       boxShadow: {
         'custom': '4px 4px 4px rgba(0, 0, 0, 0.25)',
@@ -29,5 +31,7 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    
+  ],
 }
