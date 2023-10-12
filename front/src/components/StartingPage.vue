@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import Logo from './Logo.vue'
 import { useRouter } from 'vue-router'
 
@@ -35,12 +35,16 @@ const isActiveRoute = (routeName) => {
   return router.currentRoute.value.name === routeName;
 }
 
+const isDashboardRoute = computed(() => {
+  return router.currentRoute.value.path === '/dashboard';
+})
+
 </script>
 
 <template>
   <div class="p-5">
-    <Logo @click="navigateToHome"/>
-    <div v-if="isVisible">
+    <Logo v-if="!isDashboardRoute" @click="navigateToHome"/>
+    <div v-if="isVisible && !isDashboardRoute">
       <div class="text-right xxs:mt-5 flex justify-end">
         <div class="flex items-center md:mr-[50px]">
           <button @click="navigateToHome" :class="{ 'text-white': isActiveRoute('Home') }" class="text-[16px] mt-7 xxs:mt-0 sm:mr-6 mr-3 font-bold sm:text-[32px]">
