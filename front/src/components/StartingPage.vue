@@ -66,7 +66,9 @@ const isDashboardRoute = computed(() => {
           </button>
           <button
             @click="navigateToLogin"
-            class="px-2 py-0 mt-7 xxs:mt-0 sm:px-4 sm:py-1 font-semibold rounded-lg text-lg shadow-custom bg-white text-font-black hover:bg-black hover:text-white transition duration-300 ease-in-out"
+            class="px-2 py-0 mt-7 xxs:mt-0 sm:px-4 sm:py-1 font-semibold rounded-lg
+             text-lg shadow-custom bg-white text-font-black hover:bg-black
+            hover:text-white transition duration-300 ease-in-out"
           >
             LOG IN
           </button>
