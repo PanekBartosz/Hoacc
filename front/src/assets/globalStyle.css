@@ -20,3 +20,19 @@ html, body {
     -webkit-text-stroke: 2px black;
   }
 }
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track{
+  background: rgba(30, 170, 241, 0.5);
+}
+
+::-webkit-scrollbar-thumb{
+  background: #CBD5E0;
+}
+
+::-webkit-scrollbar-thumb:hover{
+  background: #BCD2E2;
+}
