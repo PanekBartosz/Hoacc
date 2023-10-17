@@ -15,7 +15,7 @@ const navigation = [
 const mobileMenuOpen = ref(false);
 </script>
 <template>
-<div class="bg-white mb-6">
+  <div class="bg-white mb-0 sticky top-0 w-full">
     <header class="absolute inset-x-0 top-0 z-50">
       <nav
         class="flex items-center justify-between bg-white shadow-lg rounded-b-2xl p-2 px-8"

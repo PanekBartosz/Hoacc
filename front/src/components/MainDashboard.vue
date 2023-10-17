@@ -1,14 +1,21 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import MainNavbar from "./MainNavbar.vue";
+import { Pagination } from "flowbite-vue";
 
 const currentDate = new Date();
+const currentPage = ref(1);
+const totalItems = 20
 
 const formattedDate = new Intl.DateTimeFormat("en-US", {
   day: "2-digit",
   month: "long",
   year: "numeric",
 }).format(currentDate);
+
+const genNumber = () => {
+  return Math.floor(Math.random() * 100) + 1;
+}
 
 interface Operation {
   date: string;
@@ -17,19 +24,26 @@ interface Operation {
   amount: number;
 }
 
-const testOperation: Operation = {
-  date: formattedDate,
-  category: "EDUCATION",
-  description: "New book - c# in depth",
-  amount: 53.01,
-}
-
 const operations = ref<Operation[]>(
-  [...Array(4).keys()].map(() => testOperation)
+  [...Array(totalItems).keys()].map(() => ({
+    date: formattedDate,
+    category: "EDUCATION",
+    description: "New book - c# in depth",
+    amount: genNumber(),
+  }))
 );
+const perPage = 5;
+
+const paginatedOperations = computed(() => {
+  const startIndex = (currentPage.value - 1) * perPage;
+  const endIndex = startIndex + perPage;
+  return operations.value.slice(startIndex, endIndex);
+})
+
+
 </script>
 <template>
-  <MainNavbar />
+  <MainNavbar class="p-4" />
   <div class="w-full h-full flex flex-col p-5">
     <!-- Container 1-->
     <div class="w-full h-full bg-white rounded-lg shadow-lg p-4 mb-5">
@@ -78,8 +92,8 @@ const operations = ref<Operation[]>(
     >
       <div class="flex flex-row justify-between">
         <h3 class="text-xl font-medium text-gray-700">Operations</h3>
-          <button
-          class="rounded-lg bg-blue-600 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+        <button
+          class="rounded-lg bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           data-ripple-light="true"
         >
           Add new
@@ -122,7 +136,7 @@ const operations = ref<Operation[]>(
               </thead>
 
               <tbody class="bg-white">
-                <tr v-for="(o, index) in operations" :key="index">
+                <tr v-for="(o, index) in paginatedOperations" :key="index">
                   <td
                     class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
                   >
@@ -166,24 +180,14 @@ const operations = ref<Operation[]>(
                 </tr>
               </tbody>
             </table>
-            <div
-              class="flex flex-col items-center px-5 py-5 bg-white"
-            >
-              <span class="text-xs mb-2 text-gray-900 xs:text-sm"
-                >Showing 1 to 4 of 50 Entries</span
-              >
-              <div class="inline-flex mt-2">
-                <button
-                  class="px-4 py-2 text-sm font-semibold text-gray-800 bg-gray-300 rounded-l hover:bg-gray-400"
-                >
-                  Prev
-                </button>
-                <button
-                  class="px-4 py-2 text-sm font-semibold text-gray-800 bg-gray-300 rounded-r hover:bg-gray-400"
-                >
-                  Next
-                </button>
-              </div>
+            <div class="flex items-center justify-center text-cente">
+              <Pagination
+                v-model="currentPage"
+                :layout="'table'"
+                :per-page="5"
+                :total-items="totalItems"
+                class="mb-2 text-center"
+              />
             </div>
           </div>
         </div>
@@ -193,16 +197,40 @@ const operations = ref<Operation[]>(
     <!-- Container 3 & 4  -->
     <div class="w-full h-full lg:flex">
       <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:mr-5">
-        <h3 class="text-xl font-medium text-gray-700">Notification</h3>
+        <div class="flex flex-row justify-between">
+          <h3 class="text-xl font-medium text-gray-700">Notification</h3>
+          <button
+          class="rounded-lg bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          data-ripple-light="true"
+          >
+          Add new
+        </button>
+        </div>
       </div>
       <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5">
+        <div class="flex flex-row justify-between">
         <h3 class="text-xl font-medium text-gray-700">Goals</h3>
+        <button
+          class="rounded-lg bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          data-ripple-light="true"
+        >
+          Edit
+        </button>
+      </div>
       </div>
     </div>
 
     <!-- Container 5  -->
     <div class="w-full h-full bg-white rounded-lg shadow-lg p-4 mb-5">
-      <h3 class="text-xl font-medium text-gray-700">Statics</h3>
+      <div class="flex flex-row justify-between">
+        <h3 class="text-xl font-medium text-gray-700">Statics</h3>
+        <button
+          class="rounded-lg bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          data-ripple-light="true"
+        >
+          Add new
+        </button>
+      </div>
     </div>
   </div>
 </template>

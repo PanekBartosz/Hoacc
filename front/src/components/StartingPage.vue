@@ -45,7 +45,7 @@ const isDashboardRoute = computed(() => {
 </script>
 
 <template>
-  <div class="p-5">
+  <div v-if="!isDashboardRoute" class="p-5">
     <Logo v-if="!isDashboardRoute" @click="navigateToHome" />
     <div v-if="isVisible && !isDashboardRoute">
       <div class="text-right xxs:mt-5 flex justify-end">
