@@ -40,6 +40,48 @@ const paginatedOperations = computed(() => {
   return operations.value.slice(startIndex, endIndex);
 })
 
+const notifications = ref([
+  {
+    title: 'Netflix',
+    date: '17.10.2023',
+    price: genNumber() + ' PLN',
+  },
+  {
+    title: 'Netflix',
+    date: '17.10.2023',
+    price: genNumber() + ' PLN',
+  },
+  {
+    title: 'Netflix',
+    date: '17.10.2023',
+    price: genNumber() + ' PLN',
+  },
+  {
+    title: 'Netflix',
+    date: '17.10.2023',
+    price: genNumber() + ' PLN',
+  },
+  {
+    title: 'Netflix',
+    date: '17.10.2023',
+    price: genNumber() + ' PLN',
+  },
+  {
+    title: 'Netflix',
+    date: '17.10.2023',
+    price: genNumber() + ' PLN',
+  },
+  {
+    title: 'Netflix',
+    date: '17.10.2023',
+    price: genNumber() + ' PLN',
+  },
+  // Add more notification objects as needed
+]);
+
+const deleteNotification = (index) => {
+  notifications.value.splice(index, 1);
+};
 
 </script>
 <template>
@@ -196,19 +238,28 @@ const paginatedOperations = computed(() => {
 
     <!-- Container 3 & 4  -->
     <div class="w-full h-full lg:flex">
-      <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:mr-5">
-        <div class="flex flex-row justify-between">
-          <h3 class="text-xl font-medium text-gray-700">Notification</h3>
-          <button
+    <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2 lg:mr-5">
+      <div class="flex flex-row justify-between">
+        <h3 class="text-xl font-medium text-gray-700">Notifications</h3>
+        <button
           class="rounded-lg bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+          @click=""
           data-ripple-light="true"
-          >
+        >
           Add new
         </button>
-        </div>
       </div>
-      <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5">
-        <div class="flex flex-row justify-between">
+      <div class="flex flex-row my-3 overflow-auto">
+          <div v-for="(notification, index) in notifications" :key="index" class="bg-neutral-200 rounded-lg text-center shadow-md p-4 mx-3 my-3">
+            <div class="font-bold text-gray-700">{{ notification.title }}</div>
+            <div class="text-gray-500">{{ notification.date }}</div>
+            <div class="text-gray-900">{{ notification.price }}</div>
+            <button @click="deleteNotification(index)" class="text-red-600 hover:text-red-900 mt-2">Delete</button>
+          </div>
+      </div>
+    </div>
+    <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2">
+      <div class="flex flex-row justify-between">
         <h3 class="text-xl font-medium text-gray-700">Goals</h3>
         <button
           class="rounded-lg bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
@@ -217,8 +268,8 @@ const paginatedOperations = computed(() => {
           Edit
         </button>
       </div>
-      </div>
     </div>
+  </div>
 
     <!-- Container 5  -->
     <div class="w-full h-full bg-white rounded-lg shadow-lg p-4 mb-5">
