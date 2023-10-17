@@ -83,6 +83,31 @@ const deleteNotification = (index) => {
   notifications.value.splice(index, 1);
 };
 
+import {onMounted } from 'vue';
+import Chart from 'chart.js/auto';
+
+const donutChart = ref(null);
+
+onMounted(() => {
+  const ctx = donutChart.value.getContext('2d');
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: [],
+      datasets: [
+        {
+          data: [25, 75],
+          backgroundColor: ['grey', 'green'],
+        },
+      ],
+    },
+    options: {
+      responsive: true,
+      cutout: '80%',
+    },
+  });
+});
+
 </script>
 <template>
   <MainNavbar class="p-4" />
@@ -267,6 +292,9 @@ const deleteNotification = (index) => {
         >
           Edit
         </button>
+      </div>
+      <div class="w-32">
+        <canvas ref="donutChart"></canvas>
       </div>
     </div>
   </div>
