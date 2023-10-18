@@ -2,6 +2,7 @@
 import { computed, ref } from "vue";
 import MainNavbar from "./MainNavbar.vue";
 import { Pagination } from "flowbite-vue";
+import ProfitChart from "./ProfitChart.vue"
 
 const currentDate = new Date();
 const currentPage = ref(1);
@@ -89,24 +90,21 @@ import Chart from 'chart.js/auto';
 const donutChart = ref(null);
 
 onMounted(() => {
-  const ctx = donutChart.value.getContext('2d');
-  new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: [],
-      datasets: [
-        {
-          data: [25, 75],
-          backgroundColor: ['grey', 'green'],
-        },
-      ],
-    },
-    options: {
-      responsive: true,
-      cutout: '80%',
-    },
+    const ctx = donutChart.value.getContext('2d');
+    new Chart(ctx, {
+      type: 'doughnut',
+      data: {
+        labels: ['Done', 'Remaining'],
+        datasets: [
+          {
+            data: [25, 75],
+            backgroundColor: ['#93C5FD','#34D399'],
+          },
+        ],
+      },
+    });
   });
-});
+
 
 </script>
 <template>
@@ -294,22 +292,19 @@ onMounted(() => {
         </button>
       </div>
       <div class="w-32">
-        <canvas ref="donutChart"></canvas>
+        <canvas ref="donutChart">
+          <span>75%</span>
+        </canvas>
       </div>
     </div>
   </div>
 
     <!-- Container 5  -->
     <div class="w-full h-full bg-white rounded-lg shadow-lg p-4 mb-5">
-      <div class="flex flex-row justify-between">
+      <div class="flex flex-row mb-5">
         <h3 class="text-xl font-medium text-gray-700">Statics</h3>
-        <button
-          class="rounded-lg bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-          data-ripple-light="true"
-        >
-          Add new
-        </button>
       </div>
+      <ProfitChart />
     </div>
   </div>
 </template>
