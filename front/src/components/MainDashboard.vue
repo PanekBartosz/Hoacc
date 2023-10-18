@@ -3,6 +3,8 @@ import { computed, ref } from "vue";
 import MainNavbar from "./MainNavbar.vue";
 import { Pagination } from "flowbite-vue";
 import ProfitChart from "./ProfitChart.vue"
+import SavingsChart from "./SavingsChart.vue";
+import CategoryChart from "./CategoryChart.vue";
 
 const currentDate = new Date();
 const currentPage = ref(1);
@@ -77,33 +79,35 @@ const notifications = ref([
     date: '17.10.2023',
     price: genNumber() + ' PLN',
   },
-  // Add more notification objects as needed
 ]);
 
 const deleteNotification = (index) => {
   notifications.value.splice(index, 1);
 };
 
-import {onMounted } from 'vue';
+import {watch } from 'vue';
 import Chart from 'chart.js/auto';
 
-const donutChart = ref(null);
+const donutChart = ref<HTMLCanvasElement | null>(null);
 
-onMounted(() => {
-    const ctx = donutChart.value.getContext('2d');
-    new Chart(ctx, {
-      type: 'doughnut',
-      data: {
-        labels: ['Done', 'Remaining'],
-        datasets: [
-          {
-            data: [25, 75],
-            backgroundColor: ['#93C5FD','#34D399'],
-          },
-        ],
-      },
-    });
-  });
+watch(() => donutChart.value, (newValue) => {
+  if (newValue) {
+    const ctx = (newValue as HTMLCanvasElement).getContext('2d'); // Type assertion
+    if (ctx) { // Check if getContext returns a non-null value
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          datasets: [
+            {
+              data: [33, 67],
+              backgroundColor: ['grey', '#34D399'],
+            },
+          ],
+        },
+      });
+    }
+  }
+});
 
 
 </script>
@@ -282,7 +286,7 @@ onMounted(() => {
       </div>
     </div>
     <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2">
-      <div class="flex flex-row justify-between">
+      <div class="flex flex-row justify-between mb-6">
         <h3 class="text-xl font-medium text-gray-700">Goals</h3>
         <button
           class="rounded-lg bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
@@ -292,19 +296,27 @@ onMounted(() => {
         </button>
       </div>
       <div class="w-32">
-        <canvas ref="donutChart">
-          <span>75%</span>
-        </canvas>
+        <canvas ref="donutChart"></canvas>
       </div>
     </div>
   </div>
 
     <!-- Container 5  -->
-    <div class="w-full h-full bg-white rounded-lg shadow-lg p-4 mb-5">
-      <div class="flex flex-row mb-5">
+    <div class="w-full h-full justify-between bg-white rounded-lg shadow-lg p-4">
+      <div class="flex flex-row mb-2">
         <h3 class="text-xl font-medium text-gray-700">Statics</h3>
       </div>
-      <ProfitChart />
+      <div class="w-full flex flex-wrap justify-between">
+        <div class="w-full md:w-1/2 xl:w-1/3">
+          <ProfitChart class="mb-5 mr-7 h-full"/>
+        </div>
+        <div class="w-full md:w-1/2 xl:w-1/3">
+          <SavingsChart class="mb-5 mr-7 h-full"/>
+        </div>
+        <div class="w-full md:w-1/2 xl:w-1/3">
+          <CategoryChart class="mb-5 mr-7 h-full"/>
+        </div>
+      </div>
     </div>
   </div>
 </template>
