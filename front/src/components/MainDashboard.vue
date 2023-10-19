@@ -112,10 +112,10 @@ watch(() => donutChart.value, (newValue) => {
 
 </script>
 <template>
-  <MainNavbar class="p-4" />
+  <MainNavbar class="" />
   <div class="w-full h-full flex flex-col p-5">
     <!-- Container 1-->
-    <div class="w-full h-full bg-white rounded-lg shadow-lg p-4 mb-5">
+    <div class="w-full h-full mt-10 bg-white rounded-lg shadow-lg p-4 mb-5">
       <h3 class="text-xl font-medium text-gray-700">Monthly balance</h3>
       <div class="mt-3">
         <div class="flex flex-wrap -mx-6">
@@ -302,19 +302,21 @@ watch(() => donutChart.value, (newValue) => {
   </div>
 
     <!-- Container 5  -->
-    <div class="w-full h-full justify-between bg-white rounded-lg shadow-lg p-4">
-      <div class="flex flex-row mb-2">
+    <div class="w-full h-full bg-white rounded-lg shadow-lg p-4">
+      <div class="flex flex-row mb-3">
         <h3 class="text-xl font-medium text-gray-700">Statics</h3>
       </div>
-      <div class="w-full flex flex-wrap justify-between">
-        <div class="w-full md:w-1/2 xl:w-1/3">
-          <ProfitChart class="mb-5 mr-7 h-full"/>
+      <div class="w-full flex flex-wrap">
+        <div class="w-full">
+          <ProfitChart class="mb-5"/>
         </div>
-        <div class="w-full md:w-1/2 xl:w-1/3">
-          <SavingsChart class="mb-5 mr-7 h-full"/>
-        </div>
-        <div class="w-full md:w-1/2 xl:w-1/3">
-          <CategoryChart class="mb-5 mr-7 h-full"/>
+        <div class="w-full md:flex md:flex-wrap md:space-x-0">
+          <div class="w-full md:w-1/2 mb-2">
+            <SavingsChart class="w-full" />
+          </div>
+          <div class="w-full md:w-1/2 mb-2">
+            <CategoryChart class="w-full" />
+          </div>
         </div>
       </div>
     </div>

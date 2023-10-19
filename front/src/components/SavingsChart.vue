@@ -2,9 +2,11 @@
     <div class="w-full border-2 border-slate-50 shadow-lg bg-white rounded-lg p-4 md:p-6">
         <div class="flex justify-center border-gray-200 border-b pb-3">
         <dl>
-          <dt class="leading-none text-2xl font-bold text-gray-900 dark:text-white pb-1">Savings by Time</dt>
+          <dt class="leading-none text-xl font-medium text-gray-700  pb-1">Savings by Time</dt>
         </dl>
       </div>
+
+      <div class="mt-[35px]"/>
   
       <div id="column-chart"></div>
       
@@ -62,8 +64,8 @@ import { onMounted } from 'vue';
     colors: ["#1A56DB", "#FDBA8C"],
     series: [
       {
-        name: "Organic",
-        color: "#1A56DB",
+        name: "Savings",
+        color: "#FDBA8C",
         data: [
           { x: "Mon", y: 231 },
           { x: "Tue", y: 122 },
@@ -72,19 +74,6 @@ import { onMounted } from 'vue';
           { x: "Fri", y: 122 },
           { x: "Sat", y: 323 },
           { x: "Sun", y: 111 },
-        ],
-      },
-      {
-        name: "Social media",
-        color: "#FDBA8C",
-        data: [
-          { x: "Mon", y: 232 },
-          { x: "Tue", y: 113 },
-          { x: "Wed", y: 341 },
-          { x: "Thu", y: 224 },
-          { x: "Fri", y: 522 },
-          { x: "Sat", y: 411 },
-          { x: "Sun", y: 243 },
         ],
       },
     ],
@@ -166,7 +155,7 @@ import { onMounted } from 'vue';
   onMounted(() => {
     if (document.getElementById("column-chart") && typeof ApexCharts !== 'undefined') {
         const chart = new ApexCharts(document.getElementById("column-chart"), options);
-  chart.render();
+        chart.render();
     }
   });
 

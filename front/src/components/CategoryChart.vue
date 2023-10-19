@@ -2,15 +2,19 @@
     <div class="w-full bg-white border-2 border-slate-50 rounded-lg shadow-lg p-4 md:p-6 ">
       <div class="flex justify-center border-gray-200 border-b pb-3">
         <dl>
-          <dt class="leading-none text-2xl font-bold text-gray-900 dark:text-white pb-1">Expense by Categories</dt>
+          <dt class="leading-none text-xl font-medium text-gray-700  pb-1">Expense by Categories</dt>
         </dl>
       </div>
-  
-      <div class="items-center">
-        <canvas ref="pieChart"></canvas>
+      
+      <div class="mt-[50px]"/>
+
+      <div class="flex items-center justify-center">
+        <div>
+          <canvas ref="pieChart"></canvas>
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 items-center border-gray-200 border-t dark:border-gray-700">
+      <div class="grid grid-cols-1 items-center border-gray-200 mt-5 border-t dark:border-gray-700">
         <div class="flex items-center justify-center pt-5">
           <!-- Button -->
           <button
