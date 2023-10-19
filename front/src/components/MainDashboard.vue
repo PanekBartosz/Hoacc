@@ -292,12 +292,19 @@ watch(() => donutChart.value, (newValue) => {
           class="rounded-lg bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
           data-ripple-light="true"
         >
-          Edit
+          Update
         </button>
       </div>
-      <div class="w-32">
-        <canvas ref="donutChart"></canvas>
-      </div>
+
+        <div class="rounded-lg w-min flex items-center shadow-lg p-1 border-2 border-slate-50">
+          <div class="w-32">
+            <canvas ref="donutChart"></canvas>
+          </div>
+          <div>
+            <h3 class="text-3xl mx-5 font-medium text-center">Holidays</h3>
+          </div>
+        </div>
+
     </div>
   </div>
 
