@@ -5,6 +5,7 @@ import { Pagination } from "flowbite-vue";
 import ProfitChart from "./ProfitChart.vue"
 import SavingsChart from "./SavingsChart.vue";
 import CategoryChart from "./CategoryChart.vue";
+import OperationsModal from "./OperationsModal.vue";
 
 const currentDate = new Date();
 const currentPage = ref(1);
@@ -161,12 +162,7 @@ watch(() => donutChart.value, (newValue) => {
     >
       <div class="flex flex-row justify-between">
         <h3 class="text-xl font-medium text-gray-700">Operations</h3>
-        <button
-          class="rounded-lg bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-          data-ripple-light="true"
-        >
-          Add new
-        </button>
+        <OperationsModal />
       </div>
       <div class="flex flex-col mt-3">
         <div
