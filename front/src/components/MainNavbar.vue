@@ -1,18 +1,19 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref } from "vue"
 import { Dialog, DialogPanel } from "@headlessui/vue"
 import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline"
+import SettingsModal from "./SettingsModal.vue"
+import SettingsMobileModal from "./SettingsMobileModal.vue"
 
 const navigation = [
   { name: "Home", href: "#" },
   { name: "Operations", href: "#" },
   { name: "Notifications", href: "#" },
   { name: "Goals", href: "#" },
-  { name: "Statics", href: "#" },
-  { name: "Settings", href: "#" },
+  { name: "Statics", href: "#" }
 ]
 
-const mobileMenuOpen = ref(false);
+const mobileMenuOpen = ref(false)
 </script>
 <template>
   <div class="bg-white mb-5 absolute top-0 w-full">
@@ -42,12 +43,13 @@ const mobileMenuOpen = ref(false);
             v-for="item in navigation"
             :key="item.name"
             :href="item.href"
-            class="text-sm font-semibold leading-6 text-gray-900"
+            class="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-500"
             >{{ item.name }}</a
           >
+          <SettingsModal />
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="/" class="text-sm font-semibold leading-6 text-gray-900"
+          <a href="/" class="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-500"
             >Log out <span aria-hidden="true">&rarr;</span></a
           >
         </div>
@@ -86,6 +88,7 @@ const mobileMenuOpen = ref(false);
                   class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >{{ item.name }}</a
                 >
+                <SettingsMobileModal :mobileMenuOpen="mobileMenuOpen"/>
               </div>
               <div class="py-6">
                 <a
