@@ -1,0 +1,12 @@
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.Infrastructure\bin\Debug\net6.0\Hoacc.Infrastructure.deps.json
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.Infrastructure\bin\Debug\net6.0\Hoacc.Infrastructure.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.Infrastructure\bin\Debug\net6.0\Hoacc.Infrastructure.pdb
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.Infrastructure\obj\Debug\net6.0\Hoacc.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.Infrastructure\obj\Debug\net6.0\Hoacc.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.Infrastructure\obj\Debug\net6.0\Hoacc.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.Infrastructure\obj\Debug\net6.0\Hoacc.Infrastructure.AssemblyInfo.cs
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.Infrastructure\obj\Debug\net6.0\Hoacc.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.Infrastructure\obj\Debug\net6.0\Hoacc.Infrastructure.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.Infrastructure\obj\Debug\net6.0\refint\Hoacc.Infrastructure.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.Infrastructure\obj\Debug\net6.0\Hoacc.Infrastructure.pdb
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.Infrastructure\obj\Debug\net6.0\ref\Hoacc.Infrastructure.dll
