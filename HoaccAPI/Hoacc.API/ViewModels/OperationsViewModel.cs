@@ -24,4 +24,6 @@ public class Operations
     public CategoryType Category { get; set; }
     
     public double Amount { get; set; }
+    
+    public int UserId { get; set; }
 }

@@ -14,4 +14,6 @@ public class Goals
     public double GoalAmount { get; set; }
     
     public double CurrentAmount { get; set; }
+    
+    public int UserId { get; set; }
 }

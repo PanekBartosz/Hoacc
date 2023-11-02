@@ -1,4 +1,8 @@
-﻿namespace HoaccDataSql.DAO;
+﻿
+
+using System.ComponentModel.DataAnnotations;
+
+namespace HoaccDataSql.DAO;
 
 public class Operations
 {
@@ -9,7 +13,7 @@ public class Operations
         Education,
         Entertainment
     }
-    
+    [Key]
     public int OperationId { get; set; }
 
     public string Type { get; set; } = "";
@@ -21,6 +25,7 @@ public class Operations
     public CategoryType Category { get; set; }
     
     public double Amount { get; set; }
+    public int UserId { get; set; }
     
     public virtual User User { get; set; }
 }

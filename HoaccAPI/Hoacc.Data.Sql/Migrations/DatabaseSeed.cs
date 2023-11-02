@@ -21,19 +21,19 @@ namespace HoaccDataSql.Migrations
              #endregion
              
              #region CreateGoals
-             var goalsList = BuildGoalsList();
+             var goalsList = BuildGoalsList(userList);
              _context.Goals.AddRange(goalsList);
              _context.SaveChanges();
              #endregion
              
              #region CreateNotification
-             var notificationList = BuildNotificationList();
+             var notificationList = BuildNotificationList(userList);
              _context.Notification.AddRange(notificationList);
              _context.SaveChanges();
              #endregion
              
              #region CreateOperations
-             var operationsList = BuildOperationsList();
+             var operationsList = BuildOperationsList(userList);
              _context.Operations.AddRange(operationsList);
              _context.SaveChanges();
              #endregion
@@ -69,16 +69,19 @@ namespace HoaccDataSql.Migrations
              return userList;
          }
     
-         private IEnumerable<DAO.Goals> BuildGoalsList()
+         private IEnumerable<DAO.Goals> BuildGoalsList(IEnumerable<DAO.User> userList)
          {
              var goalsList = new List<DAO.Goals>();
+             var rand = new Random();
+             var userCount = userList.Count();
              for (int i = 1; i <= 5; i++)
              {
                  var goals = new DAO.Goals
                  {
                      Name = "goal" + i,
                      GoalAmount = 1000,
-                     CurrentAmount = i * 100
+                     CurrentAmount = i * 100,
+                     UserId = userList.ToList()[rand.Next(userCount)].UserId
                  };
                  goalsList.Add(goals);
              }
@@ -86,16 +89,19 @@ namespace HoaccDataSql.Migrations
              return goalsList;
          }
          
-         private IEnumerable<DAO.Notification> BuildNotificationList()
+         private IEnumerable<DAO.Notification> BuildNotificationList(IEnumerable<DAO.User> userList)
          {
              var notificationList = new List<DAO.Notification>();
+             var rand = new Random();
+             var userCount = userList.Count();
              for (int i = 1; i <= 5; i++)
              {
                  var notification = new DAO.Notification
                  {
                      Name = "notification" + i,
                      Date = new DateTime(1970, i, 7),
-                     Amount = i * 100
+                     Amount = i * 100,
+                     UserId = userList.ToList()[rand.Next(userCount)].UserId
                  };
                  notificationList.Add(notification);
              }
@@ -103,9 +109,10 @@ namespace HoaccDataSql.Migrations
              return notificationList;
          }
          
-         private IEnumerable<DAO.Operations> BuildOperationsList()
+         private IEnumerable<DAO.Operations> BuildOperationsList(IEnumerable<DAO.User> userList)
          {
              var operationsList = new List<DAO.Operations>();
+             var userCount = userList.Count();
              for (int i = 1; i <= 25; i++)
              {
                  Random random = new Random();
@@ -122,7 +129,8 @@ namespace HoaccDataSql.Migrations
                      Date = new DateTime(1970, 1, i),
                      Description = "description" + i,
                      Category = allCategories[randomIndex],
-                     Amount = i * 10
+                     Amount = i * 10,
+                     UserId = userList.ToList()[random.Next(userCount)].UserId
                  };
                  operationsList.Add(operation);
              }

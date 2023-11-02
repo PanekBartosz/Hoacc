@@ -18,7 +18,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -26,8 +26,8 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {
               "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Data.Sql\\Hoacc.Data.Sql.csproj": {
                 "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Data.Sql\\Hoacc.Data.Sql.csproj"
@@ -51,16 +51,12 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
             "FluentValidation.AspNetCore": {
               "target": "Package",
               "version": "[11.3.0, )"
-            },
-            "Microsoft.AspNetCore.OpenApi": {
-              "target": "Package",
-              "version": "[7.0.1, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -74,11 +70,15 @@
             },
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
-              "version": "[7.0.11, )"
+              "version": "[6.0.0, )"
             },
             "MySql.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -96,6 +96,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[6.0.20, 6.0.20]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.20, 6.0.20]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -226,6 +244,14 @@
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[7.0.13, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "MySql.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.0, )"
             }
           },
           "imports": [
@@ -285,7 +311,17 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
+                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj"
+              },
+              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj": {
+                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj"
+              },
+              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj": {
+                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -354,7 +390,17 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
+                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj"
+              },
+              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj": {
+                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj"
+              },
+              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj": {
+                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
