@@ -1,4 +1,6 @@
-﻿namespace HoaccDomain.Operations
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace HoaccDomain.Operations
 {
     public class Operations
     {
@@ -17,7 +19,7 @@
         public DateTime Date { get; set; }
     
         public string Description { get; set; } = "";
-    
+        
         public CategoryType Category { get; set; }
     
         public double Amount { get; set; }

@@ -10,3 +10,12 @@ C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.IData\obj\Debug\net6.0\Hoacc.IData.dl
 C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.IData\obj\Debug\net6.0\refint\Hoacc.IData.dll
 C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.IData\obj\Debug\net6.0\Hoacc.IData.pdb
 C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.IData\obj\Debug\net6.0\ref\Hoacc.IData.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.IData\bin\Debug\net6.0\Hoacc.Common.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.IData\bin\Debug\net6.0\Hoacc.Domain.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.IData\bin\Debug\net6.0\Hoacc.IServices.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.IData\bin\Debug\net6.0\Hoacc.Services.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.IData\bin\Debug\net6.0\Hoacc.Common.pdb
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.IData\bin\Debug\net6.0\Hoacc.Domain.pdb
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.IData\bin\Debug\net6.0\Hoacc.Services.pdb
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.IData\bin\Debug\net6.0\Hoacc.IServices.pdb
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.IData\obj\Debug\net6.0\Hoacc.IData.csproj.CopyComplete

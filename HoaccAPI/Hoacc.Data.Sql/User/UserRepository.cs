@@ -1,6 +1,4 @@
-﻿using System.Threading.Tasks;
-using HoaccIData.User;
-using Google.Protobuf.WellKnownTypes;
+﻿using HoaccIData.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace HoaccDataSql.User

@@ -435,13 +435,33 @@
         }
       },
       "Hoacc.Domain/1.0.0": {
+        "dependencies": {
+          "Hoacc.Common": "1.0.0",
+          "Hoacc.IServices": "1.0.0",
+          "Hoacc.Services": "1.0.0"
+        },
         "runtime": {
           "Hoacc.Domain.dll": {}
         }
       },
       "Hoacc.IData/1.0.0": {
+        "dependencies": {
+          "Hoacc.Common": "1.0.0",
+          "Hoacc.Domain": "1.0.0",
+          "Hoacc.Services": "1.0.0"
+        },
         "runtime": {
           "Hoacc.IData.dll": {}
+        }
+      },
+      "Hoacc.IServices/1.0.0": {
+        "runtime": {
+          "Hoacc.IServices.dll": {}
+        }
+      },
+      "Hoacc.Services/1.0.0": {
+        "runtime": {
+          "Hoacc.Services.dll": {}
         }
       }
     }
@@ -750,6 +770,16 @@
       "sha512": ""
     },
     "Hoacc.IData/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Hoacc.IServices/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Hoacc.Services/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

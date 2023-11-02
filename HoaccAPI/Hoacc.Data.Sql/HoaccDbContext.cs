@@ -18,5 +18,19 @@ namespace HoaccDataSql
         
         public virtual DbSet<DAO.Operations> Operations { get; set; }
         
+        //Changing ENUM mapping from default "int" to "string" for Category column in Operations Tab
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<DAO.Operations>()
+                .Property(e => e.Category)
+                .HasConversion(
+                    v => v.ToString(),
+                    v => (
+                        HoaccDomain.Operations.Operations.CategoryType)
+                        Enum.Parse(typeof(HoaccDomain.Operations.Operations.CategoryType), v)
+                );
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

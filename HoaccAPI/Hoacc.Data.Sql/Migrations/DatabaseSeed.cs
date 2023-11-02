@@ -1,4 +1,6 @@
 ﻿
+using Org.BouncyCastle.Tls;
+
 namespace HoaccDataSql.Migrations
 {
     // the class responsible for filling the database with test data
@@ -118,9 +120,10 @@ namespace HoaccDataSql.Migrations
                  Random random = new Random();
 
                  // Get all values from CategoryType enum
-                 DAO.Operations.CategoryType[] allCategories = (DAO.Operations.CategoryType[])Enum
-                     .GetValues(typeof(DAO.Operations.CategoryType));
-
+                 HoaccDomain.Operations.Operations.CategoryType[] allCategories = (
+                     HoaccDomain.Operations.Operations.CategoryType[])Enum
+                     .GetValues(typeof(HoaccDomain.Operations.Operations.CategoryType));
+                 
                  // Generate a random index to select a category
                  int randomIndex = random.Next(0, allCategories.Length);
                  var operation = new DAO.Operations

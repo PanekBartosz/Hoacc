@@ -6,13 +6,6 @@ namespace HoaccDataSql.DAO;
 
 public class Operations
 {
-    public enum CategoryType
-    {
-        Bills,
-        Food,
-        Education,
-        Entertainment
-    }
     [Key]
     public int OperationId { get; set; }
 
@@ -22,7 +15,7 @@ public class Operations
     
     public string Description { get; set; } = "";
     
-    public CategoryType Category { get; set; }
+    public HoaccDomain.Operations.Operations.CategoryType Category { get; set; }
     
     public double Amount { get; set; }
     public int UserId { get; set; }
