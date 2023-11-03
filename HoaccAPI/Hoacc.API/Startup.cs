@@ -13,7 +13,6 @@ using HoaccDataSql.User;
 using HoaccIData.User;
 using HoaccIServices.User;
 using HoaccIServices.Requests;
-using HoaccServices.User;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using CreateUser = HoaccAPI.BindingModels.CreateUser;

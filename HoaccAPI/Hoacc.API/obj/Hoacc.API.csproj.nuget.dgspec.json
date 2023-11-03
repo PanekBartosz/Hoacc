@@ -607,7 +607,14 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
+                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj"
+              },
+              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj": {
+                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

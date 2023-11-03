@@ -7,4 +7,9 @@
         <RootNamespace>HoaccServices</RootNamespace>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Hoacc.Common\Hoacc.Common.csproj" />
+      <ProjectReference Include="..\Hoacc.IServices\Hoacc.IServices.csproj" />
+    </ItemGroup>
+
 </Project>
