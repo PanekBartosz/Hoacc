@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HoaccAPI.ViewModels;
 
-public class Notification
+public class NotificationViewModel
 {
     [Key] 
     public int NotificationId { get; set; }
     
     [Column(TypeName = "nvarchar(20)")]
-    public string Name { get; set; } = "";
+    public string? Name { get; set; }
     
     public DateTime Date { get; set; }
     

@@ -3,13 +3,13 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HoaccAPI.ViewModels;
 
-public class Goals
+public class GoalsViewModel
 {
     [Key] 
     public int GoalsId { get; set; }
     
     [Column(TypeName = "nvarchar(30)")]
-    public string Name { get; set; } = "";
+    public string? Name { get; set; }
     
     public double GoalAmount { get; set; }
     
