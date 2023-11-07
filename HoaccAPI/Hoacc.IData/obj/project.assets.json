@@ -30,6 +30,9 @@
       "Hoacc.IServices/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Hoacc.Common": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Hoacc.IServices.dll": {}
         },
@@ -83,19 +86,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\BART\\.nuget\\packages\\": {}
+    "C:\\Users\\BART-PC\\.nuget\\packages\\": {},
+    "Z:\\Pobrane\\VS udostepniona sciezka insta\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IData\\Hoacc.IData.csproj",
+      "projectUniqueName": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IData\\Hoacc.IData.csproj",
       "projectName": "Hoacc.IData",
-      "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IData\\Hoacc.IData.csproj",
-      "packagesPath": "C:\\Users\\BART\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IData\\obj\\",
+      "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IData\\Hoacc.IData.csproj",
+      "packagesPath": "C:\\Users\\BART-PC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IData\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "Z:\\Pobrane\\VS udostepniona sciezka insta\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\BART\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\BART-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -109,14 +117,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
-              "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj"
+            "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
+              "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj"
             },
-            "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj": {
-              "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj"
+            "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj": {
+              "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj"
             },
-            "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj": {
-              "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj"
+            "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj": {
+              "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj"
             }
           }
         }
@@ -141,26 +149,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[6.0.20, 6.0.20]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[6.0.20, 6.0.20]"
-          },
-          {
-            "name": "Microsoft.WindowsDesktop.App.Ref",
-            "version": "[6.0.20, 6.0.20]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   }
