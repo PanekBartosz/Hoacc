@@ -2,7 +2,7 @@
 
 namespace HoaccIServices.Operations
 {
-    public interface IUserService
+    public interface IOperationsService
     {
         Task<HoaccCommon.Operations.OperationsDTO> GetOperations(int operationId);
         Task<int> CreateOperations(CreateOperations createOperations);

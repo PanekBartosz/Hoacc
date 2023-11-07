@@ -1,6 +1,12 @@
-﻿namespace HoaccIServices.Goals;
+﻿using HoaccIServices.Requests;
 
-public class IGoalsService
+namespace HoaccIServices.Goals
 {
-    
+    public interface IGoalsService
+    {
+        Task<HoaccCommon.Goals.GoalsDTO> GetGoals(int goalsId);
+        Task<int> CreateGoals(CreateGoals createGoals);
+        Task EditGoals(int goalsId, EditGoals editGoals);
+        Task RemoveGoals(int goalsId);
+    }
 }
