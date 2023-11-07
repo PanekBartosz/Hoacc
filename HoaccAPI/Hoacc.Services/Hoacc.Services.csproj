@@ -4,12 +4,8 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <AssemblyName>Hoacc.Services</AssemblyName>
         <RootNamespace>HoaccServices</RootNamespace>
     </PropertyGroup>
-
-    <ItemGroup>
-      <ProjectReference Include="..\Hoacc.Common\Hoacc.Common.csproj" />
-      <ProjectReference Include="..\Hoacc.IServices\Hoacc.IServices.csproj" />
-    </ItemGroup>
 
 </Project>

@@ -1,49 +1,11 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {
-      "Hoacc.Common/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "compile": {
-          "bin/placeholder/Hoacc.Common.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Hoacc.Common.dll": {}
-        }
-      },
-      "Hoacc.IServices/1.0.0": {
-        "type": "project",
-        "framework": ".NETCoreApp,Version=v6.0",
-        "dependencies": {
-          "Hoacc.Common": "1.0.0"
-        },
-        "compile": {
-          "bin/placeholder/Hoacc.IServices.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/Hoacc.IServices.dll": {}
-        }
-      }
-    }
+    "net6.0": {}
   },
-  "libraries": {
-    "Hoacc.Common/1.0.0": {
-      "type": "project",
-      "path": "../Hoacc.Common/Hoacc.Common.csproj",
-      "msbuildProject": "../Hoacc.Common/Hoacc.Common.csproj"
-    },
-    "Hoacc.IServices/1.0.0": {
-      "type": "project",
-      "path": "../Hoacc.IServices/Hoacc.IServices.csproj",
-      "msbuildProject": "../Hoacc.IServices/Hoacc.IServices.csproj"
-    }
-  },
+  "libraries": {},
   "projectFileDependencyGroups": {
-    "net6.0": [
-      "Hoacc.Common >= 1.0.0",
-      "Hoacc.IServices >= 1.0.0"
-    ]
+    "net6.0": []
   },
   "packageFolders": {
     "C:\\Users\\BART-PC\\.nuget\\packages\\": {},
@@ -76,14 +38,7 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {
-            "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
-              "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj"
-            },
-            "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj": {
-              "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

@@ -32,11 +32,18 @@
         }
       },
       "Hoacc.IServices/1.0.0": {
+        "dependencies": {
+          "Hoacc.Common": "1.0.0"
+        },
         "runtime": {
           "Hoacc.IServices.dll": {}
         }
       },
       "Hoacc.Services/1.0.0": {
+        "dependencies": {
+          "Hoacc.Common": "1.0.0",
+          "Hoacc.IServices": "1.0.0"
+        },
         "runtime": {
           "Hoacc.Services.dll": {}
         }

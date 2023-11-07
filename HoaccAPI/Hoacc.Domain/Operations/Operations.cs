@@ -14,11 +14,11 @@ namespace HoaccDomain.Operations
         
         public int OperationId { get; set; }
 
-        public string Type { get; set; } = "";
+        public string? Type { get; set; }
     
         public DateTime Date { get; set; }
     
-        public string Description { get; set; } = "";
+        public string? Description { get; set; }
         
         public CategoryType Category { get; set; }
     

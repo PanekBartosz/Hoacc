@@ -14,7 +14,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hoacc.Infrastructure", "Hoa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hoacc.IServices", "Hoacc.IServices\Hoacc.IServices.csproj", "{3480CCD2-E646-42A0-993C-4EA7668307BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hoacc.Services", "Hoacc.Services\Hoacc.Services.csproj", "{B4C79C43-FCE3-4F5A-B7C8-E37EF18A2DB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hoacc.Services", "Hoacc.Services\Hoacc.Services.csproj", "{49A61DF7-387D-43F5-A119-DBF3CFBD239F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,9 +50,9 @@ Global
 		{3480CCD2-E646-42A0-993C-4EA7668307BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3480CCD2-E646-42A0-993C-4EA7668307BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3480CCD2-E646-42A0-993C-4EA7668307BC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B4C79C43-FCE3-4F5A-B7C8-E37EF18A2DB7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B4C79C43-FCE3-4F5A-B7C8-E37EF18A2DB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B4C79C43-FCE3-4F5A-B7C8-E37EF18A2DB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B4C79C43-FCE3-4F5A-B7C8-E37EF18A2DB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49A61DF7-387D-43F5-A119-DBF3CFBD239F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49A61DF7-387D-43F5-A119-DBF3CFBD239F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49A61DF7-387D-43F5-A119-DBF3CFBD239F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49A61DF7-387D-43F5-A119-DBF3CFBD239F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

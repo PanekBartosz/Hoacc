@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "Hoacc.IServices/1.0.0": {
+        "dependencies": {
+          "Hoacc.Common": "1.0.0"
+        },
+        "runtime": {
+          "Hoacc.IServices.dll": {}
+        }
+      },
+      "Hoacc.Common/1.0.0": {
+        "runtime": {
+          "Hoacc.Common.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Hoacc.IServices/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Hoacc.Common/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

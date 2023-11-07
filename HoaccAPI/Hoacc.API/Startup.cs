@@ -16,7 +16,7 @@ using HoaccIServices.Requests;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using CreateUser = HoaccAPI.BindingModels.CreateUser;
-using EditUser = HoaccAPI.BindingModels.EditUser;
+using UpdateUserPassword = HoaccAPI.BindingModels.UpdateUserPassword;
 
 namespace HoaccAPI
 {

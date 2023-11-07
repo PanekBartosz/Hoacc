@@ -4,7 +4,7 @@
     {
         public int NotificationId { get; set; }
     
-        public string Name { get; set; } = "";
+        public string? Name { get; set; }
     
         public DateTime Date { get; set; }
     

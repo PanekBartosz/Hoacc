@@ -10,12 +10,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("HoaccServices")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Hoacc.Services")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
-[assembly: System.Reflection.AssemblyProductAttribute("HoaccServices")]
-[assembly: System.Reflection.AssemblyTitleAttribute("HoaccServices")]
+[assembly: System.Reflection.AssemblyProductAttribute("Hoacc.Services")]
+[assembly: System.Reflection.AssemblyTitleAttribute("Hoacc.Services")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Wygenerowane przez klasę WriteCodeFragment programu MSBuild.
