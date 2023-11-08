@@ -22,10 +22,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Validation" />
-    </ItemGroup>
-
-    <ItemGroup>
         <ProjectReference Include="..\Hoacc.Data.Sql\Hoacc.Data.Sql.csproj" />
         <ProjectReference Include="..\Hoacc.Infrastructure\Hoacc.Infrastructure.csproj" />
         <ProjectReference Include="..\Hoacc.IServices\Hoacc.IServices.csproj" />
