@@ -1,6 +1,8 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
 using HoaccAPI.BindingModels;
+using HoaccAPI.Middlewares;
+using HoaccAPI.Validation;
 using HoaccDataSql;
 using HoaccDataSql.Migrations;
 using Microsoft.AspNetCore.Builder;
@@ -48,11 +50,10 @@ namespace HoaccAPI
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                 })
                 .AddFluentValidation();
-            services.AddTransient<IValidator<EditUser>, EditUserValidator>();
-            services.AddTransient<IValidator<CreateClient>, CreateClientValidator>();
-            services.AddTransient<IValidator<UpdateClientAddress>, UpdateClientAddressValidator>();
+            services.AddTransient<IValidator<UpdateUserPassword>, UpdateUserPasswordValidator>();
+            services.AddTransient<IValidator<CreateUser>, CreateUserValidator>();
             services.AddScoped<IClientService, ClientService>();
-            services.AddScoped<IClientRepository, ClientRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
             services.AddApiVersioning( o =>
             {
                 o.ReportApiVersions = true;
@@ -65,6 +66,8 @@ namespace HoaccAPI
         {
             if (env.IsDevelopment())
             {
+                app.UseSwagger();
+                app.UseSwaggerUI();
                 app.UseDeveloperExceptionPage();
             }
 
@@ -79,7 +82,7 @@ namespace HoaccAPI
             }
 
             app.UseCors("default");
-            //app.UseMiddleware<ErrorHandlerMiddleware>();
+            app.UseMiddleware<ErrorHandlerMiddleware>();
             app.UseRouting();
 
             /*app.UseEndpoints(endpoints =>

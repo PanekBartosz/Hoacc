@@ -25,3 +25,6 @@ C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.IServices\obj\Debug\net6.0\Hoacc.ISer
 C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.IServices\obj\Debug\net6.0\refint\Hoacc.IServices.dll
 C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.IServices\obj\Debug\net6.0\Hoacc.IServices.pdb
 C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.IServices\obj\Debug\net6.0\ref\Hoacc.IServices.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.IServices\bin\Debug\net6.0\Hoacc.Common.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.IServices\bin\Debug\net6.0\Hoacc.Common.pdb
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.IServices\obj\Debug\net6.0\Hoacc.IServices.csproj.CopyComplete
