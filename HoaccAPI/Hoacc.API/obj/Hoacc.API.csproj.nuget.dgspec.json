@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.API\\Hoacc.API.csproj": {}
+    "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.API\\Hoacc.API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.API\\Hoacc.API.csproj": {
+    "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.API\\Hoacc.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.API\\Hoacc.API.csproj",
+        "projectUniqueName": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.API\\Hoacc.API.csproj",
         "projectName": "Hoacc.API",
-        "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.API\\Hoacc.API.csproj",
-        "packagesPath": "C:\\Users\\BART\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.API\\obj\\",
+        "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.API\\Hoacc.API.csproj",
+        "packagesPath": "C:\\Users\\BART-PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.API\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "Z:\\Pobrane\\VS udostepniona sciezka insta\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\BART\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\BART-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -22,24 +26,23 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\sdk\\7.0.306\\Sdks\\Microsoft.NET.Sdk.Web\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Data.Sql\\Hoacc.Data.Sql.csproj": {
-                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Data.Sql\\Hoacc.Data.Sql.csproj"
+              "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Data.Sql\\Hoacc.Data.Sql.csproj": {
+                "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Data.Sql\\Hoacc.Data.Sql.csproj"
               },
-              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Infrastructure\\Hoacc.Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Infrastructure\\Hoacc.Infrastructure.csproj"
+              "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Infrastructure\\Hoacc.Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Infrastructure\\Hoacc.Infrastructure.csproj"
               },
-              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj": {
-                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj"
+              "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj": {
+                "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj"
               },
-              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj": {
-                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj"
+              "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj": {
+                "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj"
               }
             }
           }
@@ -57,6 +60,14 @@
             "FluentValidation.AspNetCore": {
               "target": "Package",
               "version": "[11.3.0, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[6.0.24, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Versioning": {
+              "target": "Package",
+              "version": "[5.1.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -96,24 +107,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -122,21 +115,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
+    "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj",
+        "projectUniqueName": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj",
         "projectName": "Hoacc.Common",
-        "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj",
-        "packagesPath": "C:\\Users\\BART\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\obj\\",
+        "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj",
+        "packagesPath": "C:\\Users\\BART-PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "Z:\\Pobrane\\VS udostepniona sciezka insta\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\BART\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\BART-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -172,40 +169,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Data.Sql\\Hoacc.Data.Sql.csproj": {
+    "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Data.Sql\\Hoacc.Data.Sql.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Data.Sql\\Hoacc.Data.Sql.csproj",
+        "projectUniqueName": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Data.Sql\\Hoacc.Data.Sql.csproj",
         "projectName": "Hoacc.Data.Sql",
-        "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Data.Sql\\Hoacc.Data.Sql.csproj",
-        "packagesPath": "C:\\Users\\BART\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Data.Sql\\obj\\",
+        "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Data.Sql\\Hoacc.Data.Sql.csproj",
+        "packagesPath": "C:\\Users\\BART-PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Data.Sql\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "Z:\\Pobrane\\VS udostepniona sciezka insta\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\BART\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\BART-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -219,14 +206,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
-                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj"
+              "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
+                "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj"
               },
-              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj": {
-                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj"
+              "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj": {
+                "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj"
               },
-              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IData\\Hoacc.IData.csproj": {
-                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IData\\Hoacc.IData.csproj"
+              "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IData\\Hoacc.IData.csproj": {
+                "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IData\\Hoacc.IData.csproj"
               }
             }
           }
@@ -265,40 +252,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj": {
+    "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj",
         "projectName": "Hoacc.Domain",
-        "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj",
-        "packagesPath": "C:\\Users\\BART\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Domain\\obj\\",
+        "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj",
+        "packagesPath": "C:\\Users\\BART-PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Domain\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "Z:\\Pobrane\\VS udostepniona sciezka insta\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\BART\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\BART-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -312,14 +289,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
-                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj"
+              "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
+                "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj"
               },
-              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj": {
-                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj"
+              "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj": {
+                "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj"
               },
-              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj": {
-                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj"
+              "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj": {
+                "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj"
               }
             }
           }
@@ -344,40 +321,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IData\\Hoacc.IData.csproj": {
+    "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IData\\Hoacc.IData.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IData\\Hoacc.IData.csproj",
+        "projectUniqueName": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IData\\Hoacc.IData.csproj",
         "projectName": "Hoacc.IData",
-        "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IData\\Hoacc.IData.csproj",
-        "packagesPath": "C:\\Users\\BART\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IData\\obj\\",
+        "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IData\\Hoacc.IData.csproj",
+        "packagesPath": "C:\\Users\\BART-PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IData\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "Z:\\Pobrane\\VS udostepniona sciezka insta\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\BART\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\BART-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -391,14 +358,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
-                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj"
+              "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
+                "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj"
               },
-              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj": {
-                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj"
+              "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj": {
+                "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Domain\\Hoacc.Domain.csproj"
               },
-              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj": {
-                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj"
+              "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj": {
+                "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj"
               }
             }
           }
@@ -423,40 +390,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Infrastructure\\Hoacc.Infrastructure.csproj": {
+    "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Infrastructure\\Hoacc.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Infrastructure\\Hoacc.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Infrastructure\\Hoacc.Infrastructure.csproj",
         "projectName": "Hoacc.Infrastructure",
-        "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Infrastructure\\Hoacc.Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\BART\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Infrastructure\\obj\\",
+        "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Infrastructure\\Hoacc.Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\BART-PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "Z:\\Pobrane\\VS udostepniona sciezka insta\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\BART\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\BART-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -492,40 +449,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj": {
+    "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj",
+        "projectUniqueName": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj",
         "projectName": "Hoacc.IServices",
-        "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj",
-        "packagesPath": "C:\\Users\\BART\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IServices\\obj\\",
+        "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj",
+        "packagesPath": "C:\\Users\\BART-PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IServices\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "Z:\\Pobrane\\VS udostepniona sciezka insta\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\BART\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\BART-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -539,8 +486,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
-                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj"
+              "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
+                "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj"
               }
             }
           }
@@ -565,40 +512,30 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj": {
+    "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj",
+        "projectUniqueName": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj",
         "projectName": "Hoacc.Services",
-        "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj",
-        "packagesPath": "C:\\Users\\BART\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Services\\obj\\",
+        "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Services\\Hoacc.Services.csproj",
+        "packagesPath": "C:\\Users\\BART-PC\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Services\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "Z:\\Pobrane\\VS udostepniona sciezka insta\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\BART\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\BART-PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -612,11 +549,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
-                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj"
+              "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj": {
+                "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Common\\Hoacc.Common.csproj"
               },
-              "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj": {
-                "projectPath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj"
+              "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj": {
+                "projectPath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.IServices\\Hoacc.IServices.csproj"
               }
             }
           }
@@ -641,26 +578,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[6.0.20, 6.0.20]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.306\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

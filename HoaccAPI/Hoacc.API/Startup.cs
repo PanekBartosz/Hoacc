@@ -44,7 +44,7 @@ namespace HoaccAPI
             services.AddDbContext<HoaccDbContext>(options => options
                 .UseMySQL(Configuration.GetConnectionString("HoaccDbContext")));
             services.AddTransient<DatabaseSeed>();
-            /*services.AddControllers()
+            services.AddControllers()
                 .AddNewtonsoftJson(options => {
                     options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -52,13 +52,13 @@ namespace HoaccAPI
                 .AddFluentValidation();
             services.AddTransient<IValidator<UpdateUserPassword>, UpdateUserPasswordValidator>();
             services.AddTransient<IValidator<CreateUser>, CreateUserValidator>();
-            services.AddScoped<IClientService, ClientService>();
+            services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddApiVersioning( o =>
             {
                 o.ReportApiVersions = true;
                 o.UseApiBehavior = false;
-            });*/
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
