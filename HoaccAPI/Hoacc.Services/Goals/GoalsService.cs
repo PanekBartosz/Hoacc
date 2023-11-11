@@ -1,4 +1,4 @@
-﻿using HoaccIData.Goals;
+﻿using HoaccCommon.Goals;
 using HoaccIServices.Goals;
 using HoaccIServices.Requests;
 
@@ -6,9 +6,9 @@ namespace HoaccServices.Goals
 {
     public class GoalsService: IGoalsService
     {
-        private readonly IGoalsRepository _goalsRepository;
+        private readonly IGoalsRepositoryDTO _goalsRepository;
 
-        public GoalsService(IGoalsRepository goalsRepository)
+        public GoalsService(IGoalsRepositoryDTO goalsRepository)
         {
             _goalsRepository = goalsRepository;
         }

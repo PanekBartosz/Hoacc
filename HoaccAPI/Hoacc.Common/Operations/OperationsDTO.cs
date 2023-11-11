@@ -46,13 +46,12 @@ public class OperationsDTO
         UserId = userId;
     }
     public void EditOperations(string type, DateTime date, string description,
-        CategoryType category, double amount, int userId )
+        CategoryType category, double amount)
     {
         Type = type;
         Date = date;
         Description = description;
         Category = category;
         Amount = amount;
-        UserId = userId;
     }
 }

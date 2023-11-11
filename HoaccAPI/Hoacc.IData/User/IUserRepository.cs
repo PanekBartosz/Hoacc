@@ -1,16 +1,12 @@
-﻿namespace HoaccIData.User
+﻿using HoaccCommon.User;
+
+namespace HoaccIData.User
 {
     public interface IUserRepository
     {
-        Task<HoaccDomain.User.User> GetUser(string email);
-        Task<HoaccDomain.User.User> GetUser(int userId);
-        Task<int> CreateUser(HoaccDomain.User.User user);
-        Task UpdateUserPassword(int userId, HoaccDomain.User.User user);
-    }
-    public interface IUser
-    {
-        int UserId { get; set; }
-        string? Email { get; set; }
-        string? Password { get; set; }
+        Task<UserDTO> GetUser(string email);
+        Task<UserDTO> GetUser(int userId);
+        Task<int> CreateUser(UserDTO user);
+        Task UpdateUserPassword(int userId, UserDTO user);
     }
 }

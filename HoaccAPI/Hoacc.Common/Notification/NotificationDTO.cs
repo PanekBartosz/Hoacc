@@ -26,11 +26,10 @@ public class NotificationDTO
         Amount = amount;
         UserId = userId;
     }
-    public void EditNotification(string name, DateTime date, double amount, int userId )
+    public void EditNotification(string name, DateTime date, double amount)
     {
         Name = name;
         Date = date;
         Amount = amount;
-        UserId = userId;
     }
 }

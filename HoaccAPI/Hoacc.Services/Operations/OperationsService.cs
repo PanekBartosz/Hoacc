@@ -1,4 +1,4 @@
-﻿using HoaccIData.Operations;
+﻿using HoaccCommon.Operations;
 using HoaccIServices.Operations;
 using HoaccIServices.Requests;
 
@@ -6,9 +6,9 @@ namespace HoaccServices.Operations
 {
     public class OperationsService: IOperationsService
     {
-        private readonly IOperationsRepository _operationsRepository;
+        private readonly IOperationsRepositoryDTO _operationsRepository;
 
-        public OperationsService(IOperationsRepository operationsRepository)
+        public OperationsService(IOperationsRepositoryDTO operationsRepository)
         {
             _operationsRepository = operationsRepository;
         }

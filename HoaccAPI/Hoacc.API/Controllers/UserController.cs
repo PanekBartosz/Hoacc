@@ -44,6 +44,7 @@ namespace HoaccAPI.Controllers
         }
 
         [ValidateModel]
+        [HttpPost]
         public async Task<IActionResult> Post([FromBody] HoaccIServices.Requests.CreateUser createUser)
         {
             var user = await _userService.CreateUser(createUser);

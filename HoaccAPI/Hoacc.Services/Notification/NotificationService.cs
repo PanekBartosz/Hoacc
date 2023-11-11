@@ -1,4 +1,4 @@
-﻿using HoaccIData.Notification;
+﻿using HoaccCommon.Notification;
 using HoaccIServices.Notification;
 using HoaccIServices.Requests;
 
@@ -6,9 +6,9 @@ namespace HoaccServices.Notification
 {
     public class NotificationService: INotificationService
     {
-        private readonly INotificationRepository _notificationRepository;
+        private readonly INotificationRepositoryDTO _notificationRepository;
 
-        public NotificationService(INotificationRepository notificationRepository)
+        public NotificationService(INotificationRepositoryDTO notificationRepository)
         {
             _notificationRepository = notificationRepository;
         }

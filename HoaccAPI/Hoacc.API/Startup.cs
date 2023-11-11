@@ -21,6 +21,7 @@ using HoaccServices.Goals;
 using HoaccServices.Notification;
 using HoaccServices.Operations;
 using HoaccServices.User;
+using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using CreateUser = HoaccAPI.BindingModels.CreateUser;
@@ -52,6 +53,10 @@ namespace HoaccAPI
                         options.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
                     });
                 });
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "Hoacc", Version = "v1" });
+            });
             services.AddDbContext<HoaccDbContext>(options => options
                 .UseMySQL(Configuration.GetConnectionString("HoaccDbContext")));
             services.AddTransient<DatabaseSeed>();
@@ -63,20 +68,20 @@ namespace HoaccAPI
                 .AddFluentValidation();
             services.AddTransient<IValidator<UpdateUserPassword>, UpdateUserPasswordValidator>();
             services.AddTransient<IValidator<CreateUser>, CreateUserValidator>();
-            services.AddTransient<IValidator<EditOperations>, EditOperationsValidator>();
+            /*services.AddTransient<IValidator<EditOperations>, EditOperationsValidator>();
             services.AddTransient<IValidator<CreateOperations>, CreateOperationsValidator>();
             services.AddTransient<IValidator<EditNotification>, EditNotificationValidator>();
             services.AddTransient<IValidator<CreateNotification>, CreateNotificationValidator>();
             services.AddTransient<IValidator<EditGoals>, EditGoalsValidator>();
-            services.AddTransient<IValidator<CreateGoals>, CreateGoalsValidator>();
+            services.AddTransient<IValidator<CreateGoals>, CreateGoalsValidator>();*/
             services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IOperationsService, OperationsService>();
+            services.AddScoped<IUserRepositoryDTO, UserRepository>();
+            /*services.AddScoped<IOperationsService, OperationsService>();
             services.AddScoped<IOperationsRepository, OperationsRepository>();
             services.AddScoped<INotificationService, NotificationService>();
             services.AddScoped<INotificationRepository, NotificationRepository>();
             services.AddScoped<IGoalsService, GoalsService>();
-            services.AddScoped<IGoalsRepository, GoalsRepository>();
+            services.AddScoped<IGoalsRepository, GoalsRepository>();*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,7 +90,10 @@ namespace HoaccAPI
             if (env.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hoacc");
+                });
                 app.UseDeveloperExceptionPage();
             }
 

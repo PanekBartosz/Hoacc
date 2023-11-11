@@ -1,14 +1,13 @@
-﻿using HoaccIData.User;
-using HoaccIServices.Requests;
+﻿using HoaccIServices.Requests;
 using HoaccIServices.User;
 
 namespace HoaccServices.User
 {
     public class UserService: IUserService
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IUserRepositoryDTO _userRepository;
 
-        public UserService(IUserRepository userRepository)
+        public UserService(IUserRepositoryDTO userRepository)
         {
             _userRepository = userRepository;
         }
@@ -35,7 +34,7 @@ namespace HoaccServices.User
             var user = await _userRepository.GetUser(userId);
             user.Password = updateUserPassword.Password;
             
-            await _userRepository.EditClient(userId, user);
+            await _userRepository.UpdateUserPassword(userId, user);
         }
     }
     

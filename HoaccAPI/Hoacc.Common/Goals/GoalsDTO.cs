@@ -27,11 +27,10 @@ public class GoalsDTO
         CurrentAmount = currentAmount;
         UserId = userId;
     }
-    public void EditGoals(string name, double goalAmount, double currentAmount, int userId )
+    public void EditGoals(string name, double goalAmount, double currentAmount)
     {
         Name = name;
         GoalAmount = goalAmount;
         CurrentAmount = currentAmount;
-        UserId = userId;
     }
 }

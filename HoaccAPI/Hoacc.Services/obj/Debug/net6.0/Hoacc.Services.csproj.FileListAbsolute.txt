@@ -18,3 +18,12 @@ C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.Services\obj\Debug\net6.0\Hoacc.Servi
 C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.Services\obj\Debug\net6.0\Hoacc.Services.dll
 C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.Services\obj\Debug\net6.0\refint\Hoacc.Services.dll
 C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.Services\obj\Debug\net6.0\Hoacc.Services.pdb
+C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.Services\bin\Debug\net6.0\Hoacc.Services.deps.json
+C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.Services\bin\Debug\net6.0\Hoacc.Services.dll
+C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.Services\bin\Debug\net6.0\Hoacc.Services.pdb
+C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.Services\bin\Debug\net6.0\Hoacc.Common.dll
+C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.Services\bin\Debug\net6.0\Hoacc.IServices.dll
+C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.Services\bin\Debug\net6.0\Hoacc.Common.pdb
+C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.Services\bin\Debug\net6.0\Hoacc.IServices.pdb
+C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.Services\obj\Debug\net6.0\Hoacc.Services.csproj.CopyComplete
+C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.Services\obj\Debug\net6.0\ref\Hoacc.Services.dll

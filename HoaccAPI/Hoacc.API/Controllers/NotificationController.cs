@@ -31,6 +31,7 @@ namespace HoaccAPI.Controllers
         }
 
         [ValidateModel]
+        [HttpPost]
         public async Task<IActionResult> Post([FromBody] HoaccIServices.Requests.CreateNotification createNotification)
         {
             var notification = await _notificationService.CreateNotification(createNotification);
