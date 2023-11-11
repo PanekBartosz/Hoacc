@@ -9,6 +9,7 @@ namespace HoaccAPI.BindingModels
         public int UserId { get; init; }
         
         [Required]
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; init; }
         

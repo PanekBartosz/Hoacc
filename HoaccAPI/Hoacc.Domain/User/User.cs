@@ -1,5 +1,4 @@
-﻿
-namespace HoaccDomain.User
+﻿namespace HoaccDomain.User
 {
     public class User
     {

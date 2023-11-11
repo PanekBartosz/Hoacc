@@ -15,6 +15,7 @@ using HoaccDataSql.User;
 using HoaccIData.User;
 using HoaccIServices.User;
 using HoaccIServices.Requests;
+using HoaccServices.User;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using CreateUser = HoaccAPI.BindingModels.CreateUser;
@@ -25,7 +26,6 @@ namespace HoaccAPI
     public class Startup
     {
         private IConfiguration Configuration { get; }
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -54,11 +54,6 @@ namespace HoaccAPI
             services.AddTransient<IValidator<CreateUser>, CreateUserValidator>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
-            services.AddApiVersioning( o =>
-            {
-                o.ReportApiVersions = true;
-                o.UseApiBehavior = false;
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,10 +80,10 @@ namespace HoaccAPI
             app.UseMiddleware<ErrorHandlerMiddleware>();
             app.UseRouting();
 
-            /*app.UseEndpoints(endpoints =>
+            app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-            });*/
+            });
         }
     }
 }

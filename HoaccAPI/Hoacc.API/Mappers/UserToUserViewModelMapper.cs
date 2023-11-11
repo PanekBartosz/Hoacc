@@ -4,7 +4,7 @@ namespace HoaccAPI.Mappers
 {
     public class UserToUserViewModelMapper
     {
-        public static UserViewModel UserToUserViewModel(HoaccDomain.User.User user)
+        public static UserViewModel UserToUserViewModel(HoaccCommon.User.UserDTO user)
         {
             var userViewModel = new UserViewModel
             {

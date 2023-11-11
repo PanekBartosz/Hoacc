@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace HoaccAPI.BindingModels
 {
@@ -9,6 +10,7 @@ namespace HoaccAPI.BindingModels
         public int UserId { get; init; }
         
         [Required]
+        [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; init; }
         

@@ -5,7 +5,7 @@ namespace HoaccAPI.Mappers
     public class NotificationToNotificationViewModelMapper
     {
         public static NotificationViewModel 
-            NotificationToNotificationViewModel(HoaccDomain.Notification.Notification notification)
+            NotificationToNotificationViewModel(HoaccCommon.Notification.NotificationDTO notification)
         {
             var notificationViewModel = new NotificationViewModel
             {

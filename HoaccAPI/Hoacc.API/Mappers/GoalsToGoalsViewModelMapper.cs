@@ -5,7 +5,7 @@ namespace HoaccAPI.Mappers
     public class GoalsToGoalsViewModelMapper
     {
         public static GoalsViewModel 
-            GoalsToGoalsViewModel(HoaccDomain.Goals.Goals goals)
+            GoalsToGoalsViewModel(HoaccCommon.Goals.GoalsDTO goals)
         {
             var goalsViewModel = new GoalsViewModel
             {

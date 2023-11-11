@@ -1,11 +1,11 @@
 ﻿using HoaccAPI.ViewModels;
-using HoaccDomain.Operations;
+using HoaccCommon.Operations;
 
 namespace HoaccAPI.Mappers
 {
     public class OperationsToOperationsViewModelMapper
     {
-        public static OperationsViewModel OperationsToOperationsViewModel(HoaccDomain.Operations.Operations operations)
+        public static OperationsViewModel OperationsToOperationsViewModel(HoaccCommon.Operations.OperationsDTO operations)
         {
             var operationsViewModel = new OperationsViewModel
             {
@@ -22,17 +22,17 @@ namespace HoaccAPI.Mappers
             return operationsViewModel;
         }
         
-        private static OperationsViewModel.CategoryTypeViewModel MapCategoryTypeToViewModel(Operations.CategoryType domainCategoryType)
+        private static OperationsViewModel.CategoryTypeViewModel MapCategoryTypeToViewModel(OperationsDTO.CategoryType domainCategoryType)
         {
             switch (domainCategoryType)
             {
-                case Operations.CategoryType.Bills:
+                case OperationsDTO.CategoryType.Bills:
                     return OperationsViewModel.CategoryTypeViewModel.Bills;
-                case Operations.CategoryType.Food:
+                case OperationsDTO.CategoryType.Food:
                     return OperationsViewModel.CategoryTypeViewModel.Food;
-                case Operations.CategoryType.Education:
+                case OperationsDTO.CategoryType.Education:
                     return OperationsViewModel.CategoryTypeViewModel.Education;
-                case Operations.CategoryType.Entertainment:
+                case OperationsDTO.CategoryType.Entertainment:
                     return OperationsViewModel.CategoryTypeViewModel.Entertainment;
                 default:
                     // Handle any unknown values
