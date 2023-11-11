@@ -13,19 +13,19 @@ namespace HoaccServices.User
             _userRepository = userRepository;
         }
 
-        public Task<HoaccDomain.User.User> GetUserByEmail(string email)
+        public Task<HoaccCommon.User.UserDTO> GetUserByEmail(string email)
         {
             return _userRepository.GetUser(email);
         }
 
-        public Task<HoaccDomain.User.User> GetUserByUserId(int userId)
+        public Task<HoaccCommon.User.UserDTO> GetUserByUserId(int userId)
         {
             return _userRepository.GetUser(userId);
         }
 
-        public async Task<HoaccDomain.User.User> CreateUser(CreateUser createUser)
+        public async Task<HoaccCommon.User.UserDTO> CreateUser(CreateUser createUser)
         {
-            var user = new HoaccDomain.User.User(createUser.Email, createUser.Password);
+            var user = new HoaccCommon.User.UserDTO(createUser.Email, createUser.Password);
             user.UserId = await _userRepository.CreateUser(user);
             return user;
         }

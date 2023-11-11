@@ -11,4 +11,26 @@ public class NotificationDTO
     public double Amount { get; set; }
     
     public int UserId { get; set; }
+    public NotificationDTO(int notificationId, string name, DateTime date, double amount, int userId )
+    {
+        NotificationId = notificationId;
+        Name = name;
+        Date = date;
+        Amount = amount;
+        UserId = userId;
+    }
+    public NotificationDTO(string name, DateTime date, double amount, int userId )
+    {
+        Name = name;
+        Date = date;
+        Amount = amount;
+        UserId = userId;
+    }
+    public void EditNotification(string name, DateTime date, double amount, int userId )
+    {
+        Name = name;
+        Date = date;
+        Amount = amount;
+        UserId = userId;
+    }
 }

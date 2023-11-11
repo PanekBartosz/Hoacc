@@ -14,9 +14,13 @@
             Email = email;
             Password = password;
         }
-        public void UpdateUserPassword(int userId, string email, string password)
+        public User(string email, string password)
         {
-            UserId = userId;
+            Email = email;
+            Password = password;
+        }
+        public void UpdateUserPassword(string email, string password)
+        {
             Email = email;
             Password = password;
         }

@@ -23,4 +23,36 @@ public class OperationsDTO
     public double Amount { get; set; }
     
     public int UserId { get; set; }
+    
+    public OperationsDTO(int operationId, string type, DateTime date, string description,
+        CategoryType category, double amount, int userId )
+    {
+        OperationId = operationId;
+        Type = type;
+        Date = date;
+        Description = description;
+        Category = category;
+        Amount = amount;
+        UserId = userId;
+    }
+    public OperationsDTO(string type, DateTime date, string description,
+        CategoryType category, double amount, int userId )
+    {
+        Type = type;
+        Date = date;
+        Description = description;
+        Category = category;
+        Amount = amount;
+        UserId = userId;
+    }
+    public void EditOperations(string type, DateTime date, string description,
+        CategoryType category, double amount, int userId )
+    {
+        Type = type;
+        Date = date;
+        Description = description;
+        Category = category;
+        Amount = amount;
+        UserId = userId;
+    }
 }
