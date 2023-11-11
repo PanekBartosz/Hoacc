@@ -1,25 +1,36 @@
 ﻿using FluentValidation;
 using FluentValidation.AspNetCore;
-using HoaccAPI.BindingModels;
 using HoaccAPI.Middlewares;
 using HoaccAPI.Validation;
 using HoaccDataSql;
+using HoaccDataSql.Goals;
 using HoaccDataSql.Migrations;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+using HoaccDataSql.Notification;
+using HoaccDataSql.Operations;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using HoaccDataSql.User;
+using HoaccIData.Goals;
+using HoaccIData.Notification;
+using HoaccIData.Operations;
 using HoaccIData.User;
+using HoaccIServices.Goals;
+using HoaccIServices.Notification;
+using HoaccIServices.Operations;
 using HoaccIServices.User;
-using HoaccIServices.Requests;
+using HoaccServices.Goals;
+using HoaccServices.Notification;
+using HoaccServices.Operations;
 using HoaccServices.User;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using CreateUser = HoaccAPI.BindingModels.CreateUser;
 using UpdateUserPassword = HoaccAPI.BindingModels.UpdateUserPassword;
+using CreateGoals = HoaccAPI.BindingModels.CreateGoals;
+using CreateNotification = HoaccAPI.BindingModels.CreateNotification;
+using CreateOperations = HoaccAPI.BindingModels.CreateOperations;
+using EditGoals = HoaccAPI.BindingModels.EditGoals;
+using EditNotification = HoaccAPI.BindingModels.EditNotification;
+using EditOperations = HoaccAPI.BindingModels.EditOperations;
 
 namespace HoaccAPI
 {
@@ -52,8 +63,20 @@ namespace HoaccAPI
                 .AddFluentValidation();
             services.AddTransient<IValidator<UpdateUserPassword>, UpdateUserPasswordValidator>();
             services.AddTransient<IValidator<CreateUser>, CreateUserValidator>();
+            services.AddTransient<IValidator<EditOperations>, EditOperationsValidator>();
+            services.AddTransient<IValidator<CreateOperations>, CreateOperationsValidator>();
+            services.AddTransient<IValidator<EditNotification>, EditNotificationValidator>();
+            services.AddTransient<IValidator<CreateNotification>, CreateNotificationValidator>();
+            services.AddTransient<IValidator<EditGoals>, EditGoalsValidator>();
+            services.AddTransient<IValidator<CreateGoals>, CreateGoalsValidator>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IOperationsService, OperationsService>();
+            services.AddScoped<IOperationsRepository, OperationsRepository>();
+            services.AddScoped<INotificationService, NotificationService>();
+            services.AddScoped<INotificationRepository, NotificationRepository>();
+            services.AddScoped<IGoalsService, GoalsService>();
+            services.AddScoped<IGoalsRepository, GoalsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
