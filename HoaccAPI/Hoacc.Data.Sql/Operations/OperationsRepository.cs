@@ -1,22 +1,23 @@
-﻿using HoaccIData.Operations;
+﻿using HoaccCommon.Operations;
+using HoaccIData.Operations;
 using HoaccIData.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace HoaccDataSql.Operations
 {
-    public class OperationsRepository: IOperationsRepository
+    public class OperationsRepository: IOperationsRepositoryDTO
     {
         private readonly HoaccDbContext _context;
-        private IOperationsRepository _operationsRepositoryImplementation;
+        private IOperationsRepositoryDTO _operationsRepositoryImplementation;
 
         public OperationsRepository(HoaccDbContext context)
         {
             _context = context;
         }
-        public async Task<HoaccDomain.Operations.Operations> GetOperations(int operationId)
+        public async Task<OperationsDTO> GetOperations(int operationId)
         {
             var operation = await _context.Operations.FirstOrDefaultAsync(x=>x.OperationId == operationId);
-            return new HoaccDomain.Operations.Operations(operation.OperationId,
+            return new OperationsDTO(operation.OperationId,
                 operation.Type,
                 operation.Date,
                 operation.Description,
@@ -25,7 +26,7 @@ namespace HoaccDataSql.Operations
                 operation.UserId);
         }
         
-        public async Task<int> CreateOperations(HoaccDomain.Operations.Operations operations)
+        public async Task<int> CreateOperations(OperationsDTO operations)
         {
             var operationsDAO =  new DAO.Operations { 
                 OperationId = operations.OperationId,
@@ -41,7 +42,7 @@ namespace HoaccDataSql.Operations
             return operationsDAO.OperationId;
         }
 
-        public async Task EditOperations(int operationId, HoaccDomain.Operations.Operations operations)
+        public async Task EditOperations(int operationId, OperationsDTO operations)
         {
             var editOperations = await _context.Operations.FirstOrDefaultAsync(
                 x=>x.OperationId == operations.OperationId);

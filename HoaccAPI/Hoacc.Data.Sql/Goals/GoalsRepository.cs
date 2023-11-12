@@ -1,29 +1,30 @@
-﻿using HoaccIData.Goals;
+﻿using HoaccCommon.Goals;
+using HoaccIData.Goals;
 using HoaccIData.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace HoaccDataSql.Goals
 {
-    public class GoalsRepository: IGoalsRepository
+    public class GoalsRepository: IGoalsRepositoryDTO
     {
         private readonly HoaccDbContext _context;
-        private IGoalsRepository _goalsRepositoryImplementation;
+        private IGoalsRepositoryDTO _goalsRepositoryImplementation;
 
         public GoalsRepository(HoaccDbContext context)
         {
             _context = context;
         }
-        public async Task<HoaccDomain.Goals.Goals> GetGoals(int goalsId)
+        public async Task<GoalsDTO> GetGoals(int goalsId)
         {
             var goals = await _context.Goals.FirstOrDefaultAsync(x=>x.GoalsId == goalsId);
-            return new HoaccDomain.Goals.Goals(goals.GoalsId,
+            return new GoalsDTO(goals.GoalsId,
                 goals.Name,
                 goals.GoalAmount,
                 goals.CurrentAmount,
                 goals.UserId);
         }
         
-        public async Task<int> CreateGoals(HoaccDomain.Goals.Goals goals)
+        public async Task<int> CreateGoals(GoalsDTO goals)
         {
             var goalsDAO =  new DAO.Goals { 
                 GoalsId = goals.GoalsId,
@@ -37,7 +38,7 @@ namespace HoaccDataSql.Goals
             return goalsDAO.GoalsId;
         }
 
-        public async Task EditGoals(int goalsId, HoaccDomain.Goals.Goals goals)
+        public async Task EditGoals(int goalsId, GoalsDTO goals)
         {
             var editGoals = await _context.Goals.FirstOrDefaultAsync(
                 x=>x.GoalsId == goals.GoalsId);

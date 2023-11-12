@@ -1,6 +1,7 @@
 ﻿
 
 using System.ComponentModel.DataAnnotations;
+using HoaccCommon.Operations;
 
 namespace HoaccDataSql.DAO;
 
@@ -15,7 +16,7 @@ public class Operations
     
     public string Description { get; set; } = "";
     
-    public HoaccDomain.Operations.Operations.CategoryType Category { get; set; }
+    public OperationsDTO.CategoryType Category { get; set; }
     
     public double Amount { get; set; }
     public int UserId { get; set; }

@@ -1,10 +1,12 @@
-﻿namespace HoaccIData.Operations
+﻿using HoaccCommon.Operations;
+
+namespace HoaccIData.Operations
 {
     public interface IOperationsRepository
     {
-        Task<HoaccDomain.Operations.Operations> GetOperations(int operationId);
-        Task<int> CreateOperations(HoaccDomain.Operations.Operations operations);
-        Task EditOperations(int operationId, HoaccDomain.Operations.Operations operations);
+        Task<OperationsDTO> GetOperations(int operationId);
+        Task<int> CreateOperations(OperationsDTO operations);
+        Task EditOperations(int operationId, OperationsDTO operations);
         Task RemoveOperations(int operationId);
     }
 }

@@ -1,29 +1,30 @@
-﻿using HoaccIData.Notification;
+﻿using HoaccCommon.Notification;
+using HoaccIData.Notification;
 using HoaccIData.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace HoaccDataSql.Notification
 {
-    public class NotificationRepository: INotificationRepository
+    public class NotificationRepository: INotificationRepositoryDTO
     {
         private readonly HoaccDbContext _context;
-        private INotificationRepository _notificationRepositoryImplementation;
+        private INotificationRepositoryDTO _notificationRepositoryImplementation;
 
         public NotificationRepository(HoaccDbContext context)
         {
             _context = context;
         }
-        public async Task<HoaccDomain.Notification.Notification> GetNotification(int notificationId)
+        public async Task<NotificationDTO> GetNotification(int notificationId)
         {
             var notification = await _context.Notification.FirstOrDefaultAsync(x=>x.NotificationId == notificationId);
-            return new HoaccDomain.Notification.Notification(notification.NotificationId,
+            return new NotificationDTO(notification.NotificationId,
                 notification.Name,
                 notification.Date,
                 notification.Amount,
                 notification.UserId);
         }
         
-        public async Task<int> CreateNotification(HoaccDomain.Notification.Notification notification)
+        public async Task<int> CreateNotification(NotificationDTO notification)
         {
             var notificationDAO =  new DAO.Notification { 
                 NotificationId = notification.NotificationId,
@@ -37,7 +38,7 @@ namespace HoaccDataSql.Notification
             return notificationDAO.NotificationId;
         }
 
-        public async Task EditNotification(int notificationId, HoaccDomain.Notification.Notification notification)
+        public async Task EditNotification(int notificationId, NotificationDTO notification)
         {
             var editNotification = await _context.Notification.FirstOrDefaultAsync(
                 x=>x.NotificationId == notification.NotificationId);

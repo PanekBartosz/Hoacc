@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using HoaccCommon.Operations;
+using Microsoft.EntityFrameworkCore;
 using HoaccDataSql.DAOConfigurations;
 using HoaccDataSql.DAO;
 
@@ -26,8 +27,8 @@ namespace HoaccDataSql
                 .HasConversion(
                     v => v.ToString(),
                     v => (
-                        HoaccDomain.Operations.Operations.CategoryType)
-                        Enum.Parse(typeof(HoaccDomain.Operations.Operations.CategoryType), v)
+                        OperationsDTO.CategoryType)
+                        Enum.Parse(typeof(OperationsDTO.CategoryType), v)
                 );
 
             base.OnModelCreating(modelBuilder);

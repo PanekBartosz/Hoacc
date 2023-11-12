@@ -1,4 +1,5 @@
 ﻿
+using HoaccCommon.Operations;
 using Org.BouncyCastle.Tls;
 
 namespace HoaccDataSql.Migrations
@@ -120,9 +121,9 @@ namespace HoaccDataSql.Migrations
                  Random random = new Random();
 
                  // Get all values from CategoryType enum
-                 HoaccDomain.Operations.Operations.CategoryType[] allCategories = (
-                     HoaccDomain.Operations.Operations.CategoryType[])Enum
-                     .GetValues(typeof(HoaccDomain.Operations.Operations.CategoryType));
+                 OperationsDTO.CategoryType[] allCategories = (
+                     OperationsDTO.CategoryType[])Enum
+                     .GetValues(typeof(OperationsDTO.CategoryType));
                  
                  // Generate a random index to select a category
                  int randomIndex = random.Next(0, allCategories.Length);
