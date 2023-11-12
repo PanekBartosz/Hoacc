@@ -1,19 +1,18 @@
 ﻿using HoaccAPI.ViewModels;
+using HoaccCommon.User;
 
-namespace HoaccAPI.Mappers
+namespace HoaccAPI.Mappers;
+
+public class UserToUserViewModelMapper
 {
-    public class UserToUserViewModelMapper
+    public static UserViewModel UserToUserViewModel(UserDTO user)
     {
-        public static UserViewModel UserToUserViewModel(HoaccCommon.User.UserDTO user)
+        var userViewModel = new UserViewModel
         {
-            var userViewModel = new UserViewModel
-            {
-                UserId = user.UserId,
-                Email = user.Email,
-                Password = user.Password,
-            };
-            return userViewModel;
-        }
-
+            UserId = user.UserId,
+            Email = user.Email,
+            Password = user.Password
+        };
+        return userViewModel;
     }
 }

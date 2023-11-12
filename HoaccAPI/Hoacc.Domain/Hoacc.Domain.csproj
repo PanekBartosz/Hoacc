@@ -8,9 +8,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Hoacc.Common\Hoacc.Common.csproj" />
-      <ProjectReference Include="..\Hoacc.IServices\Hoacc.IServices.csproj" />
-      <ProjectReference Include="..\Hoacc.Services\Hoacc.Services.csproj" />
+        <ProjectReference Include="..\Hoacc.Common\Hoacc.Common.csproj"/>
+        <ProjectReference Include="..\Hoacc.IServices\Hoacc.IServices.csproj"/>
+        <ProjectReference Include="..\Hoacc.Services\Hoacc.Services.csproj"/>
     </ItemGroup>
 
 </Project>

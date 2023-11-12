@@ -1,12 +1,12 @@
-﻿using HoaccIServices.Requests;
+﻿using HoaccCommon.User;
+using HoaccIServices.Requests;
 
-namespace HoaccIServices.User
+namespace HoaccIServices.User;
+
+public interface IUserService
 {
-    public interface IUserService
-    {
-        Task<HoaccCommon.User.UserDTO> GetUserByEmail(string email);
-        Task<HoaccCommon.User.UserDTO> GetUserByUserId(int userId);
-        Task<HoaccCommon.User.UserDTO> CreateUser(CreateUser createUser);
-        Task UpdateUserPassword(UpdateUserPassword updateUserPassword, int userId);
-    }
+    Task<UserDTO> GetUserByEmail(string email);
+    Task<UserDTO> GetUserByUserId(int userId);
+    Task<UserDTO> CreateUser(CreateUser createUser);
+    Task UpdateUserPassword(UpdateUserPassword updateUserPassword, int userId);
 }

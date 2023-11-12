@@ -4,6 +4,11 @@ namespace HoaccAPI.Middlewares
 {
     public class ErrorHandlerMiddleware
     {
+        private readonly Dictionary<Func<Exception, bool>, Func<Exception, (string, int)>> _exceptionDictionary =
+            new Dictionary<Func<Exception, bool>, Func<Exception, (string, int)>>
+            {
+            };
+
         private readonly RequestDelegate _next;
 
         public ErrorHandlerMiddleware(RequestDelegate next)
@@ -28,7 +33,7 @@ namespace HoaccAPI.Middlewares
         private Task HandleErrorAsync(HttpContext context, Exception exception)
         {
             var exceptionResult = GetException(exception);
-            var response = new { message = exceptionResult.Item1 };
+            var response = new {message = exceptionResult.Item1};
             var payload = JsonConvert.SerializeObject(response);
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = exceptionResult.Item2;
@@ -44,14 +49,9 @@ namespace HoaccAPI.Middlewares
                 //Todo: logging
                 return ("Internal Server Error", 500);
             }
+
             //Todo: logging
             return _exceptionDictionary[key](exception);
         }
-        
-        private readonly Dictionary<Func<Exception,bool>, Func<Exception,(string,int)>> _exceptionDictionary = 
-            new Dictionary<Func<Exception,bool>,Func<Exception,(string,int)>>
-            {
-            };
-
     }
 }

@@ -1,32 +1,31 @@
-﻿namespace HoaccDomain.Notification
+﻿namespace HoaccDomain.Notification;
+
+public class Notification
 {
-    public class Notification
+    public Notification(int notificationId, string name, DateTime date, double amount, int userId)
     {
-        public int NotificationId { get; set; }
-    
-        public string? Name { get; set; }
-    
-        public DateTime Date { get; set; }
-    
-        public double Amount { get; set; }
-        public int UserId { get; set; }
+        NotificationId = notificationId;
+        Name = name;
+        Date = date;
+        Amount = amount;
+        UserId = userId;
+    }
 
-        public Notification(int notificationId, string name, DateTime date, double amount, int userId )
-        {
-            NotificationId = notificationId;
-            Name = name;
-            Date = date;
-            Amount = amount;
-            UserId = userId;
-        }
-        public void EditNotification(int notificationId, string name, DateTime date, double amount, int userId )
-        {
-            NotificationId = notificationId;
-            Name = name;
-            Date = date;
-            Amount = amount;
-            UserId = userId;
-        }
+    public int NotificationId { get; set; }
 
+    public string? Name { get; set; }
+
+    public DateTime Date { get; set; }
+
+    public double Amount { get; set; }
+    public int UserId { get; set; }
+
+    public void EditNotification(int notificationId, string name, DateTime date, double amount, int userId)
+    {
+        NotificationId = notificationId;
+        Name = name;
+        Date = date;
+        Amount = amount;
+        UserId = userId;
     }
 }
