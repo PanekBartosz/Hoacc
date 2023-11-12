@@ -2,6 +2,9 @@
 using FluentValidation.AspNetCore;
 using HoaccAPI.Middlewares;
 using HoaccAPI.Validation;
+using HoaccCommon.Goals;
+using HoaccCommon.Notification;
+using HoaccCommon.Operations;
 using HoaccDataSql;
 using HoaccDataSql.Goals;
 using HoaccDataSql.Migrations;
@@ -68,20 +71,20 @@ namespace HoaccAPI
                 .AddFluentValidation();
             services.AddTransient<IValidator<UpdateUserPassword>, UpdateUserPasswordValidator>();
             services.AddTransient<IValidator<CreateUser>, CreateUserValidator>();
-            /*services.AddTransient<IValidator<EditOperations>, EditOperationsValidator>();
+            services.AddTransient<IValidator<EditOperations>, EditOperationsValidator>();
             services.AddTransient<IValidator<CreateOperations>, CreateOperationsValidator>();
             services.AddTransient<IValidator<EditNotification>, EditNotificationValidator>();
             services.AddTransient<IValidator<CreateNotification>, CreateNotificationValidator>();
             services.AddTransient<IValidator<EditGoals>, EditGoalsValidator>();
-            services.AddTransient<IValidator<CreateGoals>, CreateGoalsValidator>();*/
+            services.AddTransient<IValidator<CreateGoals>, CreateGoalsValidator>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepositoryDTO, UserRepository>();
-            /*services.AddScoped<IOperationsService, OperationsService>();
-            services.AddScoped<IOperationsRepository, OperationsRepository>();
+            services.AddScoped<IOperationsService, OperationsService>();
+            services.AddScoped<IOperationsRepositoryDTO, OperationsRepository>();
             services.AddScoped<INotificationService, NotificationService>();
-            services.AddScoped<INotificationRepository, NotificationRepository>();
+            services.AddScoped<INotificationRepositoryDTO, NotificationRepository>();
             services.AddScoped<IGoalsService, GoalsService>();
-            services.AddScoped<IGoalsRepository, GoalsRepository>();*/
+            services.AddScoped<IGoalsRepositoryDTO, GoalsRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
