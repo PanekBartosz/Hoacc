@@ -28,7 +28,7 @@ const validateInput = (event) => {
       data-ripple-light="true"
       @click="open = true"
     >
-      Add new
+      Update
     </button>
     <div
       :class="`modal ${
@@ -46,7 +46,7 @@ const validateInput = (event) => {
         <div class="px-6 py-4 text-left modal-content">
           <!-- Title -->
           <div class="flex items-center justify-between pb-3">
-            <p class="text-2xl font-bold">Add goal</p>
+            <p class="text-2xl font-bold">Edit goal</p>
             <div class="z-50 cursor-pointer modal-close" @click="open = false">
               <img width="12" src="../icons/close-icon.png" />
             </div>
@@ -66,7 +66,7 @@ const validateInput = (event) => {
                 </div>
                 <div class="mt-4 w-3/4 mx-auto">
                     <input
-                    id="CurrentAmount"
+                    id="amount"
                     placeholder="Enter current amount"
                     name="amount"
                     type="text"
@@ -77,7 +77,7 @@ const validateInput = (event) => {
                 </div>
                 <div class="mt-4 w-3/4 mx-auto">
                     <input
-                    id="GoalAmount"
+                    id="amount"
                     placeholder="Enter goal amount"
                     name="amount"
                     type="text"
@@ -88,7 +88,15 @@ const validateInput = (event) => {
                 </div>
             </div>
 
-            <div class="flex justify-center mt-5">
+            <div class="justify-center mt-5 text-center">
+                <button
+                    type="submit"
+                    class="rounded-lg mb-3 w-3/4 bg-red-700 py-2 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                    data-ripple-light="true"
+                    @click="open = false"
+                >
+                    Delete
+                </button>
                 <button
                     type="submit"
                     class="rounded-lg w-3/4 bg-slate-900 py-2 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
@@ -96,7 +104,7 @@ const validateInput = (event) => {
                     @click="open = false"
                     :disabled="!isButtonEnabled"
                 >
-                    Add goal
+                    Save
                 </button>
             </div>
         </div>

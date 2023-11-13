@@ -9,6 +9,7 @@ import OperationsModal from "./OperationsModal.vue";
 import NotificationsModal from "./NotificationsModal.vue";
 import EditOperationsModal from "./EditOperationsModal.vue";
 import GoalsModal from "./GoalsModal.vue";
+import EditGoalsModal from "./EditGoalsModal.vue"
 
 const currentDate = new Date();
 const currentPage = ref(1);
@@ -286,8 +287,9 @@ watch(() => donutChart.value, (newValue) => {
           <div class="w-32">
             <canvas ref="donutChart"></canvas>
           </div>
-          <div>
-            <h3 class="text-3xl mx-5 font-medium text-center">Holidays</h3>
+          <div class="text-center">
+            <h3 class="text-3xl mx-5 font-medium mb-2">Holidays</h3>
+            <EditGoalsModal />
           </div>
         </div>
 
