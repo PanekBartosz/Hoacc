@@ -59,7 +59,7 @@
               href="#"
               class="font-semibold leading-6 text-button-blue hover:text-button-blue-hover"
             >
-              Forgot password?
+              <!-- Forgot password? -->
             </a>
           </div>
 

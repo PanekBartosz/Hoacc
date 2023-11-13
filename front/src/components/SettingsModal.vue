@@ -1,8 +1,14 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from 'vue';
+
+const newPassword = ref('');
+const confirmPassword = ref('');
+
+const isButtonEnabled = computed(() => {
+  return newPassword.value !== '' && confirmPassword.value !== '';
+});
 
 const open = ref(false);
-
 </script>
 
 <template>
@@ -26,8 +32,7 @@ const open = ref(false);
       <div
         class="z-50 w-11/12 mx-auto overflow-y-auto bg-white rounded shadow-lg modal-container md:max-w-md"
       >
-        <div class="px-6 py-4 text-left modal-content">
-          <!-- Title -->
+      <div class="px-6 py-4 text-left modal-content">
           <div class="flex items-center justify-between pb-3">
             <p class="text-2xl font-bold">Settings</p>
             <div class="z-50 cursor-pointer modal-close" @click="open = false">
@@ -35,19 +40,51 @@ const open = ref(false);
             </div>
           </div>
 
-          <!-- Body -->
-          <p>Modal content.</p>
-
-          <!-- Footer -->
-          <div class="flex justify-center pt-2">
-            <button
-              class="rounded-lg w-1/2 mt-5 bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-              data-ripple-light="true"
-              @click="open = false"
-            >
-              Add operation
-            </button>
+          <p class="text-center">Account details</p>
+          <hr>
+          <div class="mt-4 mb-4 text-center">
+            Your email: <b>{{ "example@gmail.com" }}</b>
           </div>
+          <p class="text-center mt-10">Change password</p>
+          <hr>
+            <form class="space-y-6" action="#" method="POST">
+              <div class="flex">
+                <div class="mt-4 w-1/2 mr-2">
+                  <input
+                    id="NewPass"
+                    placeholder="New Password"
+                    name="Newpassword"
+                    type="password"
+                    required="true"
+                    class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
+                    v-model="newPassword"
+                    />
+                </div>
+                <div class="mt-4 w-1/2">
+                  <input
+                    id="ConPass"
+                    placeholder="Confirm Password"
+                    name="Conpassword"
+                    type="password"
+                    required="true"
+                    class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
+                    v-model="confirmPassword"
+                    />
+                </div>
+              </div>
+
+              <div class="flex justify-center">
+                <button
+                  type="submit"
+                  class="rounded-lg w-full bg-slate-900 py-2 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                  data-ripple-light="true"
+                  @click="open = false"
+                  :disabled="!isButtonEnabled"
+                >
+                  Change password
+                </button>
+              </div>
+            </form>
         </div>
       </div>
     </div>
