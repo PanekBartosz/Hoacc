@@ -19,7 +19,6 @@ const formatDate = (date) => {
   return `${month}.${day}.${year}`
 }
 
-const color = 'red';
 </script>
 
 <template>
@@ -112,6 +111,7 @@ const color = 'red';
 
 .vuejs3-datepicker__calendar-topbar {
     background-color: rgba(30, 170, 241, 0.5);
+    padding: 4px;
 }
 
 .vuejs3-datepicker__calendar .cell.selected {
@@ -123,6 +123,10 @@ const color = 'red';
     background-color: rgba(30, 170, 241, 0.5);
     border-radius: 25%;
     border-color: rgba(30, 170, 241, 0.5);
+}
+
+.vuejs3-datepicker__calendar-topbar-year {
+  display: none;
 }
 
 </style>
