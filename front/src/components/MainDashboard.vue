@@ -116,7 +116,7 @@ watch(() => donutChart.value, (newValue) => {
   <MainNavbar class="" />
   <div class="w-full h-full flex flex-col p-5">
     <!-- Container 1-->
-    <div class="w-full h-full mt-10 bg-white rounded-lg shadow-lg p-4 mb-5">
+    <div id="home" class="w-full h-full mt-10 bg-white rounded-lg shadow-lg p-4 mb-5">
       <h3 class="text-xl font-medium text-gray-700">Monthly balance</h3>
       <div class="mt-3">
         <div class="flex flex-wrap -mx-6">
@@ -160,7 +160,7 @@ watch(() => donutChart.value, (newValue) => {
     <div
       class="w-full h-full overflow-hidden bg-white rounded-lg shadow-lg p-4 mb-5"
     >
-      <div class="flex flex-row justify-between">
+      <div id="operations" class="flex flex-row justify-between">
         <h3 class="text-xl font-medium text-gray-700">Operations</h3>
         <OperationsModal />
       </div>
@@ -262,7 +262,7 @@ watch(() => donutChart.value, (newValue) => {
     <!-- Container 3 & 4  -->
     <div class="w-full h-full lg:flex">
     <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2 lg:mr-5">
-      <div class="flex flex-row justify-between">
+      <div id="notifications" class="flex flex-row justify-between">
         <h3 class="text-xl font-medium text-gray-700">Notifications</h3>
         <button
           class="rounded-lg bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
@@ -282,7 +282,7 @@ watch(() => donutChart.value, (newValue) => {
       </div>
     </div>
     <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2">
-      <div class="flex flex-row justify-between mb-6">
+      <div id="goals" class="flex flex-row justify-between mb-6">
         <h3 class="text-xl font-medium text-gray-700">Goals</h3>
         <button
           class="rounded-lg bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
@@ -302,11 +302,11 @@ watch(() => donutChart.value, (newValue) => {
         </div>
 
     </div>
-  </div>
+  </div >
 
     <!-- Container 5  -->
-    <div class="w-full h-full bg-white rounded-lg shadow-lg p-4">
-      <div class="flex flex-row mb-3">
+    <div id="statics" class="w-full h-full bg-white rounded-lg shadow-lg p-4">
+      <div  class="flex flex-row mb-3">
         <h3 class="text-xl font-medium text-gray-700">Statics</h3>
       </div>
       <div class="w-full flex flex-wrap">

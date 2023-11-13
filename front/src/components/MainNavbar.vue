@@ -14,6 +14,26 @@ const navigation = [
 ]
 
 const mobileMenuOpen = ref(false)
+
+const scrollToSection = (sectionId) => {
+  if (sectionId === "home") {
+    window.scrollTo({
+      top: 0, // Scroll to the top of the page
+      behavior: "smooth",
+    });
+  } else {
+    const element = document.getElementById(sectionId);
+
+    if (element) {
+      const offset = 25
+      window.scrollTo({
+        top: element.offsetTop - offset,
+        behavior: "smooth",
+      });
+    }
+  }
+};
+
 </script>
 <template>
   <div class="bg-white mb-5 absolute top-0 w-full">
@@ -42,7 +62,7 @@ const mobileMenuOpen = ref(false)
           <a
             v-for="item in navigation"
             :key="item.name"
-            :href="item.href"
+            @click.prevent="scrollToSection(item.name.toLowerCase())"
             class="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-500"
             >{{ item.name }}</a
           >
@@ -84,7 +104,7 @@ const mobileMenuOpen = ref(false)
                 <a
                   v-for="item in navigation"
                   :key="item.name"
-                  :href="item.href"
+                  @click.prevent="scrollToSection(item.name.toLowerCase())"
                   class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >{{ item.name }}</a
                 >
