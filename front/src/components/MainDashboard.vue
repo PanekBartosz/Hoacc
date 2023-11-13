@@ -7,6 +7,7 @@ import SavingsChart from "./SavingsChart.vue";
 import CategoryChart from "./CategoryChart.vue";
 import OperationsModal from "./OperationsModal.vue";
 import NotificationsModal from "./NotificationsModal.vue";
+import EditOperationsModal from "./EditOperationsModal.vue";
 
 const currentDate = new Date();
 const currentPage = ref(1);
@@ -237,11 +238,9 @@ watch(() => donutChart.value, (newValue) => {
                   </td>
 
                   <td
-                    class="px-6 py-4 text-sm font-bold leading-5 text-right border-b border-gray-200 whitespace-nowrap"
+                    class="px-6 py-4 leading-5 text-right border-b border-gray-200"
                   >
-                    <a href="#" class="text-indigo-600 hover:text-indigo-900"
-                      >Edit</a
-                    >
+                  <EditOperationsModal />
                   </td>
                 </tr>
               </tbody>
