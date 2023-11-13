@@ -8,6 +8,7 @@ import CategoryChart from "./CategoryChart.vue";
 import OperationsModal from "./OperationsModal.vue";
 import NotificationsModal from "./NotificationsModal.vue";
 import EditOperationsModal from "./EditOperationsModal.vue";
+import GoalsModal from "./GoalsModal.vue";
 
 const currentDate = new Date();
 const currentPage = ref(1);
@@ -278,12 +279,7 @@ watch(() => donutChart.value, (newValue) => {
     <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2">
       <div id="goals" class="flex flex-row justify-between mb-6">
         <h3 class="text-xl font-medium text-gray-700">Goals</h3>
-        <button
-          class="rounded-lg bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-          data-ripple-light="true"
-        >
-          Update
-        </button>
+        <GoalsModal />
       </div>
 
         <div class="rounded-lg w-min flex items-center shadow-lg p-1 border-2 border-slate-50">
