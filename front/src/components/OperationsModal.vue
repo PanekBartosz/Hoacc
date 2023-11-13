@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref,computed } from "vue";
+import { ref,computed, onMounted } from "vue";
 import Datepicker from 'vuejs3-datepicker';
 
 const open = ref(false);
@@ -9,6 +9,20 @@ const description = ref('');
 const amount = ref('');
 const isButtonEnabled = computed(() => {
   return description.value !== '' && amount.value !== '';
+});
+
+const selectedType = ref('');
+
+const updateSelectedType = (type) => {
+  selectedType.value = type;
+  localStorage.setItem('selectedType', type);
+};
+
+onMounted(() => {
+  const storedType = localStorage.getItem('selectedType');
+  if (storedType) {
+    selectedType.value = storedType;
+  }
 });
 
 </script>
@@ -53,13 +67,16 @@ const isButtonEnabled = computed(() => {
                 type="radio"
                 class="w-5 h-5 text-blue-600 focus:ring-blue-500"
                 name="radio"
-                checked
+                :checked="selectedType === 'income'"
+                @change="updateSelectedType('income')"
               ><span class="ml-2 mr-5 text-gray-700">Income</span>
               <input
                 id="outcome"
                 type="radio"
                 class="w-5 h-5 text-blue-600 focus:ring-blue-500"
                 name="radio"
+                :checked="selectedType === 'outcome'"
+                @change="updateSelectedType('outcome')"
               ><span class="ml-2 text-gray-700">Outcome</span>
             </label>
           </div>
