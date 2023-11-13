@@ -48,7 +48,6 @@ const open = ref(false);
           </div>
           <p class="text-center mt-10">Change password</p>
           <hr>
-            <form class="space-y-6" action="#" method="POST">
               <div class="flex">
                 <div class="mt-4 w-1/2 mr-2">
                   <input
@@ -56,7 +55,6 @@ const open = ref(false);
                     placeholder="New Password"
                     name="Newpassword"
                     type="password"
-                    required="true"
                     class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
                     v-model="newPassword"
                     />
@@ -67,14 +65,13 @@ const open = ref(false);
                     placeholder="Confirm Password"
                     name="Conpassword"
                     type="password"
-                    required="true"
                     class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
                     v-model="confirmPassword"
                     />
                 </div>
               </div>
 
-              <div class="flex justify-center">
+              <div class="flex justify-center mt-5">
                 <button
                   type="submit"
                   class="rounded-lg w-full bg-slate-900 py-2 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
@@ -85,7 +82,6 @@ const open = ref(false);
                   Change password
                 </button>
               </div>
-            </form>
         </div>
       </div>
     </div>
