@@ -6,6 +6,7 @@ import ProfitChart from "./ProfitChart.vue"
 import SavingsChart from "./SavingsChart.vue";
 import CategoryChart from "./CategoryChart.vue";
 import OperationsModal from "./OperationsModal.vue";
+import NotificationsModal from "./NotificationsModal.vue";
 
 const currentDate = new Date();
 const currentPage = ref(1);
@@ -262,15 +263,9 @@ watch(() => donutChart.value, (newValue) => {
     <!-- Container 3 & 4  -->
     <div class="w-full h-full lg:flex">
     <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2 lg:mr-5">
-      <div id="notifications" class="flex flex-row justify-between">
+      <div id="operations" class="flex flex-row justify-between">
         <h3 class="text-xl font-medium text-gray-700">Notifications</h3>
-        <button
-          class="rounded-lg bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-          @click=""
-          data-ripple-light="true"
-        >
-          Add new
-        </button>
+        <NotificationsModal/>
       </div>
       <div class="flex flex-row my-3 overflow-auto">
           <div v-for="(notification, index) in notifications" :key="index" class="bg-neutral-200 rounded-lg text-center shadow-md p-4 mx-3 my-3">
