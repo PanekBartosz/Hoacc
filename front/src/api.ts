@@ -1,12 +1,29 @@
-import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios'
 
 const apiClient = axios.create({
   baseURL: 'https://localhost:5001/api',
   headers: {
     'Content-Type': 'application/json',
   },
-});
+})
 
-export const fetchData = async (id: number): Promise<AxiosResponse> => apiClient.get(`/Operations/${id}`);
+export const getOperation = async (id: number): Promise<AxiosResponse> => apiClient.get(`/Operations/user/${id}`)
+export const getNotification= async (id: number): Promise<AxiosResponse> => apiClient.get(`/Notification/user/${id}`)
+export const getGoal = async (id: number): Promise<AxiosResponse> => apiClient.get(`/Goals/user/${id}`)
 
-//export const postData = async (data: any): Promise<AxiosResponse> => apiClient.post('/endpoint', data);
+export const postGoal= async (data: any): Promise<AxiosResponse> => apiClient.post('/Goals', data)
+export const postNotification= async (data: any): Promise<AxiosResponse> => apiClient.post('/Notification', data)
+export const postOperation= async (data: any): Promise<AxiosResponse> => apiClient.post('/Operations', data)
+export const postUser= async (data: any): Promise<AxiosResponse> => apiClient.post('/User', data)
+
+export const deleteOperation = async (id: number): Promise<AxiosResponse> => apiClient.delete(`/Operations/${id}`);
+export const deleteNotification = async (id: number): Promise<AxiosResponse> => apiClient.delete(`/Notification/${id}`);
+export const deleteGoal = async (id: number): Promise<AxiosResponse> => apiClient.delete(`/Goals/${id}`);
+
+export const updateOperation = async (id: number, data: any): Promise<AxiosResponse> => apiClient.put(`/Operations/${id}`, data);
+export const updateNotification = async (id: number, data: any): Promise<AxiosResponse> => apiClient.put(`/Notification/${id}`, data);
+export const updateGoal = async (id: number, data: any): Promise<AxiosResponse> => apiClient.put(`/Goals/${id}`, data);
+export const updateUserPass = async (id: number, data: any): Promise<AxiosResponse> => apiClient.patch(`/User/${id}/password`, data);
+
+export const authenticateUser= async (email: any,password: any): Promise<AxiosResponse> => apiClient.post('/auth/login', {email,password})
+
