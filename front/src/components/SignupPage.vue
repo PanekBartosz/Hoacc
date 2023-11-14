@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+
+</script>
 <template>
   <div class="flex min-h-[90vh] justify-center items-center">
     <div
@@ -28,6 +30,7 @@
                 type="email"
                 autocomplete="email"
                 required="true"
+                maxlength="200"
                 class="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
               />
             </div>
@@ -49,6 +52,7 @@
                 type="password"
                 autocomplete="current-password"
                 required="true"
+                maxlength="200"
                 class="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
               />
             </div>
@@ -70,6 +74,7 @@
                 type="password"
                 autocomplete="current-password"
                 required="true"
+                maxlength="200"
                 class="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
               />
             </div>
@@ -78,7 +83,7 @@
           <div>
             <button
               type="submit"
-              class="flex w-full justify-center rounded-md bg-button-blue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-button-blue-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-button-blue-hover"
+              class="flex w-full justify-center rounded-md bg-button-blue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-button-blue-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-button-blue-hover disabled:pointer-events-none disabled:opacity-50"
             >
               Sign up
             </button>

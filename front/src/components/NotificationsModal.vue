@@ -19,6 +19,15 @@ const formatDate = (date) => {
   return `${month}.${day}.${year}`
 }
 
+const validateInput = (event) => {
+  const pattern = /^(\d+(\.\d{0,2})?)?$/;
+  const inputValue = event.target.value;
+
+  if (!pattern.test(inputValue)) {
+    amount.value = '';
+  }
+}
+
 </script>
 
 <template>
@@ -60,6 +69,7 @@ const formatDate = (date) => {
                     placeholder="Enter title"
                     name="title"
                     type="text"
+                    maxlength="20"
                     class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
                     v-model="title"
                     />
@@ -70,8 +80,10 @@ const formatDate = (date) => {
                     placeholder="Enter amount"
                     name="amount"
                     type="text"
+                    maxlength="10"
                     class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
                     v-model="amount"
+                    @input="validateInput"
                     />
                 </div>
                 <p class="mt-5">Pick date</p>

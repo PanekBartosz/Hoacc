@@ -11,6 +11,15 @@ const isButtonEnabled = computed(() => {
   return description.value !== '' && amount.value !== '';
 });
 
+const validateInput = (event) => {
+  const pattern = /^(\d+(\.\d{0,2})?)?$/;
+  const inputValue = event.target.value;
+
+  if (!pattern.test(inputValue)) {
+    amount.value = '';
+  }
+}
+
 </script>
 
 <template>
@@ -93,6 +102,7 @@ const isButtonEnabled = computed(() => {
                     placeholder="Enter Description"
                     name="title"
                     type="text"
+                    maxlength="50"
                     class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
                     v-model="description"
                     />
@@ -103,15 +113,17 @@ const isButtonEnabled = computed(() => {
                     placeholder="Enter amount"
                     name="amount"
                     type="text"
+                    maxlength="10"
                     class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
                     v-model="amount"
+                    @input="validateInput"
                     />
                 </div>
             </div>
           <!-- Footer -->
           <div class="text-center justify-center pt-2">
             <button
-              class="rounded-lg w-3/4 mt-5 bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              class="rounded-lg w-3/4 mt-5 bg-red-700 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               data-ripple-light="true"
               @click="open = false"
             >

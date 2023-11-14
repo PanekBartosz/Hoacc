@@ -2,10 +2,11 @@
 import { ref, computed } from 'vue';
 
 const name = ref('');
-const amount = ref('');
+const CurrentAmount = ref('');
+const GoalAmount = ref('');
 
 const isButtonEnabled = computed(() => {
-  return name.value !== '' && amount.value !== '';
+  return name.value !== '' && CurrentAmount.value !== '' && GoalAmount.value !== '';
 });
 
 const open = ref(false);
@@ -15,7 +16,8 @@ const validateInput = (event) => {
   const inputValue = event.target.value;
 
   if (!pattern.test(inputValue)) {
-    amount.value = '';
+    CurrentAmount.value = ''
+    GoalAmount.value = ''
   }
 }
 
@@ -60,6 +62,7 @@ const validateInput = (event) => {
                     placeholder="Enter name"
                     name="name"
                     type="text"
+                    maxlength="20"
                     class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
                     v-model="name"
                     />
@@ -70,8 +73,9 @@ const validateInput = (event) => {
                     placeholder="Enter current amount"
                     name="amount"
                     type="text"
+                    maxlength="10"
                     class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
-                    v-model="amount"
+                    v-model="CurrentAmount"
                     @input="validateInput"
                     />
                 </div>
@@ -81,8 +85,9 @@ const validateInput = (event) => {
                     placeholder="Enter goal amount"
                     name="amount"
                     type="text"
+                    maxlength="10"
                     class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
-                    v-model="amount"
+                    v-model="GoalAmount"
                     @input="validateInput"
                     />
                 </div>
