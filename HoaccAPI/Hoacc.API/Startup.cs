@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System.Text;
+using FluentValidation;
 using FluentValidation.AspNetCore;
 using HoaccAPI.BindingModels;
 using HoaccAPI.Middlewares;
@@ -20,7 +21,9 @@ using HoaccServices.Goals;
 using HoaccServices.Notification;
 using HoaccServices.Operations;
 using HoaccServices.User;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -46,7 +49,19 @@ public class Startup
         services.AddSwaggerGen(options =>
         {
             options.SwaggerDoc("v1", new OpenApiInfo {Title = "Hoacc", Version = "v1"});
+            // Add support for JWT authentication in Swagger
+            options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Description = "JWT Authorization header using the Bearer scheme.",
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer"
+            });
+
+            options.OperationFilter<SecurityRequirementsOperationFilter>();
         });
+        
         services.AddDbContext<HoaccDbContext>(options => options
             .UseMySQL(Configuration.GetConnectionString("HoaccDbContext")));
         services.AddTransient<DatabaseSeed>();
@@ -98,6 +113,7 @@ public class Startup
         app.UseCors("default");
         app.UseMiddleware<ErrorHandlerMiddleware>();
         app.UseRouting();
+        app.UseAuthentication();
 
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }
