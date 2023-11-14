@@ -1,5 +1,41 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+import { postUser } from '../api'
 
+const email = ref('')
+const password = ref('')
+const confirmPassword = ref('')
+const errorMessage = ref('')
+const successMessage = ref('')
+
+const signUpUser = async () => {
+  // Reset messages before making a new sign-up attempt
+  errorMessage.value = ''
+  successMessage.value = ''
+  
+  try {
+    if (password.value !== confirmPassword.value) {
+      errorMessage.value = 'Passwords do not match.'
+      return
+    }
+
+    const userData = {
+      email: email.value,
+      password: password.value,
+    }
+
+    const response = await postUser(userData)
+
+    // Check the response status and show appropriate messages
+    if (response.status === 201) {
+      successMessage.value = 'User created successfully. You can now log in.'
+    } else {
+      errorMessage.value = 'Error creating user.'
+    }
+  } catch (error) {
+    errorMessage.value = 'Email address is already in use.'
+  }
+}
 </script>
 <template>
   <div class="flex min-h-[90vh] justify-center items-center">
@@ -15,7 +51,7 @@
       </div>
 
       <div class="mt-10 mx-auto w-full max-w-sm">
-        <form class="space-y-6" action="#" method="POST">
+        <form @submit.prevent="signUpUser" class="space-y-6" action="#" method="POST">
           <div>
             <label
               for="email"
@@ -25,6 +61,7 @@
             </label>
             <div class="mt-2">
               <input
+                v-model="email"
                 id="email"
                 name="email"
                 type="email"
@@ -47,6 +84,7 @@
             </div>
             <div class="mt-2">
               <input
+                v-model="password"
                 id="password"
                 name="password"
                 type="password"
@@ -69,6 +107,7 @@
             </div>
             <div class="mt-2">
               <input
+                v-model="confirmPassword"
                 id="c_password"
                 name="c_password"
                 type="password"
@@ -79,7 +118,8 @@
               />
             </div>
           </div>
-
+          <p v-if="successMessage" class="text-green-500 text-center">{{ successMessage }}</p>
+          <p v-if="errorMessage" class="text-red-500 text-center">{{ errorMessage }}</p>
           <div>
             <button
               type="submit"
