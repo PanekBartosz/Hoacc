@@ -63,6 +63,7 @@ const validateInput = (event) => {
                     name="name"
                     type="text"
                     maxlength="20"
+                    autocomplete="name"
                     class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
                     v-model="name"
                     />

@@ -28,10 +28,8 @@ export const updateUserPass = async (id: number, data: any): Promise<AxiosRespon
 export const authenticateUser = async (email: any, password: any): Promise<AxiosResponse> => {
     try {
       const response = await apiClient.post('/auth/login', { email, password });
-      console.log('Authentication successful:', response.data);
       return response; // Returning the response to handle it in the component
     } catch (error) {
-      console.error('Authentication failed:', error.response?.data);
       throw error; // Rethrow the error to handle it in the component
     }
   }
