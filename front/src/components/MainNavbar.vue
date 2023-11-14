@@ -4,6 +4,7 @@ import { Dialog, DialogPanel } from "@headlessui/vue"
 import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline"
 import SettingsModal from "./SettingsModal.vue"
 import SettingsMobileModal from "./SettingsMobileModal.vue"
+import { useRouter } from 'vue-router'
 
 const navigation = [
   { name: "Home", href: "#" },
@@ -33,6 +34,13 @@ const scrollToSection = (sectionId) => {
     }
   }
 };
+
+const router = useRouter();
+
+const logout = () => {
+  localStorage.setItem('isVisibleState', JSON.stringify(true));
+  router.push('/');
+}
 
 </script>
 <template>
@@ -69,7 +77,7 @@ const scrollToSection = (sectionId) => {
           <SettingsModal />
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a href="/" class="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-500"
+          <a @click="logout" class="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-500"
             >Log out <span aria-hidden="true">&rarr;</span></a
           >
         </div>
@@ -113,7 +121,7 @@ const scrollToSection = (sectionId) => {
               </div>
               <div class="py-6">
                 <a
-                  href="/"
+                  @click="logout"
                   class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >Log out</a
                 >
