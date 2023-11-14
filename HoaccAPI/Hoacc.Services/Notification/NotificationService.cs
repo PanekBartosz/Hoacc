@@ -17,6 +17,11 @@ public class NotificationService : INotificationService
     {
         return _notificationRepository.GetNotification(notificationId);
     }
+    public async Task<IEnumerable<NotificationDTO>> GetNotificationByUser(int userId)
+    {
+        var notification = await _notificationRepository.GetNotificationByUser(userId);
+        return notification;
+    }
 
     public async Task<NotificationDTO> CreateNotification(CreateNotification createNotification)
     {

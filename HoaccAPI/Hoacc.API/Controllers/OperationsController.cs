@@ -28,6 +28,19 @@ public class OperationsController : ControllerBase
             return Ok(OperationsToOperationsViewModelMapper.OperationsToOperationsViewModel(operations));
         return NotFound();
     }
+    
+    [HttpGet("user/{userId}")]
+    public async Task<IActionResult> GetOperationsByUser(int userId)
+    {
+        var operations = await _operationsService.GetOperationsByUser(userId);
+
+        if (operations == null || !operations.Any())
+        {
+            return NotFound($"No operations found for user ID {userId}");
+        }
+
+        return Ok(operations);
+    }
 
     [ValidateModel]
     [HttpPost]

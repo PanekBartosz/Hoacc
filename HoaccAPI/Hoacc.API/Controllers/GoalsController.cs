@@ -27,6 +27,19 @@ public class GoalsController : ControllerBase
         if (goals != null) return Ok(GoalsToGoalsViewModelMapper.GoalsToGoalsViewModel(goals));
         return NotFound();
     }
+    
+    [HttpGet("user/{userId}")]
+    public async Task<IActionResult> GetGoalsByUser(int userId)
+    {
+        var goal = await _goalsService.GetGoalsByUser(userId);
+
+        if (goal == null || !goal.Any())
+        {
+            return NotFound($"No notification found for user ID {userId}");
+        }
+
+        return Ok(goal);
+    }
 
     [ValidateModel]
     [HttpPost]

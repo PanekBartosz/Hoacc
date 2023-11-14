@@ -17,6 +17,12 @@ public class GoalsService : IGoalsService
     {
         return _goalsRepository.GetGoals(goalsId);
     }
+    
+    public async Task<IEnumerable<GoalsDTO>> GetGoalsByUser(int userId)
+    {
+        var goal = await _goalsRepository.GetGoalsByUser(userId);
+        return goal;
+    }
 
     public async Task<GoalsDTO> CreateGoals(CreateGoals createGoals)
     {

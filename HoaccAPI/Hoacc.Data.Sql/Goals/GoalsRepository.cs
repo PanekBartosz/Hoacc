@@ -22,6 +22,15 @@ public class GoalsRepository : IGoalsRepositoryDTO
             goals.CurrentAmount,
             goals.UserId);
     }
+    
+    public async Task<IEnumerable<GoalsDTO>> GetGoalsByUser(int userId)
+    {
+        var goal = await _context.Goals
+            .Where(x => x.UserId == userId)
+            .ToListAsync();
+
+        return goal.Select(MapGoalsToDTO);
+    }
 
     public async Task<int> CreateGoals(GoalsDTO goals)
     {
@@ -56,5 +65,16 @@ public class GoalsRepository : IGoalsRepositoryDTO
         if (goals == null) throw new Exception("Goal not found");
         _context.Goals.Remove(goals);
         await _context.SaveChangesAsync();
+    }
+    
+    private GoalsDTO MapGoalsToDTO(DAO.Goals goals)
+    {
+        return new GoalsDTO(
+            goals.GoalsId,
+            goals.Name,
+            goals.GoalAmount,
+            goals.CurrentAmount,
+            goals.UserId
+        );
     }
 }

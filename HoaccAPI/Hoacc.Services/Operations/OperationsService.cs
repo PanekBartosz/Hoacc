@@ -17,6 +17,12 @@ public class OperationsService : IOperationsService
     {
         return _operationsRepository.GetOperations(operationsId);
     }
+    
+    public async Task<IEnumerable<OperationsDTO>> GetOperationsByUser(int userId)
+    {
+        var operations = await _operationsRepository.GetOperationsByUser(userId);
+        return operations;
+    }
 
     public async Task<OperationsDTO> CreateOperations(CreateOperations createOperations)
     {

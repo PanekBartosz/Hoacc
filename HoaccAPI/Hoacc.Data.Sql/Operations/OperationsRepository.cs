@@ -25,6 +25,14 @@ public class OperationsRepository : IOperationsRepositoryDTO
             operation.UserId);
     }
 
+    public async Task<IEnumerable<OperationsDTO>> GetOperationsByUser(int userId)
+    {
+        var operations = await _context.Operations
+            .Where(x => x.UserId == userId)
+            .ToListAsync();
+
+        return operations.Select(MapOperationsToDTO);
+    }
     public async Task<int> CreateOperations(OperationsDTO operations)
     {
         var operationsDAO = new DAO.Operations
@@ -62,5 +70,18 @@ public class OperationsRepository : IOperationsRepositoryDTO
         if (operation == null) throw new Exception("Operation not found");
         _context.Operations.Remove(operation);
         await _context.SaveChangesAsync();
+    }
+    
+    private OperationsDTO MapOperationsToDTO(DAO.Operations operation)
+    {
+        return new OperationsDTO(
+            operation.OperationId,
+            operation.Type,
+            operation.Date,
+            operation.Description,
+            operation.Category,
+            operation.Amount,
+            operation.UserId
+        );
     }
 }
