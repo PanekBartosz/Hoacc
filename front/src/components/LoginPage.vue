@@ -6,6 +6,7 @@ import { authenticateUser } from '../api'
 const email = ref('')
 const password = ref('')
 const router = useRouter()
+const errorMessage = ref('')
 
 const loginUser = async () => {
   try {
@@ -13,11 +14,10 @@ const loginUser = async () => {
     
     // If authentication is successful, navigate to the dashboard route
     const userId = response.data.userId
-    console.log("userID:",userId)
     router.push({ name: 'Dashboard', params: { id: userId } });
   } catch (error) {
     // Handle authentication failure
-    console.error('Authentication error:', error);
+    errorMessage.value = 'Invalid email or password.';
   }
 }
 </script>
@@ -80,16 +80,17 @@ const loginUser = async () => {
             </div>
           </div>
 
-          <div class="text-center">
+          <!-- <div class="text-center">
             <a
               href="#"
               class="font-semibold leading-6 text-button-blue hover:text-button-blue-hover"
             >
-              <!-- Forgot password? -->
+              Forgot password?
             </a>
-          </div>
+          </div> -->
 
           <div>
+            <p v-if="errorMessage" class="text-red-500 text-center">{{ errorMessage }}</p>
             <button
               type="submit"
               class="flex w-full justify-center rounded-md bg-button-blue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-button-blue-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-button-blue-hover"
