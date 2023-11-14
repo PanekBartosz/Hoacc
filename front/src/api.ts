@@ -25,5 +25,14 @@ export const updateNotification = async (id: number, data: any): Promise<AxiosRe
 export const updateGoal = async (id: number, data: any): Promise<AxiosResponse> => apiClient.put(`/Goals/${id}`, data);
 export const updateUserPass = async (id: number, data: any): Promise<AxiosResponse> => apiClient.patch(`/User/${id}/password`, data);
 
-export const authenticateUser= async (email: any,password: any): Promise<AxiosResponse> => apiClient.post('/auth/login', {email,password})
+export const authenticateUser = async (email: any, password: any): Promise<AxiosResponse> => {
+    try {
+      const response = await apiClient.post('/auth/login', { email, password });
+      console.log('Authentication successful:', response.data);
+      return response; // Returning the response to handle it in the component
+    } catch (error) {
+      console.error('Authentication failed:', error.response?.data);
+      throw error; // Rethrow the error to handle it in the component
+    }
+  }
 

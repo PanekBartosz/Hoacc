@@ -40,7 +40,7 @@ const isActiveRoute = (routeName) => {
 };
 
 const isDashboardRoute = computed(() => {
-  return router.currentRoute.value.path === "/dashboard";
+  return router.currentRoute.value.path.startsWith("/dashboard/")
 });
 </script>
 

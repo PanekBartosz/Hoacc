@@ -1,4 +1,26 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { authenticateUser } from '../api'
+
+const email = ref('')
+const password = ref('')
+const router = useRouter()
+
+const loginUser = async () => {
+  try {
+    const response = await authenticateUser(email.value, password.value)
+    
+    // If authentication is successful, navigate to the dashboard route
+    const userId = response.data.userId
+    console.log("userID:",userId)
+    router.push({ name: 'Dashboard', params: { id: userId } });
+  } catch (error) {
+    // Handle authentication failure
+    console.error('Authentication error:', error);
+  }
+}
+</script>
 <template>
   <div class="flex min-h-[90vh] justify-center items-center">
     <div
@@ -13,7 +35,7 @@
       </div>
 
       <div class="mt-10 mx-auto w-full max-w-sm">
-        <form class="space-y-6" action="#" method="POST">
+        <form @submit.prevent="loginUser" class="space-y-6" action="#" method="POST">
           <div>
             <label
               for="email"
@@ -23,6 +45,7 @@
             </label>
             <div class="mt-2">
               <input
+                v-model="email"
                 id="email"
                 name="email"
                 type="email"
@@ -45,6 +68,7 @@
             </div>
             <div class="mt-2">
               <input
+                v-model="password"
                 id="password"
                 name="password"
                 type="password"

@@ -10,7 +10,7 @@ const routes: RouteRecordRaw[] = [
     { path: '/about',name:"About", component: AboutUs },
     { path: '/login',name:"Login", component: LoginPage },
     { path: '/signup',name:"SignUp", component: SignupPage },
-    { path: '/dashboard',name:"Dashboard", component: MainDashboard },
+    { path: '/dashboard/:id',name:"Dashboard", component: MainDashboard, props: true },
   ]
   
   const router = createRouter({
