@@ -264,7 +264,7 @@ watch(() => donutChart.value, (newValue) => {
     <!-- Container 3 & 4  -->
     <div class="w-full h-full lg:flex">
     <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2 lg:mr-5">
-      <div id="operations" class="flex flex-row justify-between">
+      <div id="notifications" class="flex flex-row justify-between">
         <h3 class="text-xl font-medium text-gray-700">Notifications</h3>
         <NotificationsModal/>
       </div>

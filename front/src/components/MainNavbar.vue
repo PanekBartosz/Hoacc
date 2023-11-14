@@ -25,7 +25,7 @@ const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
 
     if (element) {
-      const offset = 25
+      const offset = 20
       window.scrollTo({
         top: element.offsetTop - offset,
         behavior: "smooth",
@@ -105,6 +105,7 @@ const scrollToSection = (sectionId) => {
                   v-for="item in navigation"
                   :key="item.name"
                   @click.prevent="scrollToSection(item.name.toLowerCase())"
+                  @click="mobileMenuOpen = false"
                   class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >{{ item.name }}</a
                 >
