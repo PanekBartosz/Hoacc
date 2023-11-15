@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "8RC6hYYVspm0Jf47PRNcEi8Cp6+unUxLESVLNPjsa60TQZlsddFn2ssbsEfPeARkVDpJ9qFTxauI9B8/8AVxOQ==",
+  "dgSpecHash": "Tzv2eFDj7l6PVxOBEqmF0SB0QLLW1TefH2Ag0/Ga3K6colL+ehrxQYojo5TX30SCTJTXV8d7pcYgdtrXAPCP9w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\BART-PC\\Desktop\\v1\\HoaccAPI\\Hoacc.Infrastructure\\Hoacc.Infrastructure.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "C:\\Users\\BART\\Desktop\\Hoacc\\HoaccAPI\\Hoacc.Infrastructure\\Hoacc.Infrastructure.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\BART\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.20\\microsoft.netcore.app.ref.6.0.20.nupkg.sha512",
+    "C:\\Users\\BART\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.20\\microsoft.windowsdesktop.app.ref.6.0.20.nupkg.sha512",
+    "C:\\Users\\BART\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.20\\microsoft.aspnetcore.app.ref.6.0.20.nupkg.sha512"
+  ],
   "logs": []
 }
