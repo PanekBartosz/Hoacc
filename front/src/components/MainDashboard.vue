@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed, ref, onMounted } from "vue";
 import MainNavbar from "./MainNavbar.vue";
 import { Pagination } from "flowbite-vue";
 import ProfitChart from "./ProfitChart.vue"
@@ -10,43 +10,76 @@ import NotificationsModal from "./NotificationsModal.vue";
 import EditOperationsModal from "./EditOperationsModal.vue";
 import GoalsModal from "./GoalsModal.vue";
 import EditGoalsModal from "./EditGoalsModal.vue"
+import { getOperations } from '../api';
+import { format } from 'date-fns';
+import { enUS } from 'date-fns/locale';
 
-const currentDate = new Date();
+interface Operation {
+  operationId: number;
+  type: string;
+  date: Date;
+  description: string;
+  category: number;
+  amount: number;
+  userId: number;
+}
+
+interface Category {
+  value: number;
+  name: string;
+  color: string;
+}
+
+const categoryMappings: Category[] = [
+  { value: 0, name: 'Bills', color: 'red' },
+  { value: 1, name: 'Food', color: 'green' },
+  { value: 2, name: 'Education', color: 'blue' },
+  { value: 3, name: 'Entertainment', color: 'purple' },
+]
+
 const currentPage = ref(1);
-const totalItems = 20
+const operations = ref<Operation[]>([]);
+const userId = ref<number | undefined>(undefined);
 
-const formattedDate = new Intl.DateTimeFormat("en-US", {
-  day: "2-digit",
-  month: "long",
-  year: "numeric",
-}).format(currentDate);
+const router = useRouter();
+
+const formatDate = (dateString: Date): string => {
+  const date = new Date(dateString);
+  return format(date, 'dd MMMM yyyy', { locale: enUS }).toUpperCase();
+};
 
 const genNumber = () => {
   return Math.floor(Math.random() * 100) + 1;
 }
 
-interface Operation {
-  date: string;
-  category: string;
-  description: string;
-  amount: number;
-}
+const fetchOperations = async () => {
+  try {
+    if (userId.value !== undefined) {
+      const response = await getOperations(userId.value);
+      operations.value = response.data;
+    } else {
+      console.error('User ID is undefined.');
+    }
+  } catch (error) {
+    console.error('Error fetching operations:', error.response?.data);
+  }
+};
 
-const operations = ref<Operation[]>(
-  [...Array(totalItems).keys()].map(() => ({
-    date: formattedDate,
-    category: "EDUCATION",
-    description: "New book - c# in depth",
-    amount: genNumber(),
-  }))
-);
+onMounted(() => {
+  userId.value = Number(router.currentRoute.value.params.id);
+  fetchOperations();
+});
 const perPage = 5;
 
 const paginatedOperations = computed(() => {
   const startIndex = (currentPage.value - 1) * perPage;
   const endIndex = startIndex + perPage;
-  return operations.value.slice(startIndex, endIndex);
-})
+
+  return operations.value.slice(startIndex, endIndex).map((o: Operation) => {
+    const categoryInfo = categoryMappings.find(c => c.value === o.category);
+    return { ...o, categoryInfo };
+  });
+});
 
 const notifications = ref([
   {
@@ -92,6 +125,7 @@ const deleteNotification = (index) => {
 
 import {watch } from 'vue';
 import Chart from 'chart.js/auto';
+import { useRouter } from "vue-router";
 
 const donutChart = ref<HTMLCanvasElement | null>(null);
 
@@ -211,7 +245,7 @@ watch(() => donutChart.value, (newValue) => {
                   >
                     <div class="flex items-center">
                       <div class="text-sm font-medium leading-5 text-gray-900">
-                        {{ o.date }}
+                        {{ formatDate(o.date) }}
                       </div>
                     </div>
                   </td>
@@ -227,14 +261,14 @@ watch(() => donutChart.value, (newValue) => {
                   <td
                     class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
                   >
-                    <span
-                      class="inline-flex px-2 text-xs font-semibold leading-5 text-blue-800 bg-blue-200 rounded-full"
-                      >{{ o.category }}</span
-                    >
+                  <span
+                    :class="`inline-flex px-2 text-xs font-semibold leading-5 text-${o.categoryInfo?.color}-800 bg-${o.categoryInfo?.color}-200 rounded-full`"
+                    >{{ o.categoryInfo?.name }}</span>
                   </td>
 
                   <td
                     class="px-6 py-4 text-sm leading-5 text-gray-900 border-b border-gray-200 whitespace-nowrap"
+                    :style="{ color: (o.type.toLowerCase() === 'income' ? 'green' : 'red') as any }"
                   >
                     {{ o.amount + " PLN" }}
                   </td>
@@ -251,8 +285,8 @@ watch(() => donutChart.value, (newValue) => {
               <Pagination
                 v-model="currentPage"
                 :layout="'table'"
-                :per-page="5"
-                :total-items="totalItems"
+                :per-page="perPage"
+                :total-items="operations.length"
                 class="mb-2 text-center"
               />
             </div>

@@ -133,14 +133,19 @@ public class DatabaseSeed
 
             // Generate a random index to select a category
             var randomIndex = random.Next(0, allCategories.Length);
+            
+            // Generate a random boolean to determine the type
+            var isIncome = random.Next(0, 2) == 0;
+            var type = isIncome ? "income" : "outcome";
+            
             var operation = new DAO.Operations
             {
-                Type = "operation" + i,
-                Date = new DateTime(1970, 1, i),
+                Type = type,
+                Date = new DateTime(2023, 11, i),
                 Description = "description" + i,
                 Category = allCategories[randomIndex],
                 Amount = i * 10,
-                UserId = userList.ToList()[random.Next(userCount)].UserId
+                UserId = 1
             };
             operationsList.Add(operation);
         }
