@@ -83,14 +83,14 @@ public class DatabaseSeed
         var goalsList = new List<DAO.Goals>();
         var rand = new Random();
         var userCount = userList.Count();
-        for (var i = 1; i <= 5; i++)
+        for (var i = 1; i <= 8; i++)
         {
             var goals = new DAO.Goals
             {
                 Name = "goal" + i,
                 GoalAmount = 1000,
                 CurrentAmount = i * 100,
-                UserId = userList.ToList()[rand.Next(userCount)].UserId
+                UserId = 1
             };
             goalsList.Add(goals);
         }

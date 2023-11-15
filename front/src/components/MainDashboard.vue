@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted } from "vue";
+import { computed, ref, onMounted, nextTick, Ref  } from "vue";
 import MainNavbar from "./MainNavbar.vue";
 import { Pagination } from "flowbite-vue";
 import ProfitChart from "./ProfitChart.vue"
@@ -10,9 +10,11 @@ import NotificationsModal from "./NotificationsModal.vue";
 import EditOperationsModal from "./EditOperationsModal.vue";
 import GoalsModal from "./GoalsModal.vue";
 import EditGoalsModal from "./EditGoalsModal.vue"
-import { getOperations,getNotifications,deleteNotification } from '../api';
+import { getOperations,getNotifications,deleteNotification,getGoals } from '../api';
 import { format } from 'date-fns';
 import { enUS } from 'date-fns/locale';
+import Chart from 'chart.js/auto';
+import { useRouter } from "vue-router";
 
 interface Operation {
   operationId: number;
@@ -37,6 +39,13 @@ interface Notification {
   amount: number;
 }
 
+interface Goal {
+  goalsId: number;
+  name: string;
+  goalAmount: number;
+  currentAmount: number;
+}
+
 const categoryMappings: Category[] = [
   { value: 0, name: 'Bills', color: 'red' },
   { value: 1, name: 'Food', color: 'green' },
@@ -48,6 +57,7 @@ const currentPage = ref(1);
 const operations = ref<Operation[]>([]);
 const userId = ref<number | undefined>(undefined);
 const notifications = ref<Notification[]>([]);
+const goals = ref<Goal[]>([]);
 
 const router = useRouter();
 
@@ -74,11 +84,64 @@ const fetchOperations = async () => {
   }
 };
 
-onMounted(() => {
-  userId.value = Number(router.currentRoute.value.params.id);
-  fetchOperations();
-  fetchNotifications();
+const fetchGoals = async () => {
+  try {
+    if (userId.value !== undefined) {
+      const response = await getGoals(userId.value);
+      goals.value = response.data;
+    } else {
+      console.error('User ID is undefined.');
+    }
+  } catch (error) {
+    console.error('Error fetching goals:', error.response?.data);
+  }
+};
+
+const chartRefs = ref<Array<Ref<null | HTMLCanvasElement>>>([]);
+
+onMounted(async () => {
+  try {
+    userId.value = Number(router.currentRoute.value.params.id);
+    await fetchNotifications();
+    await fetchOperations();
+    //await fetchGoals();
+    
+     // Fetch goals from the database
+    const response = await getGoals(userId.value);
+    goals.value = response.data;
+
+    // Initialize chartRefs with null values
+    chartRefs.value = goals.value.map(() => ref(null));
+
+    // Create a chart for each goal
+    goals.value.forEach((goal, index) => {
+      const canvasRef = chartRefs.value[index];
+      if (canvasRef.value) {
+        const ctx = canvasRef.value.getContext('2d');
+        if (ctx) {
+          // Log a message to the console when creating each chart
+          console.log(`Creating chart for goal ${goal.name}`);
+          
+          new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+              labels: ['Completed', 'Remaining'],
+              datasets: [
+                {
+                  data: [goal.currentAmount, goal.goalAmount - goal.currentAmount],
+                  backgroundColor: ['grey', '#34D399'],
+                },
+              ],
+            },
+          });
+        }
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching goals:', error.response?.data);
+  }
 });
+
 const perPage = 5;
 
 const paginatedOperations = computed(() => {
@@ -113,32 +176,6 @@ const deleteNotificationLocal = async (index) => {
     alert('Error deleting notification')
   }
 };
-
-import {watch } from 'vue';
-import Chart from 'chart.js/auto';
-import { useRouter } from "vue-router";
-
-const donutChart = ref<HTMLCanvasElement | null>(null);
-
-watch(() => donutChart.value, (newValue) => {
-  if (newValue) {
-    const ctx = (newValue as HTMLCanvasElement).getContext('2d'); // Type assertion
-    if (ctx) { // Check if getContext returns a non-null value
-      new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-          datasets: [
-            {
-              data: [33, 67],
-              backgroundColor: ['grey', '#34D399'],
-            },
-          ],
-        },
-      });
-    }
-  }
-});
-
 
 </script>
 <template>
@@ -288,40 +325,46 @@ watch(() => donutChart.value, (newValue) => {
 
     <!-- Container 3 & 4  -->
     <div class="w-full h-full lg:flex">
-    <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2 lg:mr-5">
-      <div id="notifications" class="flex flex-row justify-between">
-        <h3 class="text-xl font-medium text-gray-700">Notifications</h3>
-        <NotificationsModal 
-          :userId="userId" 
-          :fetchNotifications="fetchNotifications"
-        />
-      </div>
-      <div class="flex flex-row my-3 overflow-auto">
-          <div v-for="(notification, index) in notifications" :key="index" class="bg-neutral-200 rounded-lg text-center shadow-md p-4 mx-3 my-3">
-            <div class="font-bold text-gray-700">{{ notification.name }}</div>
-            <div class="text-gray-500">{{ formatDateNotification(notification.date) }}</div>
-            <div class="text-gray-900">{{ notification.amount + " PLN"}}</div>
-            <button @click="deleteNotificationLocal(index)" class="text-red-600 hover:text-red-900 mt-2">Delete</button>
-          </div>
-      </div>
-    </div>
-    <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2">
-      <div id="goals" class="flex flex-row justify-between mb-6">
-        <h3 class="text-xl font-medium text-gray-700">Goals</h3>
-        <GoalsModal />
-      </div>
-
-        <div class="rounded-lg w-min flex items-center shadow-lg p-1 border-2 border-slate-50">
-          <div class="w-32">
-            <canvas ref="donutChart"></canvas>
-          </div>
-          <div class="text-center">
-            <h3 class="text-3xl mx-5 font-medium mb-2">Holidays</h3>
-            <EditGoalsModal />
-          </div>
+      <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2 lg:mr-5">
+        <div id="notifications" class="flex flex-row justify-between">
+          <h3 class="text-xl font-medium text-gray-700">Notifications</h3>
+          <NotificationsModal 
+            :userId="userId" 
+            :fetchNotifications="fetchNotifications"
+          />
         </div>
+        <div class="flex flex-row my-3 overflow-auto">
+            <div v-for="(notification, index) in notifications" :key="index" class="bg-neutral-200 rounded-lg text-center shadow-md p-4 mx-3 my-3">
+              <div class="font-bold text-gray-700">{{ notification.name }}</div>
+              <div class="text-gray-500">{{ formatDateNotification(notification.date) }}</div>
+              <div class="text-gray-900">{{ notification.amount + " PLN"}}</div>
+              <button @click="deleteNotificationLocal(index)" class="text-red-600 hover:text-red-900 mt-2">Delete</button>
+            </div>
+        </div>
+      </div>
+      
 
+      <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2 overflow-x-auto">
+    <div class="flex flex-row justify-between mb-6">
+      <h3 class="text-xl font-medium text-gray-700">Goals</h3>
+      <GoalsModal />
     </div>
+
+    <div class="flex flex-no-wrap space-x-4 overflow-x-auto">
+      <!-- Loop through goals and create a chart for each one -->
+      <div v-for="(goal, index) in goals" :key="index" class="rounded-lg w-min flex items-center shadow-lg p-1 border-2 border-slate-50 mb-4">
+        <div class="w-32">
+          <!-- Use ref to create a reactive reference for the chart -->
+          <canvas ref="chartRefs[index]" class="h-[120px] w-[120px]"></canvas>
+        </div>
+        <div class="text-center">
+          <h3 class="text-3xl mx-5 font-medium mb-2">{{ goal.name }}</h3>
+          <EditGoalsModal :goal="goal" />
+        </div>
+      </div>
+    </div>
+  </div>
+
   </div >
 
     <!-- Container 5  -->
