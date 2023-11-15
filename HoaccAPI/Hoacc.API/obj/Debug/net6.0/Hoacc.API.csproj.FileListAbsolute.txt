@@ -607,3 +607,14 @@ C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.API\bin\Debug\net6.0\Microsoft.Identi
 C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.API\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
 C:\Users\BART-PC\Desktop\v1\HoaccAPI\Hoacc.API\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.API\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.API\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.API\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.API\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.API\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.API\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.API\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.API\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\BART\Desktop\Hoacc\HoaccAPI\Hoacc.API\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
