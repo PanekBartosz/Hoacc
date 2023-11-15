@@ -1,6 +1,9 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed,defineProps } from 'vue';
 import Datepicker from 'vuejs3-datepicker';
+import { postNotification } from '../api';
+
+const props = defineProps(['fetchNotifications', 'userId']);
 
 const title = ref('');
 const amount = ref('');
@@ -12,13 +15,6 @@ const isButtonEnabled = computed(() => {
 
 const open = ref(false);
 
-const formatDate = (date) => {
-  const day = date.getDate().toString().padStart(2, '0')
-  const month = (date.getMonth() + 1).toString().padStart(2, '0')
-  const year = date.getFullYear()
-  return `${month}.${day}.${year}`
-}
-
 const validateInput = (event) => {
   const pattern = /^(\d+(\.\d{0,2})?)?$/;
   const inputValue = event.target.value;
@@ -27,6 +23,30 @@ const validateInput = (event) => {
     amount.value = '';
   }
 }
+
+const addNewNotification = async () => {
+  try {
+    const newNotification = {
+      name: title.value,
+      amount: parseFloat(amount.value),
+      date: selectedDate.value.toISOString().split('T')[0],
+      userId: props.userId,
+    };
+    // Call the API to add a new notification
+    await postNotification(newNotification);
+    await props.fetchNotifications();
+
+    // Clear input fields
+    title.value = '';
+    amount.value = '';
+
+    // Close the modal
+    open.value = false;
+  } catch (error) {
+    console.error('Error adding new notification:', error.response?.data);
+    alert('Error adding new notification')
+  }
+};
 
 </script>
 
@@ -103,7 +123,7 @@ const validateInput = (event) => {
                     type="submit"
                     class="rounded-lg w-3/4 bg-slate-900 py-2 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                     data-ripple-light="true"
-                    @click="open = false"
+                    @click="addNewNotification"
                     :disabled="!isButtonEnabled"
                 >
                     Add notification

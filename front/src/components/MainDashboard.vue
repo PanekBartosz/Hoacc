@@ -10,7 +10,7 @@ import NotificationsModal from "./NotificationsModal.vue";
 import EditOperationsModal from "./EditOperationsModal.vue";
 import GoalsModal from "./GoalsModal.vue";
 import EditGoalsModal from "./EditGoalsModal.vue"
-import { getOperations } from '../api';
+import { getOperations,getNotifications,deleteNotification } from '../api';
 import { format } from 'date-fns';
 import { enUS } from 'date-fns/locale';
 
@@ -30,6 +30,13 @@ interface Category {
   color: string;
 }
 
+interface Notification {
+  notificationId: number;
+  name: string;
+  date: Date;
+  amount: number;
+}
+
 const categoryMappings: Category[] = [
   { value: 0, name: 'Bills', color: 'red' },
   { value: 1, name: 'Food', color: 'green' },
@@ -40,6 +47,7 @@ const categoryMappings: Category[] = [
 const currentPage = ref(1);
 const operations = ref<Operation[]>([]);
 const userId = ref<number | undefined>(undefined);
+const notifications = ref<Notification[]>([]);
 
 const router = useRouter();
 
@@ -48,9 +56,10 @@ const formatDate = (dateString: Date): string => {
   return format(date, 'dd MMMM yyyy', { locale: enUS }).toUpperCase();
 };
 
-const genNumber = () => {
-  return Math.floor(Math.random() * 100) + 1;
-}
+const formatDateNotification = (dateString: Date): string => {
+  const date = new Date(dateString);
+  return format(date, 'dd.MM.yyyy').toUpperCase();
+};
 
 const fetchOperations = async () => {
   try {
@@ -68,6 +77,7 @@ const fetchOperations = async () => {
 onMounted(() => {
   userId.value = Number(router.currentRoute.value.params.id);
   fetchOperations();
+  fetchNotifications();
 });
 const perPage = 5;
 
@@ -81,46 +91,27 @@ const paginatedOperations = computed(() => {
   });
 });
 
-const notifications = ref([
-  {
-    title: 'Netflix',
-    date: '17.10.2023',
-    price: genNumber() + ' PLN',
-  },
-  {
-    title: 'Netflix',
-    date: '17.10.2023',
-    price: genNumber() + ' PLN',
-  },
-  {
-    title: 'Netflix',
-    date: '17.10.2023',
-    price: genNumber() + ' PLN',
-  },
-  {
-    title: 'Netflix',
-    date: '17.10.2023',
-    price: genNumber() + ' PLN',
-  },
-  {
-    title: 'Netflix',
-    date: '17.10.2023',
-    price: genNumber() + ' PLN',
-  },
-  {
-    title: 'Netflix',
-    date: '17.10.2023',
-    price: genNumber() + ' PLN',
-  },
-  {
-    title: 'Netflix',
-    date: '17.10.2023',
-    price: genNumber() + ' PLN',
-  },
-]);
+const fetchNotifications = async () => {
+  try {
+    if (userId.value !== undefined) {
+      const response = await getNotifications(userId.value);
+      notifications.value = response.data;
+    } else {
+      console.error('User ID is undefined.');
+    }
+  } catch (error) {
+    console.error('Error fetching notifications:', error.response?.data);
+  }
+};
 
-const deleteNotification = (index) => {
-  notifications.value.splice(index, 1);
+const deleteNotificationLocal = async (index) => {
+  try {
+    const notificationId = notifications.value[index].notificationId;
+    await deleteNotification(notificationId);
+    notifications.value.splice(index, 1);
+  } catch (error) {
+    alert('Error deleting notification')
+  }
 };
 
 import {watch } from 'vue';
@@ -300,14 +291,17 @@ watch(() => donutChart.value, (newValue) => {
     <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2 lg:mr-5">
       <div id="notifications" class="flex flex-row justify-between">
         <h3 class="text-xl font-medium text-gray-700">Notifications</h3>
-        <NotificationsModal/>
+        <NotificationsModal 
+          :userId="userId" 
+          :fetchNotifications="fetchNotifications"
+        />
       </div>
       <div class="flex flex-row my-3 overflow-auto">
           <div v-for="(notification, index) in notifications" :key="index" class="bg-neutral-200 rounded-lg text-center shadow-md p-4 mx-3 my-3">
-            <div class="font-bold text-gray-700">{{ notification.title }}</div>
-            <div class="text-gray-500">{{ notification.date }}</div>
-            <div class="text-gray-900">{{ notification.price }}</div>
-            <button @click="deleteNotification(index)" class="text-red-600 hover:text-red-900 mt-2">Delete</button>
+            <div class="font-bold text-gray-700">{{ notification.name }}</div>
+            <div class="text-gray-500">{{ formatDateNotification(notification.date) }}</div>
+            <div class="text-gray-900">{{ notification.amount + " PLN"}}</div>
+            <button @click="deleteNotificationLocal(index)" class="text-red-600 hover:text-red-900 mt-2">Delete</button>
           </div>
       </div>
     </div>

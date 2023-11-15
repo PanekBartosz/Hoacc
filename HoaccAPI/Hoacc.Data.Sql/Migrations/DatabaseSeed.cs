@@ -108,9 +108,9 @@ public class DatabaseSeed
             var notification = new DAO.Notification
             {
                 Name = "notification" + i,
-                Date = new DateTime(1970, i, 7),
+                Date = new DateTime(2023, 11, i),
                 Amount = i * 100,
-                UserId = userList.ToList()[rand.Next(userCount)].UserId
+                UserId = 1
             };
             notificationList.Add(notification);
         }
