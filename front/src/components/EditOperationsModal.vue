@@ -3,9 +3,12 @@ import { ref,computed} from "vue";
 import Datepicker from 'vuejs3-datepicker';
 import { updateOperation, deleteOperation} from '../api';
 
+const props = defineProps(['fetchOperations','operation']);
+
 const open = ref(false);
 
 const selectedDate = ref(new Date());
+const category = ref('');
 const description = ref('');
 const amount = ref('');
 const isButtonEnabled = computed(() => {
@@ -21,6 +24,44 @@ const validateInput = (event) => {
   }
 }
 
+const fetchOperationsData = async () => {
+    name.value = props.goal.name;
+    currentAmount.value = props.goal.currentAmount;
+    goalAmount.value = props.goal.goalAmount;
+
+    open.value = true;
+};
+
+const updateOperationLocal = async () => {
+  try {
+    const newGoal = {
+      name: name.value,
+      currentAmount: currentAmount.value,
+      goalAmount: goalAmount.value,
+      userId: props.userId,
+    };
+    // Call the API to add a new goal
+    await updateGoal(props.goal.goalsId, newGoal);
+    await props.fetchGoals();
+
+    // Close the modal
+    open.value = false;
+  } catch (error) {
+    console.error('Error adding new goal:', error.response?.data);
+    alert('Error adding new goal')
+  }
+};
+
+const deleteOperationLocal = async () => {
+  try {
+    await deleteGoal(props.goal.goalsId);
+    await props.fetchGoals();
+  } catch (error) {
+    alert('Error cannot delete goal')
+  }
+  open.value = false
+};
+
 </script>
 
 <template>
@@ -28,7 +69,7 @@ const validateInput = (event) => {
     <button
       class="rounded-lg bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
       data-ripple-light="true"
-      @click="open = true"
+      @click="fetchOperationsData"
     >
       Edit
     </button>
@@ -57,7 +98,7 @@ const validateInput = (event) => {
           <!-- Body -->
           <label class="block mt-5 mb-2 text-center text-sm font-medium text-gray-900">Select Type</label>
           <div class="text-center">
-            <label>
+            <label >
               <input
                 id="EOincome"
                 type="radio"
@@ -76,7 +117,7 @@ const validateInput = (event) => {
 
           <label class="block mt-5 mb-2 text-center text-sm font-medium text-gray-900">Select an Category</label>
           <div class="w-3/4 mx-auto">
-            <select id="EOcategory" class="bg-gray-50 border text-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+            <select id="EOcategory" v-model="category" class="bg-gray-50 border text-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
               <option selected value="Bills">Bills</option>
               <option value="Food">Food</option>
               <option value="Education">Education</option>

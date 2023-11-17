@@ -304,7 +304,10 @@ const deleteNotificationLocal = async (index) => {
                   <td
                     class="px-6 py-4 leading-5 text-right border-b border-gray-200"
                   >
-                  <EditOperationsModal />
+                  <EditOperationsModal 
+                    :operation="o"
+                    :fetchOperations="fetchOperations"
+                  />
                   </td>
                 </tr>
               </tbody>
