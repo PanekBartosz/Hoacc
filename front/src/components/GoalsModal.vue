@@ -1,12 +1,15 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { postGoal } from '../api';
+
+const props = defineProps(['fetchGoals', 'userId']);
 
 const name = ref('');
-const CurrentAmount = ref('');
-const GoalAmount = ref('');
+const currentAmount = ref('');
+const goalAmount = ref('');
 
 const isButtonEnabled = computed(() => {
-  return name.value !== '' && CurrentAmount.value !== '' && GoalAmount.value !== '';
+  return name.value !== '' && currentAmount.value !== '' && goalAmount.value !== '';
 });
 
 const open = ref(false);
@@ -16,10 +19,35 @@ const validateInput = (event) => {
   const inputValue = event.target.value;
 
   if (!pattern.test(inputValue)) {
-    CurrentAmount.value = ''
-    GoalAmount.value = ''
+    currentAmount.value = ''
+    goalAmount.value = ''
   }
 }
+
+const addNewGoal = async () => {
+  try {
+    const newGoal = {
+      name: name.value,
+      currentAmount: currentAmount.value,
+      goalAmount: goalAmount.value,
+      userId: props.userId,
+    };
+    // Call the API to add a new goal
+    await postGoal(newGoal);
+    await props.fetchGoals();
+
+    // Clear input fields
+    name.value = '';
+    currentAmount.value = '';
+    goalAmount.value = '';
+
+    // Close the modal
+    open.value = false;
+  } catch (error) {
+    console.error('Error adding new goal:', error.response?.data);
+    alert('Error adding new goal')
+  }
+};
 
 </script>
 
@@ -76,7 +104,7 @@ const validateInput = (event) => {
                     type="text"
                     maxlength="10"
                     class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
-                    v-model="CurrentAmount"
+                    v-model="currentAmount"
                     @input="validateInput"
                     />
                 </div>
@@ -88,7 +116,7 @@ const validateInput = (event) => {
                     type="text"
                     maxlength="10"
                     class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
-                    v-model="GoalAmount"
+                    v-model="goalAmount"
                     @input="validateInput"
                     />
                 </div>
@@ -99,7 +127,7 @@ const validateInput = (event) => {
                     type="submit"
                     class="rounded-lg w-3/4 bg-slate-900 py-2 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                     data-ripple-light="true"
-                    @click="open = false"
+                    @click="addNewGoal"
                     :disabled="!isButtonEnabled"
                 >
                     Add goal

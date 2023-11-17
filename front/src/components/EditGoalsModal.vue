@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { updateGoal, getGoal, deleteGoal } from '../api';
+
+
+const props = defineProps(['fetchGoals', 'userId', 'goalId']);
 
 const name = ref('');
-const CurrentAmount = ref('');
-const GoalAmount = ref('');
+const currentAmount = ref('');
+const goalAmount = ref('');
 
 const isButtonEnabled = computed(() => {
-  return name.value !== '' && CurrentAmount.value !== '' && GoalAmount.value !== '';
+  return name.value !== '' && currentAmount.value !== '' && goalAmount.value !== '';
 });
 
 const open = ref(false);
@@ -16,11 +20,56 @@ const validateInput = (event) => {
   const inputValue = event.target.value;
 
   if (!pattern.test(inputValue)) {
-    CurrentAmount.value = ''
-    GoalAmount.value = ''
+    currentAmount.value = ''
+    goalAmount.value = ''
   }
 }
 
+const fetchGoalData = async () => {
+  try {
+    const response = await getGoal(props.goalId);
+    const goal = response.data;
+
+    name.value = goal.name;
+    currentAmount.value = goal.currentAmount;
+    goalAmount.value = goal.goalAmount;
+
+    open.value = true;
+  } catch (error) {
+    alert('Error fetching goal')
+  }
+  open.value = true
+};
+
+const updateGoalLocal = async () => {
+  try {
+    const newGoal = {
+      name: name.value,
+      currentAmount: currentAmount.value,
+      goalAmount: goalAmount.value,
+      userId: props.userId,
+    };
+    // Call the API to add a new goal
+    await updateGoal(props.goalId, newGoal);
+    await props.fetchGoals();
+
+    // Close the modal
+    open.value = false;
+  } catch (error) {
+    console.error('Error adding new goal:', error.response?.data);
+    alert('Error adding new goal')
+  }
+};
+
+const deleteGoalLocal = async () => {
+  try {
+    await getGoal(props.goalId);
+    await props.fetchGoals();
+  } catch (error) {
+    alert('Error cannot delete goal')
+  }
+  open.value = false
+};
 </script>
 
 <template>
@@ -28,7 +77,7 @@ const validateInput = (event) => {
     <button
       class="rounded-lg bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
       data-ripple-light="true"
-      @click="open = true"
+      @click="fetchGoalData"
     >
       Update
     </button>
@@ -76,7 +125,7 @@ const validateInput = (event) => {
                     type="text"
                     maxlength="10"
                     class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
-                    v-model="CurrentAmount"
+                    v-model="currentAmount"
                     @input="validateInput"
                     />
                 </div>
@@ -88,7 +137,7 @@ const validateInput = (event) => {
                     type="text"
                     maxlength="10"
                     class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
-                    v-model="GoalAmount"
+                    v-model="goalAmount"
                     @input="validateInput"
                     />
                 </div>
@@ -99,7 +148,7 @@ const validateInput = (event) => {
                     type="submit"
                     class="rounded-lg mb-3 w-3/4 bg-red-700 py-2 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                     data-ripple-light="true"
-                    @click="open = false"
+                    @click="deleteGoalLocal"
                 >
                     Delete
                 </button>
@@ -107,7 +156,7 @@ const validateInput = (event) => {
                     type="submit"
                     class="rounded-lg w-3/4 bg-slate-900 py-2 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                     data-ripple-light="true"
-                    @click="open = false"
+                    @click="updateGoalLocal"
                     :disabled="!isButtonEnabled"
                 >
                     Save

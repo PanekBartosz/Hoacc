@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, nextTick, Ref  } from "vue";
+import { computed, ref, onMounted, Ref  } from "vue";
 import MainNavbar from "./MainNavbar.vue";
 import { Pagination } from "flowbite-vue";
 import ProfitChart from "./ProfitChart.vue"
@@ -347,7 +347,10 @@ const deleteNotificationLocal = async (index) => {
       <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2 overflow-x-auto">
     <div class="flex flex-row justify-between mb-6">
       <h3 class="text-xl font-medium text-gray-700">Goals</h3>
-      <GoalsModal />
+      <GoalsModal 
+        :userId="userId" 
+        :fetchGoals="fetchGoals"
+      />
     </div>
 
     <div class="flex flex-no-wrap space-x-4 overflow-x-auto">
@@ -357,9 +360,13 @@ const deleteNotificationLocal = async (index) => {
           <!-- Use ref to create a reactive reference for the chart -->
           <canvas ref="chartRefs[index]" class="h-[120px] w-[120px]"></canvas>
         </div>
-        <div class="text-center">
+        <div class="text-center mr-2">
           <h3 class="text-3xl mx-5 font-medium mb-2">{{ goal.name }}</h3>
-          <EditGoalsModal :goal="goal" />
+          <EditGoalsModal 
+            :userId="userId"
+            :goalId="goal.goalsId"
+            :fetchGoals="fetchGoals"
+          />
         </div>
       </div>
     </div>

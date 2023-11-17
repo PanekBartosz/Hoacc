@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed,defineProps } from 'vue';
+import { ref, computed } from 'vue';
 import Datepicker from 'vuejs3-datepicker';
 import { postNotification } from '../api';
 
