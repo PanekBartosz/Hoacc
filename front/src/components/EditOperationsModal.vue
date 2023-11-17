@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref,computed} from "vue";
 import Datepicker from 'vuejs3-datepicker';
+import { updateOperation, deleteOperation} from '../api';
 
 const open = ref(false);
 

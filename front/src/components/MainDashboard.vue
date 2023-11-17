@@ -364,7 +364,7 @@ const deleteNotificationLocal = async (index) => {
           <h3 class="text-3xl mx-5 font-medium mb-2">{{ goal.name }}</h3>
           <EditGoalsModal 
             :userId="userId"
-            :goalId="goal.goalsId"
+            :goal="goal"
             :fetchGoals="fetchGoals"
           />
         </div>

@@ -10,7 +10,6 @@ const apiClient = axios.create({
 export const getOperations = async (id: number): Promise<AxiosResponse> => apiClient.get(`/Operations/user/${id}`)
 export const getNotifications= async (id: number): Promise<AxiosResponse> => apiClient.get(`/Notification/user/${id}`)
 export const getGoals = async (id: number): Promise<AxiosResponse> => apiClient.get(`/Goals/user/${id}`)
-export const getGoal = async (id: number): Promise<AxiosResponse> => apiClient.get(`/Goals/${id}`)
 
 export const postGoal= async (data: any): Promise<AxiosResponse> => apiClient.post('/Goals', data)
 export const postNotification= async (data: any): Promise<AxiosResponse> => apiClient.post('/Notification', data)

@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
-import { updateGoal, getGoal, deleteGoal } from '../api';
+import { updateGoal, deleteGoal } from '../api';
 
 
-const props = defineProps(['fetchGoals', 'userId', 'goalId']);
+const props = defineProps(['fetchGoals', 'userId','goal']);
 
 const name = ref('');
 const currentAmount = ref('');
@@ -26,19 +26,11 @@ const validateInput = (event) => {
 }
 
 const fetchGoalData = async () => {
-  try {
-    const response = await getGoal(props.goalId);
-    const goal = response.data;
-
-    name.value = goal.name;
-    currentAmount.value = goal.currentAmount;
-    goalAmount.value = goal.goalAmount;
+    name.value = props.goal.name;
+    currentAmount.value = props.goal.currentAmount;
+    goalAmount.value = props.goal.goalAmount;
 
     open.value = true;
-  } catch (error) {
-    alert('Error fetching goal')
-  }
-  open.value = true
 };
 
 const updateGoalLocal = async () => {
@@ -50,7 +42,7 @@ const updateGoalLocal = async () => {
       userId: props.userId,
     };
     // Call the API to add a new goal
-    await updateGoal(props.goalId, newGoal);
+    await updateGoal(props.goal.goalsId, newGoal);
     await props.fetchGoals();
 
     // Close the modal
@@ -63,7 +55,7 @@ const updateGoalLocal = async () => {
 
 const deleteGoalLocal = async () => {
   try {
-    await getGoal(props.goalId);
+    await deleteGoal(props.goal.goalsId);
     await props.fetchGoals();
   } catch (error) {
     alert('Error cannot delete goal')
