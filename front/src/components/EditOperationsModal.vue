@@ -7,6 +7,7 @@ const props = defineProps(['fetchOperations','operation']);
 
 const open = ref(false);
 
+const selectedType = ref('income')
 const selectedDate = ref(new Date());
 const category = ref('');
 const description = ref('');
@@ -25,39 +26,42 @@ const validateInput = (event) => {
 }
 
 const fetchOperationsData = async () => {
-    name.value = props.goal.name;
-    currentAmount.value = props.goal.currentAmount;
-    goalAmount.value = props.goal.goalAmount;
+    selectedDate.value = props.operation.date;
+    description.value = props.operation.description;
+    category.value = props.operation.categoryInfo?.name;
+    amount.value = props.operation.amount;
 
     open.value = true;
 };
 
 const updateOperationLocal = async () => {
   try {
-    const newGoal = {
-      name: name.value,
-      currentAmount: currentAmount.value,
-      goalAmount: goalAmount.value,
-      userId: props.userId,
+    const newOperation = {
+      type: selectedType.value,
+      date: selectedDate.value,
+      description: description.value,
+      category: category.value,
+      amount: amount.value,
+      userId: props.operation.userId,
     };
     // Call the API to add a new goal
-    await updateGoal(props.goal.goalsId, newGoal);
-    await props.fetchGoals();
+    await updateOperation(props.operation.operationId, newOperation);
+    await props.fetchOperations();
 
     // Close the modal
     open.value = false;
   } catch (error) {
-    console.error('Error adding new goal:', error.response?.data);
-    alert('Error adding new goal')
+    console.error('Error adding new operation:', error.response?.data);
+    alert('Error adding new operation')
   }
 };
 
 const deleteOperationLocal = async () => {
   try {
-    await deleteGoal(props.goal.goalsId);
-    await props.fetchGoals();
+    await deleteOperation(props.operation.operationId);
+    await props.fetchOperations();
   } catch (error) {
-    alert('Error cannot delete goal')
+    alert('Error cannot delete operation')
   }
   open.value = false
 };
@@ -104,13 +108,17 @@ const deleteOperationLocal = async () => {
                 type="radio"
                 class="w-5 h-5 text-blue-600 focus:ring-blue-500"
                 name="radio"
+                value="income"
                 checked
+                @change="selectedType = 'income'"
               ><span class="ml-2 mr-5 text-gray-700">Income</span>
               <input
                 id="EOoutcome"
                 type="radio"
                 class="w-5 h-5 text-blue-600 focus:ring-blue-500"
                 name="radio"
+                value="outcome"
+                @change="selectedType = 'outcome'"
               ><span class="ml-2 text-gray-700">Outcome</span>
             </label>
           </div>
@@ -118,10 +126,10 @@ const deleteOperationLocal = async () => {
           <label class="block mt-5 mb-2 text-center text-sm font-medium text-gray-900">Select an Category</label>
           <div class="w-3/4 mx-auto">
             <select id="EOcategory" v-model="category" class="bg-gray-50 border text-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-              <option selected value="Bills">Bills</option>
-              <option value="Food">Food</option>
-              <option value="Education">Education</option>
-              <option value="Entertaiment">Entertaiment</option>
+              <option selected value="0">Bills</option>
+              <option value="1">Food</option>
+              <option value="2">Education</option>
+              <option value="3">Entertaiment</option>
             </select>
           </div>
 
@@ -138,7 +146,8 @@ const deleteOperationLocal = async () => {
           </div>
 
           <div class="items-center justify-center text-center">
-                <div class="mt-4 w-3/4 mx-auto">
+                <label class="block mt-5 text-center text-sm font-medium text-gray-900">Enter description</label>
+                <div class="mt-1 w-3/4 mx-auto">
                     <input
                     id="EOdescription"
                     placeholder="Enter Description"
@@ -149,7 +158,8 @@ const deleteOperationLocal = async () => {
                     v-model="description"
                     />
                 </div>
-                <div class="mt-4 w-3/4 mx-auto">
+                <label class="block mt-5 text-center text-sm font-medium text-gray-900">Enter amount</label>
+                <div class="mt-1 w-3/4 mx-auto">
                     <input
                     id="EOamount"
                     placeholder="Enter amount"
@@ -167,14 +177,14 @@ const deleteOperationLocal = async () => {
             <button
               class="rounded-lg w-3/4 mt-5 bg-red-700 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               data-ripple-light="true"
-              @click="open = false"
+              @click="deleteOperationLocal"
             >
               Delete
             </button>
             <button
               class="rounded-lg w-3/4 mt-5 bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               data-ripple-light="true"
-              @click="open = false"
+              @click="updateOperationLocal"
               :disabled="!isButtonEnabled"
             >
               Save
