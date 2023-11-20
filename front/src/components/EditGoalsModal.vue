@@ -97,7 +97,8 @@ const deleteGoalLocal = async () => {
 
           <!-- Body -->
             <div class="items-center justify-center text-center">
-                <div class="mt-4 w-3/4 mx-auto">
+                <label class="block mt-4 mb-0 text-sm font-medium text-gray-500">Enter name</label>
+                <div class="mt-0 w-3/4 mx-auto">
                     <input
                     id="name"
                     placeholder="Enter name"
@@ -109,7 +110,8 @@ const deleteGoalLocal = async () => {
                     v-model="name"
                     />
                 </div>
-                <div class="mt-4 w-3/4 mx-auto">
+                <label class="block mt-4 mb-0 text-sm font-medium text-gray-500">Enter current amount</label>
+                <div class="mt-0 w-3/4 mx-auto">
                     <input
                     id="amount"
                     placeholder="Enter current amount"
@@ -121,7 +123,8 @@ const deleteGoalLocal = async () => {
                     @input="validateInput"
                     />
                 </div>
-                <div class="mt-4 w-3/4 mx-auto">
+                <label class="block mt-4 mb-0 text-sm font-medium text-gray-500">Enter goal amount</label>
+                <div class="mt-0 w-3/4 mx-auto">
                     <input
                     id="amount"
                     placeholder="Enter goal amount"
