@@ -100,7 +100,6 @@ const deleteGoalLocal = async () => {
                 <label class="block mt-4 mb-0 text-sm font-medium text-gray-500">Enter name</label>
                 <div class="mt-0 w-3/4 mx-auto">
                     <input
-                    id="name"
                     placeholder="Enter name"
                     name="name"
                     type="text"
@@ -113,7 +112,6 @@ const deleteGoalLocal = async () => {
                 <label class="block mt-4 mb-0 text-sm font-medium text-gray-500">Enter current amount</label>
                 <div class="mt-0 w-3/4 mx-auto">
                     <input
-                    id="amount"
                     placeholder="Enter current amount"
                     name="amount"
                     type="text"
@@ -126,7 +124,6 @@ const deleteGoalLocal = async () => {
                 <label class="block mt-4 mb-0 text-sm font-medium text-gray-500">Enter goal amount</label>
                 <div class="mt-0 w-3/4 mx-auto">
                     <input
-                    id="amount"
                     placeholder="Enter goal amount"
                     name="amount"
                     type="text"

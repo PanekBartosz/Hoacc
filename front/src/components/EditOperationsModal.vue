@@ -105,7 +105,6 @@ const deleteOperationLocal = async () => {
           <div class="text-center">
             <label >
               <input
-                id="EOincome"
                 type="radio"
                 class="w-5 h-5 text-blue-600 focus:ring-blue-500"
                 name="radio"
@@ -114,7 +113,6 @@ const deleteOperationLocal = async () => {
                 @change="selectedType = 'income'"
               ><span class="ml-2 mr-5 text-gray-700">Income</span>
               <input
-                id="EOoutcome"
                 type="radio"
                 class="w-5 h-5 text-blue-600 focus:ring-blue-500"
                 name="radio"
@@ -150,7 +148,6 @@ const deleteOperationLocal = async () => {
                 <label class="block mt-5 text-center text-sm font-medium text-gray-900">Enter description</label>
                 <div class="mt-1 w-3/4 mx-auto">
                     <input
-                    id="EOdescription"
                     placeholder="Enter Description"
                     name="title"
                     type="text"
@@ -162,7 +159,6 @@ const deleteOperationLocal = async () => {
                 <label class="block mt-5 text-center text-sm font-medium text-gray-900">Enter amount</label>
                 <div class="mt-1 w-3/4 mx-auto">
                     <input
-                    id="EOamount"
                     placeholder="Enter amount"
                     name="amount"
                     type="text"

@@ -105,7 +105,7 @@ const addNewOperation = async () => {
 
           <label class="block mt-5 mb-2 text-center text-sm font-medium text-gray-900">Select an Category</label>
           <div class="w-3/4 mx-auto">
-            <select id="category" v-model="category" class="bg-gray-50 border text-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+            <select v-model="category" class="bg-gray-50 border text-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
               <option selected value="0">Bills</option>
               <option value="1">Food</option>
               <option value="2">Education</option>
@@ -128,7 +128,6 @@ const addNewOperation = async () => {
           <div class="items-center justify-center text-center">
                 <div class="mt-4 w-3/4 mx-auto">
                     <input
-                    id="description"
                     placeholder="Enter Description"
                     name="title"
                     type="text"
@@ -139,7 +138,6 @@ const addNewOperation = async () => {
                 </div>
                 <div class="mt-4 w-3/4 mx-auto">
                     <input
-                    id="OPamount"
                     placeholder="Enter amount"
                     name="amount"
                     type="text"

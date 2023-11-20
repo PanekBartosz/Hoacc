@@ -61,6 +61,34 @@ const goals = ref<Goal[]>([]);
 
 const router = useRouter();
 
+const totalIncome = computed(() => {
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth(); // Get the current month (0-indexed)
+  
+  return operations.value
+    .filter(o => {
+      const operationDate = new Date(o.date);
+      return operationDate.getMonth() === currentMonth && o.type.toLowerCase() === 'income';
+    })
+    .reduce((total, operation) => total + operation.amount, 0);
+});
+
+const totalOutcome = computed(() => {
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth(); // Get the current month (0-indexed)
+  
+  return operations.value
+    .filter(o => {
+      const operationDate = new Date(o.date);
+      return operationDate.getMonth() === currentMonth && o.type.toLowerCase() === 'outcome';
+    })
+    .reduce((total, operation) => total + operation.amount, 0);
+});
+
+const totalSavings = computed(() => {
+  return totalIncome.value - totalOutcome.value;
+});
+
 const formatDate = (dateString: Date): string => {
   const date = new Date(dateString);
   return format(date, 'dd MMMM yyyy', { locale: enUS }).toUpperCase();
@@ -192,7 +220,7 @@ const deleteNotificationLocal = async (index) => {
             >
               <div class="mx-auto">
                 <div class="text-center">Total income</div>
-                <h4 class="text-2xl font-semibold">6250 PLN</h4>
+                <h4 class="text-2xl font-semibold">{{ totalIncome }} PLN</h4>
               </div>
             </div>
           </div>
@@ -203,7 +231,7 @@ const deleteNotificationLocal = async (index) => {
             >
               <div class="mx-auto">
                 <div class="text-center">Total outcome</div>
-                <h4 class="text-2xl font-semibold">5300 PLN</h4>
+                <h4 class="text-2xl font-semibold">{{ totalOutcome }} PLN</h4>
               </div>
             </div>
           </div>
@@ -214,7 +242,7 @@ const deleteNotificationLocal = async (index) => {
             >
               <div class="mx-auto">
                 <div class="text-center">Total savings</div>
-                <h4 class="text-2xl font-semibold">950 PLN</h4>
+                <h4 class="text-2xl font-semibold">{{ totalSavings }} PLN</h4>
               </div>
             </div>
           </div>
@@ -351,7 +379,7 @@ const deleteNotificationLocal = async (index) => {
       
 
       <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2 overflow-x-auto">
-    <div class="flex flex-row justify-between mb-6">
+    <div id="goals" class="flex flex-row justify-between mb-6">
       <h3 class="text-xl font-medium text-gray-700">Goals</h3>
       <GoalsModal 
         :userId="userId" 

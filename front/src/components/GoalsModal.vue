@@ -86,7 +86,6 @@ const addNewGoal = async () => {
             <div class="items-center justify-center text-center">
                 <div class="mt-4 w-3/4 mx-auto">
                     <input
-                    id="name"
                     placeholder="Enter name"
                     name="name"
                     type="text"
