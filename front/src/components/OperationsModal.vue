@@ -1,28 +1,20 @@
 <script setup lang="ts">
 import { ref,computed, onMounted } from "vue";
 import Datepicker from 'vuejs3-datepicker';
+import { postOperation } from '../api';
+
+const props = defineProps(['fetchOperations','userId']);
 
 const open = ref(false);
 
+const selectedType = ref('income')
 const selectedDate = ref(new Date());
 const description = ref('');
+const category = ref('');
 const amount = ref('');
+
 const isButtonEnabled = computed(() => {
   return description.value !== '' && amount.value !== '';
-});
-
-const selectedType = ref('');
-
-const updateSelectedType = (type) => {
-  selectedType.value = type;
-  localStorage.setItem('selectedType', type);
-};
-
-onMounted(() => {
-  const storedType = localStorage.getItem('selectedType');
-  if (storedType) {
-    selectedType.value = storedType;
-  }
 });
 
 const validateInput = (event) => {
@@ -33,6 +25,28 @@ const validateInput = (event) => {
     amount.value = '';
   }
 }
+
+const addNewOperation = async () => {
+  try {
+    const newOperation = {
+      type: selectedType.value,
+      date: selectedDate.value,
+      description: description.value,
+      category: category.value,
+      amount: amount.value,
+      userId: props.userId,
+    };
+    // Call the API to add a new operation
+    await postOperation(newOperation);
+    await props.fetchOperations();
+
+    // Close the modal
+    open.value = false;
+  } catch (error) {
+    console.error('Error adding new operation:', error.response?.data);
+    alert('Error adding new operation')
+  }
+};
 
 </script>
 
@@ -76,27 +90,26 @@ const validateInput = (event) => {
                 type="radio"
                 class="w-5 h-5 text-blue-600 focus:ring-blue-500"
                 name="radio"
-                :checked="selectedType === 'income'"
-                @change="updateSelectedType('income')"
+                checked
+                @change="selectedType = 'income'"
               ><span class="ml-2 mr-5 text-gray-700">Income</span>
               <input
                 id="outcome"
                 type="radio"
                 class="w-5 h-5 text-blue-600 focus:ring-blue-500"
                 name="radio"
-                :checked="selectedType === 'outcome'"
-                @change="updateSelectedType('outcome')"
+                @change="selectedType = 'outcome'"
               ><span class="ml-2 text-gray-700">Outcome</span>
             </label>
           </div>
 
           <label class="block mt-5 mb-2 text-center text-sm font-medium text-gray-900">Select an Category</label>
           <div class="w-3/4 mx-auto">
-            <select id="category" class="bg-gray-50 border text-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-              <option selected value="Bills">Bills</option>
-              <option value="Food">Food</option>
-              <option value="Education">Education</option>
-              <option value="Entertaiment">Entertaiment</option>
+            <select id="category" v-model="category" class="bg-gray-50 border text-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+              <option selected value="0">Bills</option>
+              <option value="1">Food</option>
+              <option value="2">Education</option>
+              <option value="3">Entertaiment</option>
             </select>
           </div>
 
@@ -142,7 +155,7 @@ const validateInput = (event) => {
             <button
               class="rounded-lg w-3/4 mt-5 bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               data-ripple-light="true"
-              @click="open = false"
+              @click="addNewOperation"
               :disabled="!isButtonEnabled"
             >
               Add operation

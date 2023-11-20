@@ -228,7 +228,10 @@ const deleteNotificationLocal = async (index) => {
     >
       <div id="operations" class="flex flex-row justify-between">
         <h3 class="text-xl font-medium text-gray-700">Operations</h3>
-        <OperationsModal />
+        <OperationsModal 
+        :fetchOperations="fetchOperations"
+        :userId="userId"
+        />
       </div>
       <div class="flex flex-col mt-3">
         <div

@@ -12,6 +12,7 @@ const selectedDate = ref(new Date());
 const category = ref('');
 const description = ref('');
 const amount = ref('');
+
 const isButtonEnabled = computed(() => {
   return description.value !== '' && amount.value !== '';
 });
