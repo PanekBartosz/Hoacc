@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, Ref  } from "vue";
+import { computed, ref, onMounted, Ref, nextTick  } from "vue";
 import MainNavbar from "./MainNavbar.vue";
 import { Pagination } from "flowbite-vue";
 import ProfitChart from "./ProfitChart.vue"
@@ -120,51 +120,87 @@ const fetchGoals = async () => {
     } else {
       console.error('User ID is undefined.');
     }
+    updateCharts()
   } catch (error) {
     console.error('Error fetching goals:', error.response?.data);
   }
 };
 
-const chartRefs = ref<Array<Ref<null | HTMLCanvasElement>>>([]);
+// Function to generate a random color excluding white and black
+const generateRandomColor = () => {
+      let randomColor;
+      do {
+        randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+      } while (randomColor === '#ffffff' || randomColor === '#000000');
+      return randomColor;
+    };
+
+// Function to calculate percentage completed
+const calculatePercentageCompleted = (currentAmount, goalAmount) => {
+  return ((currentAmount / goalAmount) * 100).toFixed(2) + '%';
+};
+
+const updateCharts = async () => {
+  try {
+    const response = await getGoals(Number(router.currentRoute.value.params.id));
+    goals.value = response.data;
+
+    await nextTick();
+
+    goals.value.forEach(async (goal, index) => {
+      const canvasRef = document.querySelector(`#goalChart_${index}`) as HTMLCanvasElement;
+      if (canvasRef) {
+        const ctx = canvasRef.getContext('2d');
+        if (ctx) {
+          console.log(`Creating or updating chart for goal ${goal.name}`);
+
+          const percentageCompleted = calculatePercentageCompleted(goal.currentAmount, goal.goalAmount);
+
+          // Check if chart already exists for this canvas
+          const existingChart = Chart.getChart(ctx);
+          if (existingChart) {
+            existingChart.data.datasets = [
+              {
+                data: [goal.goalAmount - goal.currentAmount, goal.currentAmount],
+                backgroundColor: ['#CCCCCC', generateRandomColor()],
+              },
+            ];
+            existingChart.update();
+          } else {
+            new Chart(ctx, {
+              type: 'doughnut',
+              data: {
+                datasets: [
+                  {
+                    data: [goal.goalAmount - goal.currentAmount, goal.currentAmount],
+                    backgroundColor: ['#CCCCCC', generateRandomColor()],
+                  },
+                ],
+              },
+              options: {
+                elements: {
+                  arc: {
+                    spacing: 3,
+                    borderRadius: 5,
+                  },
+                },
+              },
+            });
+          }
+        }
+      }
+    });
+  } catch (error) {
+    console.error('Error fetching goals:', error.response?.data);
+  }
+};
 
 onMounted(async () => {
   try {
     userId.value = Number(router.currentRoute.value.params.id);
     await fetchNotifications();
     await fetchOperations();
-    //await fetchGoals();
-    
-     // Fetch goals from the database
-    const response = await getGoals(userId.value);
-    goals.value = response.data;
-
-    // Initialize chartRefs with null values
-    chartRefs.value = goals.value.map(() => ref(null));
-
-    // Create a chart for each goal
-    goals.value.forEach((goal, index) => {
-      const canvasRef = chartRefs.value[index];
-      if (canvasRef.value) {
-        const ctx = canvasRef.value.getContext('2d');
-        if (ctx) {
-          // Log a message to the console when creating each chart
-          console.log(`Creating chart for goal ${goal.name}`);
-          
-          new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-              labels: ['Completed', 'Remaining'],
-              datasets: [
-                {
-                  data: [goal.currentAmount, goal.goalAmount - goal.currentAmount],
-                  backgroundColor: ['grey', '#34D399'],
-                },
-              ],
-            },
-          });
-        }
-      }
-    });
+    await fetchGoals();
   } catch (error) {
     console.error('Error fetching goals:', error.response?.data);
   }
@@ -392,7 +428,7 @@ const deleteNotificationLocal = async (index) => {
       <div v-for="(goal, index) in goals" :key="index" class="rounded-lg w-min flex items-center shadow-lg p-1 border-2 border-slate-50 mb-4">
         <div class="w-32">
           <!-- Use ref to create a reactive reference for the chart -->
-          <canvas ref="chartRefs[index]" class="h-[120px] w-[120px]"></canvas>
+          <canvas :id="`goalChart_${index}`" class="h-[120px] w-[120px]"></canvas>
         </div>
         <div class="text-center mr-2">
           <h3 class="text-3xl mx-5 font-medium mb-2">{{ goal.name }}</h3>
