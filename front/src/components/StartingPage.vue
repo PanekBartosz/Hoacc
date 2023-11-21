@@ -8,6 +8,7 @@ const router = useRouter();
 const localStorageKey = "isVisibleState"; // Key for storing in localStorage
 let initialIsVisible = localStorage.getItem(localStorageKey);
 const isVisible = ref(true);
+localStorage.setItem(localStorageKey, JSON.stringify(true));
 
 const navigateToHome = () => {
   isVisible.value = true;
