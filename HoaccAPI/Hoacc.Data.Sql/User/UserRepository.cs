@@ -28,6 +28,16 @@ public class UserRepository : IUserRepositoryDTO
             user.Email,
             user.Password);
     }
+    
+    public async Task<string?> GetUserEmail(int userId)
+    {
+        var userEmail = await _context.User
+            .Where(x => x.UserId == userId)
+            .Select(x => x.Email)
+            .FirstOrDefaultAsync();
+
+        return userEmail;
+    }
 
     public async Task<int> CreateUser(UserDTO user)
     {

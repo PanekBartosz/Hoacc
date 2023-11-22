@@ -37,6 +37,17 @@ public class UserController : ControllerBase
         if (user != null) return Ok(UserToUserViewModelMapper.UserToUserViewModel(user));
         return NotFound();
     }
+    
+    [HttpGet("{userId:min(1)}/email", Name = "GetEmailByUserId")]
+    public async Task<IActionResult> GetEmailByUserId(int userId)
+    {
+        var email = await _userService.GetEmailByUserId(userId);
+        if (email != null) 
+        {
+            return Ok(email);
+        }
+        return NotFound();
+    }
 
     [ValidateModel]
     [HttpPost]

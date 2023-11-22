@@ -22,6 +22,12 @@ public class UserService : IUserService
     {
         return _userRepository.GetUser(userId);
     }
+    
+    public async Task<string?> GetEmailByUserId(int userId)
+    {
+        var user = await _userRepository.GetUser(userId);
+        return user?.Email;
+    }
 
     public async Task<UserDTO> CreateUser(CreateUser createUser)
     {
