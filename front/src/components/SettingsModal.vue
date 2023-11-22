@@ -1,14 +1,60 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
+import { updateUserPass, getUserEmail } from '../api';
+import { useRouter } from 'vue-router';
+
+const props = defineProps(['userId']);
+
+const router = useRouter();
 
 const newPassword = ref('');
 const confirmPassword = ref('');
+const error = ref('');
+const message = ref('');
 
 const isButtonEnabled = computed(() => {
   return newPassword.value !== '' && confirmPassword.value !== '';
 });
 
 const open = ref(false);
+
+const updatePassword = async () => {
+  if (newPassword.value !== confirmPassword.value) {
+    error.value = 'The provided passwords are different';
+    return;
+  }
+
+  try {
+    const userId = props.userId
+    const response = await updateUserPass(userId, {
+      password: newPassword.value,
+    });
+    // Handle successful password change
+    if (response.status === 204) {
+      error.value = '';
+      message.value = 'Password changed';
+      newPassword.value = '';
+      confirmPassword.value = '';
+      setTimeout(() => {
+        message.value = '';
+        open.value = false;
+      }, 3000); // Change password success message disappears after 3 seconds
+    }
+  } catch (error) {
+    error.value = 'Failed to change password'
+  }
+};
+
+const email = ref('');
+
+onMounted(async () => {
+  try {
+    const response = await getUserEmail(Number(router.currentRoute.value.params.id));
+    email.value = response.data;
+  } catch (error) {
+    error.value = 'Failed to fetch email'
+  }
+});
 </script>
 
 <template>
@@ -43,7 +89,7 @@ const open = ref(false);
           <p class="text-center">Account details</p>
           <hr>
           <div class="mt-4 mb-4 text-center">
-            Your email: <b>{{ "example@gmail.com" }}</b>
+            Your email: <b>{{ email }}</b>
           </div>
           <p class="text-center mt-10">Change password</p>
           <hr>
@@ -71,11 +117,16 @@ const open = ref(false);
               </div>
 
               <div class="flex justify-center mt-5">
+                <p v-if="error !== ''" class="text-red-500 text-sm">{{ error }}</p>
+                <p v-if="message !== ''" class="text-green-500 text-sm">{{ message }}</p>
+              </div>
+
+              <div class="flex justify-center mt-5">
                 <button
                   type="submit"
                   class="rounded-lg w-full bg-slate-900 py-2 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                   data-ripple-light="true"
-                  @click="open = false"
+                  @click="updatePassword"
                   :disabled="!isButtonEnabled"
                 >
                   Change password

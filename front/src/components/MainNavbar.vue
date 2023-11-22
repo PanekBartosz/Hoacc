@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue"
+import { ref, onMounted } from "vue"
 import { Dialog, DialogPanel } from "@headlessui/vue"
 import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline"
 import SettingsModal from "./SettingsModal.vue"
@@ -36,11 +36,16 @@ const scrollToSection = (sectionId) => {
 };
 
 const router = useRouter();
+const userId = ref<number | undefined>(undefined);
 
 const logout = () => {
   localStorage.setItem('isVisibleState', JSON.stringify(true));
   router.push('/');
 }
+
+onMounted(async () => {
+  userId.value = Number(router.currentRoute.value.params.id);
+});
 
 </script>
 <template>
@@ -74,7 +79,9 @@ const logout = () => {
             class="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-500"
             >{{ item.name }}</a
           >
-          <SettingsModal />
+          <SettingsModal 
+          :userId="userId"
+          />
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
           <a @click="logout" class="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-500"
@@ -117,7 +124,10 @@ const logout = () => {
                   class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
                   >{{ item.name }}</a
                 >
-                <SettingsMobileModal :mobileMenuOpen="mobileMenuOpen"/>
+                <SettingsMobileModal 
+                :mobileMenuOpen="mobileMenuOpen"
+                :userId="userId"
+                />
               </div>
               <div class="py-6">
                 <a
