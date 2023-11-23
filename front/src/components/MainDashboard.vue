@@ -13,7 +13,7 @@ import EditGoalsModal from "./EditGoalsModal.vue"
 import { getOperations,getNotifications,deleteNotification,getGoals } from '../api';
 import { format } from 'date-fns';
 import { enUS } from 'date-fns/locale';
-import Chart from 'chart.js/auto';
+import Chart, { ChartOptions } from 'chart.js/auto';
 import { useRouter } from "vue-router";
 
 interface Operation {
@@ -140,6 +140,31 @@ const calculatePercentageCompleted = (currentAmount, goalAmount) => {
   return ((currentAmount / goalAmount) * 100).toFixed(2) + '%';
 };
 
+const chartOptions: ChartOptions<'doughnut'> = {
+  elements: {
+    arc: {
+      spacing: 3,
+      borderRadius: 5,
+    },
+  },
+  plugins: {
+    tooltip: {
+      callbacks: {
+        label: (context) => {
+          const labelIndex = context.dataIndex;
+          const value = context.dataset.data[labelIndex];
+
+          if (labelIndex === 0) {
+            return `Remaining: ${value}`;
+          } else {
+            return `Completed: ${value}`;
+          }
+        },
+      },
+    },
+  },
+};
+
 const updateCharts = async () => {
   try {
     const response = await getGoals(Number(router.currentRoute.value.params.id));
@@ -177,14 +202,7 @@ const updateCharts = async () => {
                   },
                 ],
               },
-              options: {
-                elements: {
-                  arc: {
-                    spacing: 3,
-                    borderRadius: 5,
-                  },
-                },
-              },
+              options: chartOptions,
             });
           }
         }
@@ -404,7 +422,7 @@ const deleteNotificationLocal = async (index) => {
           />
         </div>
         <div class="flex flex-row my-3 overflow-auto">
-            <div v-for="(notification, index) in notifications" :key="index" class="bg-neutral-200 rounded-lg text-center shadow-md p-4 mx-3 my-3">
+            <div v-for="(notification, index) in notifications" :key="index" class="bg-white border border-t-4 border-t-blue-500 shadow-sm rounded-xl text-center shadow-md p-4 mx-3 my-3">
               <div class="font-bold text-gray-700">{{ notification.name }}</div>
               <div class="text-gray-500">{{ formatDateNotification(notification.date) }}</div>
               <div class="text-gray-900">{{ notification.amount + " PLN"}}</div>
