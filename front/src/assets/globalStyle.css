@@ -26,13 +26,16 @@ html, body {
 }
 
 ::-webkit-scrollbar-track{
-  background: rgba(30, 170, 241, 0.5);
+  background: #E4E4E4;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb{
-  background: #CBD5E0;
+  background: black;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover{
-  background: #BCD2E2;
+  background: grey;
+  border-radius: 10px;
 }
