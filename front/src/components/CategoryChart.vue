@@ -64,7 +64,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import Chart from "chart.js/auto";
 import { getOperationsFiltered } from "../api";
 import { useRouter } from "vue-router";
@@ -136,6 +136,18 @@ const showNoDataMessage = () => {
   ctx.textAlign = 'center';
   ctx.fillText('Lack of data', pieChart.value.width / 2, pieChart.value.height / 2);
 };
+
+const operations = defineProps({
+  operations: {
+    type: Array,
+    required: true,
+  },
+});
+
+// Watch for changes in operations and update the chart
+watch(operations, () => {
+  fetchData(selectedOption.value);
+});
 
 const formatDate = (date) => {
   return date.toISOString().split('T')[0];

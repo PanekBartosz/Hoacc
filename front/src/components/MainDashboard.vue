@@ -476,7 +476,8 @@ const deleteNotificationLocal = async (index) => {
             <SavingsChart class="w-full" />
           </div>
           <div class="w-full md:w-1/2 mb-2">
-            <CategoryChart 
+            <CategoryChart
+            :operations="operations"
             class="w-full" />
           </div>
         </div>
