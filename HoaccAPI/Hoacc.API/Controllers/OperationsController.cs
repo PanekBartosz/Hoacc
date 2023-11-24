@@ -41,6 +41,23 @@ public class OperationsController : ControllerBase
 
         return Ok(operations);
     }
+    
+    [HttpGet("user/{userId}/filtered")]
+    public async Task<IActionResult> GetFilteredOperationsByUser(
+        int userId,
+        [FromQuery] DateTime startDate,
+        [FromQuery] DateTime endDate
+    )
+    {
+        var operations = await _operationsService.GetFilteredOperationsByUser(userId, startDate, endDate);
+
+        if (operations == null || !operations.Any())
+        {
+            return NotFound($"No operations found for user ID {userId}");
+        }
+
+        return Ok(operations);
+    }
 
     [ValidateModel]
     [HttpPost]

@@ -133,12 +133,12 @@ const generateRandomColor = () => {
         randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
       } while (randomColor === '#ffffff' || randomColor === '#000000');
       return randomColor;
-    };
+};
 
 // Function to calculate percentage completed
-const calculatePercentageCompleted = (currentAmount, goalAmount) => {
-  return ((currentAmount / goalAmount) * 100).toFixed(2) + '%';
-};
+// const calculatePercentageCompleted = (currentAmount, goalAmount) => {
+//   return ((currentAmount / goalAmount) * 100).toFixed(2) + '%';
+// };
 
 const chartOptions: ChartOptions<'doughnut'> = {
   elements: {
@@ -179,7 +179,7 @@ const updateCharts = async () => {
         if (ctx) {
           console.log(`Creating or updating chart for goal ${goal.name}`);
 
-          const percentageCompleted = calculatePercentageCompleted(goal.currentAmount, goal.goalAmount);
+          //const percentageCompleted = calculatePercentageCompleted(goal.currentAmount, goal.goalAmount);
 
           // Check if chart already exists for this canvas
           const existingChart = Chart.getChart(ctx);
@@ -422,7 +422,7 @@ const deleteNotificationLocal = async (index) => {
           />
         </div>
         <div class="flex flex-row my-3 overflow-auto">
-            <div v-for="(notification, index) in notifications" :key="index" class="bg-white border border-t-4 border-t-blue-500 shadow-sm rounded-xl text-center shadow-md p-4 mx-3 my-3">
+            <div v-for="(notification, index) in notifications" :key="index" class="bg-white border border-t-4 border-t-blue-500 rounded-xl text-center shadow-md p-4 mx-3 my-3">
               <div class="font-bold text-gray-700">{{ notification.name }}</div>
               <div class="text-gray-500">{{ formatDateNotification(notification.date) }}</div>
               <div class="text-gray-900">{{ notification.amount + " PLN"}}</div>
@@ -476,7 +476,8 @@ const deleteNotificationLocal = async (index) => {
             <SavingsChart class="w-full" />
           </div>
           <div class="w-full md:w-1/2 mb-2">
-            <CategoryChart class="w-full" />
+            <CategoryChart 
+            class="w-full" />
           </div>
         </div>
       </div>
