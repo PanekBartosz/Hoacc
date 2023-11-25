@@ -59,6 +59,31 @@ public class OperationsController : ControllerBase
 
         return Ok(operations);
     }
+    
+    [HttpGet("user/{userId}/profit")]
+    public async Task<IActionResult> GetProfitChartDataByUser(
+        int userId,
+        [FromQuery] DateTime startDate,
+        [FromQuery] DateTime endDate
+    )
+    {
+        try
+        {
+            var profitChartData = await _operationsService.GetProfitDataForUser(userId, startDate, endDate);
+
+            if (profitChartData == null)
+            {
+                return NotFound($"No profit data found for user ID {userId}");
+            }
+
+            return Ok(profitChartData);
+        }
+        catch (Exception ex)
+        {
+            // Handle exceptions appropriately
+            return StatusCode(500, "Internal server error");
+        }
+    }
 
     [ValidateModel]
     [HttpPost]

@@ -61,6 +61,15 @@ public class OperationsRepository : IOperationsRepositoryDTO
         editOperations.Amount = operations.Amount;
         await _context.SaveChangesAsync();
     }
+    
+    public async Task<IEnumerable<OperationsDTO>> GetOperationsByUserAndDateRange(int userId, DateTime startDate, DateTime endDate)
+    {
+        var operations = await _context.Operations
+            .Where(op => op.UserId == userId && op.Date >= startDate && op.Date <= endDate)
+            .ToListAsync();
+        
+        return operations.Select(MapOperationsToDTO);
+    }
 
     public async Task RemoveOperations(int operationId)
     {
