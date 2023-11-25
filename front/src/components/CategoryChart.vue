@@ -103,8 +103,8 @@ const fetchData = async (selected) => {
     const response = await getOperationsFiltered(userId, startDate, endDate, 'outcome');
     const { data } = response;
 
-    if (outcomeData.length > 0) {
-      const { labels, values, colors } = transformDataForChart(outcomeData);
+    if (data.length > 0) {
+      const { labels, values, colors } = transformDataForChart(data);
 
       if (pieChart.value.chart) {
         pieChart.value.chart.destroy();
