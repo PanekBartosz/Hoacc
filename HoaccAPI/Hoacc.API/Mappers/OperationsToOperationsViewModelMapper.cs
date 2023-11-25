@@ -27,6 +27,8 @@ public class OperationsToOperationsViewModelMapper
     {
         switch (domainCategoryType)
         {
+            case OperationsDTO.CategoryType.Other:
+                return OperationsViewModel.CategoryTypeViewModel.Other;
             case OperationsDTO.CategoryType.Bills:
                 return OperationsViewModel.CategoryTypeViewModel.Bills;
             case OperationsDTO.CategoryType.Food:

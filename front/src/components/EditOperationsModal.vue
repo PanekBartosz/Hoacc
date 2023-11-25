@@ -126,10 +126,11 @@ const deleteOperationLocal = async () => {
           <label class="block mt-5 mb-2 text-center text-sm font-medium text-gray-900">Select an Category</label>
           <div class="w-3/4 mx-auto">
             <select id="EOcategory" v-model="category" class="bg-gray-50 border text-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-              <option selected value="0">Bills</option>
-              <option value="1">Food</option>
-              <option value="2">Education</option>
-              <option value="3">Entertaiment</option>
+              <option selected value="0">Other</option>
+              <option value="1">Bills</option>
+              <option value="2">Food</option>
+              <option value="3">Education</option>
+              <option value="4">Entertaiment</option>
             </select>
           </div>
 
