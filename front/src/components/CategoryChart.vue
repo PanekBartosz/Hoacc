@@ -157,19 +157,15 @@ const calculateStartDate = (selected) => {
   switch (selected) {
     case "Yesterday": {
       const yesterday = new Date(currentDate);
-      const yesterdayEnd = new Date(currentDate);
-      yesterday.setDate(currentDate.getDate() - 2);
-      yesterdayEnd.setDate(currentDate.getDate() - 1);
+      yesterday.setDate(currentDate.getDate() - 1);
       return {
         startDate: formatDate(yesterday),
-        endDate: formatDate(yesterdayEnd),
+        endDate: formatDate(yesterday),
       };
     }
     case "Today": {
-      const today = new Date(currentDate);
-      today.setDate(currentDate.getDate() - 1);
       return {
-        startDate: formatDate(today),
+        startDate: formatDate(currentDate),
         endDate: formatDate(currentDate),
       };
     }
