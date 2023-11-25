@@ -48,7 +48,6 @@ const updateGoalLocal = async () => {
     // Close the modal
     open.value = false;
   } catch (error) {
-    console.error('Error adding new goal:', error.response?.data);
     alert('Error adding new goal')
   }
 };

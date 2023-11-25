@@ -136,33 +136,42 @@ const generateRandomColor = () => {
 };
 
 // Function to calculate percentage completed
-// const calculatePercentageCompleted = (currentAmount, goalAmount) => {
-//   return ((currentAmount / goalAmount) * 100).toFixed(2) + '%';
-// };
+const calculatePercentageCompleted = (currentAmount, goalAmount) => {
+  return ((currentAmount / goalAmount) * 100) + '%';
+};
 
-const chartOptions: ChartOptions<'doughnut'> = {
-  elements: {
-    arc: {
-      spacing: 3,
-      borderRadius: 5,
+// Function to calculate percentage remaining
+const calculatePercentageRemaining = (currentAmount, goalAmount) => {
+  return ((currentAmount / goalAmount) * 100) + '%';
+};
+
+const chartOptions = (goalAmount) => {
+  return {
+    elements: {
+      arc: {
+        spacing: 3,
+        borderRadius: 5,
+      },
     },
-  },
-  plugins: {
-    tooltip: {
-      callbacks: {
-        label: (context) => {
-          const labelIndex = context.dataIndex;
-          const value = context.dataset.data[labelIndex];
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            const labelIndex = context.dataIndex;
+            const value = context.dataset.data[labelIndex];
 
-          if (labelIndex === 0) {
-            return `Remaining: ${value}`;
-          } else {
-            return `Completed: ${value}`;
-          }
+            if (labelIndex === 0) {
+              const remainingPercentage = calculatePercentageRemaining(value, goalAmount);
+              return `Remaining: ${remainingPercentage}`;
+            } else {
+              const completedPercentage = calculatePercentageCompleted(value, goalAmount);
+              return `Completed: ${completedPercentage}`;
+            }
+          },
         },
       },
     },
-  },
+  };
 };
 
 const updateCharts = async () => {
@@ -177,9 +186,7 @@ const updateCharts = async () => {
       if (canvasRef) {
         const ctx = canvasRef.getContext('2d');
         if (ctx) {
-          console.log(`Creating or updating chart for goal ${goal.name}`);
-
-          //const percentageCompleted = calculatePercentageCompleted(goal.currentAmount, goal.goalAmount);
+          const options = chartOptions(goal.goalAmount)
 
           // Check if chart already exists for this canvas
           const existingChart = Chart.getChart(ctx);
@@ -190,6 +197,7 @@ const updateCharts = async () => {
                 backgroundColor: ['#CCCCCC', generateRandomColor()],
               },
             ];
+            existingChart.options = options
             existingChart.update();
           } else {
             new Chart(ctx, {
@@ -202,7 +210,7 @@ const updateCharts = async () => {
                   },
                 ],
               },
-              options: chartOptions,
+              options: options,
             });
           }
         }
