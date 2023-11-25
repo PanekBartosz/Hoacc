@@ -2,6 +2,7 @@
 import { ref,computed, onMounted } from "vue";
 import Datepicker from 'vuejs3-datepicker';
 import { postOperation } from '../api';
+import dayjs from 'dayjs'
 
 const props = defineProps(['fetchOperations','userId']);
 
@@ -30,7 +31,7 @@ const addNewOperation = async () => {
   try {
     const newOperation = {
       type: selectedType.value,
-      date: selectedDate.value.toISOString().split('T')[0],
+      date: dayjs(selectedDate.value).format('YYYY-MM-DD'),
       description: description.value,
       category: category.value,
       amount: amount.value,
