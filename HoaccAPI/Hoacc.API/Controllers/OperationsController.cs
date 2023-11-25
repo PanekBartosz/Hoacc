@@ -46,10 +46,11 @@ public class OperationsController : ControllerBase
     public async Task<IActionResult> GetFilteredOperationsByUser(
         int userId,
         [FromQuery] DateTime startDate,
-        [FromQuery] DateTime endDate
+        [FromQuery] DateTime endDate,
+        [FromQuery] string type = "outcome" // Default to "outcome"
     )
     {
-        var operations = await _operationsService.GetFilteredOperationsByUser(userId, startDate, endDate);
+        var operations = await _operationsService.GetFilteredOperationsByUser(userId, startDate, endDate, type);
 
         if (operations == null || !operations.Any())
         {

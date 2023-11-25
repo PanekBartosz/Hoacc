@@ -100,14 +100,11 @@ onMounted(async () => {
 const fetchData = async (selected) => {
   try {
     const { startDate, endDate } = calculateStartDate(selected);
-    const response = await getOperationsFiltered(userId, startDate, endDate);
+    const response = await getOperationsFiltered(userId, startDate, endDate, 'outcome');
     const { data } = response;
 
-    // Filter data to include only 'outcome' entries
-    const outcomeData = data.filter(entry => entry.type === "outcome");
-
     if (outcomeData.length > 0) {
-      const { labels, values, colors } = transformDataForChart(outcomeData, "outcome");
+      const { labels, values, colors } = transformDataForChart(outcomeData);
 
       if (pieChart.value.chart) {
         pieChart.value.chart.destroy();
@@ -225,11 +222,10 @@ const calculateStartDate = (selected) => {
   }
 };
 
-const transformDataForChart = (data, type) => {
+const transformDataForChart = (data) => {
   const categoryAmounts = {};
 
   data.forEach((operation) => {
-    if (operation.type === type) {
       const category = operation.category;
 
       if (!categoryAmounts[category]) {
@@ -237,7 +233,6 @@ const transformDataForChart = (data, type) => {
       }
 
       categoryAmounts[category] += operation.amount;
-    }
   });
 
   const labels = [];

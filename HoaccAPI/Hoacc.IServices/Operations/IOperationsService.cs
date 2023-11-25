@@ -7,7 +7,8 @@ public interface IOperationsService
 {
     Task<OperationsDTO> GetOperations(int operationId);
     Task<IEnumerable<OperationsDTO>> GetOperationsByUser(int userId);
-    Task<IEnumerable<OperationsDTO>> GetFilteredOperationsByUser(int userId, DateTime startDate, DateTime endDate);
+    Task<IEnumerable<OperationsDTO>> GetFilteredOperationsByUser
+        (int userId, DateTime startDate, DateTime endDate, string type);
     Task<OperationsDTO> CreateOperations(CreateOperations createOperations);
     Task EditOperations(int operationId, EditOperations editOperations);
     Task RemoveOperations(int operationId);

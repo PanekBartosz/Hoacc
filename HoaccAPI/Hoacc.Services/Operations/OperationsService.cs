@@ -24,13 +24,15 @@ public class OperationsService : IOperationsService
         return operations;
     }
 
-    public async Task<IEnumerable<OperationsDTO>> GetFilteredOperationsByUser(int userId, DateTime startDate, DateTime endDate)
+    public async Task<IEnumerable<OperationsDTO>> GetFilteredOperationsByUser
+        (int userId, DateTime startDate, DateTime endDate, string type)
     {
         var operations = await _operationsRepository.GetOperationsByUser(userId);
 
         return operations.Where(op => op.UserId == userId &&
                                       op.Date >= startDate &&
-                                      op.Date <= endDate);
+                                      op.Date <= endDate &&
+                                      op.Type == type);
     }
 
     public async Task<OperationsDTO> CreateOperations(CreateOperations createOperations)
