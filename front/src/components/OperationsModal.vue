@@ -11,7 +11,7 @@ const open = ref(false);
 const selectedType = ref('income')
 const selectedDate = ref(new Date());
 const description = ref('');
-const category = ref('');
+const category = ref(0);
 const amount = ref('');
 
 const isButtonEnabled = computed(() => {
