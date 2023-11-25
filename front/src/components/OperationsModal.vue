@@ -30,12 +30,13 @@ const addNewOperation = async () => {
   try {
     const newOperation = {
       type: selectedType.value,
-      date: selectedDate.value,
+      date: selectedDate.value.toISOString().split('T')[0],
       description: description.value,
       category: category.value,
       amount: amount.value,
       userId: props.userId,
     };
+    console.log('data:',selectedDate.value)
     // Call the API to add a new operation
     await postOperation(newOperation);
     await props.fetchOperations();
