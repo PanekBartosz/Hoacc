@@ -73,7 +73,7 @@ const router = useRouter();
 const userId = Number(router.currentRoute.value.params.id)
 
 const categoryMappings = [
-  { value: 0, name: 'Other', color: 'yellow' },
+  { value: 0, name: 'Other', color: 'pink' },
   { value: 1, name: 'Bills', color: 'red' },
   { value: 2, name: 'Food', color: 'green' },
   { value: 3, name: 'Education', color: 'blue' },

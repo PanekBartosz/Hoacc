@@ -47,7 +47,7 @@ interface Goal {
 }
 
 const categoryMappings: Category[] = [
-  { value: 0, name: 'Other', color: 'yellow' },
+  { value: 0, name: 'Other', color: 'pink' },
   { value: 1, name: 'Bills', color: 'red' },
   { value: 2, name: 'Food', color: 'green' },
   { value: 3, name: 'Education', color: 'blue' },
@@ -391,7 +391,7 @@ const deleteNotificationLocal = async (index) => {
                   </td>
 
                   <td
-                    class="px-6 py-4 text-sm leading-5 text-gray-900 border-b border-gray-200 whitespace-nowrap"
+                    class="px-6 py-4 text-sm font-bold leading-5 text-gray-900 border-b border-gray-200 whitespace-nowrap"
                     :style="{ color: (o.type.toLowerCase() === 'income' ? 'green' : 'red') as any }"
                   >
                     {{ o.amount + " PLN" }}
