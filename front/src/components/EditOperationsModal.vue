@@ -8,7 +8,7 @@ const props = defineProps(['fetchOperations','operation']);
 
 const open = ref(false);
 
-const selectedType = ref('income')
+const selectedType = ref('');
 const selectedDate = ref(new Date());
 const category = ref('');
 const description = ref('');
@@ -28,9 +28,10 @@ const validateInput = (event) => {
 }
 
 const fetchOperationsData = async () => {
+    selectedType.value = props.operation.type;
     selectedDate.value = props.operation.date;
     description.value = props.operation.description;
-    category.value = props.operation.categoryInfo?.name;
+    category.value = props.operation.category;
     amount.value = props.operation.amount;
 
     open.value = true;
@@ -104,21 +105,20 @@ const deleteOperationLocal = async () => {
           <!-- Body -->
           <label class="block mt-5 mb-2 text-center text-sm font-medium text-gray-900">Select Type</label>
           <div class="text-center">
-            <label >
+            <label>
               <input
                 type="radio"
                 class="w-5 h-5 text-blue-600 focus:ring-blue-500"
                 name="radio"
                 value="income"
-                checked
-                @change="selectedType = 'income'"
+                v-model="selectedType"
               ><span class="ml-2 mr-5 text-gray-700">Income</span>
               <input
                 type="radio"
                 class="w-5 h-5 text-blue-600 focus:ring-blue-500"
                 name="radio"
                 value="outcome"
-                @change="selectedType = 'outcome'"
+                v-model="selectedType"
               ><span class="ml-2 text-gray-700">Outcome</span>
             </label>
           </div>
@@ -126,7 +126,7 @@ const deleteOperationLocal = async () => {
           <label class="block mt-5 mb-2 text-center text-sm font-medium text-gray-900">Select an Category</label>
           <div class="w-3/4 mx-auto">
             <select id="EOcategory" v-model="category" class="bg-gray-50 border text-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-              <option selected value="0">Other</option>
+              <option value="0">Other</option>
               <option value="1">Bills</option>
               <option value="2">Food</option>
               <option value="3">Education</option>

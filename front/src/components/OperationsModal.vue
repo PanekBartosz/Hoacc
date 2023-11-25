@@ -91,7 +91,7 @@ const addNewOperation = async () => {
                 type="radio"
                 class="w-5 h-5 text-blue-600 focus:ring-blue-500"
                 name="radio"
-                checked
+                :checked="selectedType === 'income'"
                 @change="selectedType = 'income'"
               ><span class="ml-2 mr-5 text-gray-700">Income</span>
               <input
@@ -99,6 +99,7 @@ const addNewOperation = async () => {
                 type="radio"
                 class="w-5 h-5 text-blue-600 focus:ring-blue-500"
                 name="radio"
+                :checked="selectedType === 'outcome'"
                 @change="selectedType = 'outcome'"
               ><span class="ml-2 text-gray-700">Outcome</span>
             </label>
