@@ -36,7 +36,6 @@ const addNewOperation = async () => {
       amount: amount.value,
       userId: props.userId,
     };
-    console.log('data:',selectedDate.value)
     // Call the API to add a new operation
     await postOperation(newOperation);
     await props.fetchOperations();

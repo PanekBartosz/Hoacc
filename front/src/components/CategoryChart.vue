@@ -150,6 +150,7 @@ watch(operations, () => {
 });
 
 const formatDate = (date) => {
+  console.log(date.toISOString().split('T')[0])
   return date.toISOString().split('T')[0];
 };
 
@@ -159,18 +160,20 @@ const calculateStartDate = (selected) => {
   switch (selected) {
     case "Yesterday": {
       const yesterday = new Date(currentDate);
-      yesterday.setDate(currentDate.getDate() - 1);
+      const yesterdayEnd = new Date(currentDate);
+      yesterday.setDate(currentDate.getDate() - 2);
+      yesterdayEnd.setDate(currentDate.getDate() - 1);
       return {
         startDate: formatDate(yesterday),
-        endDate: formatDate(currentDate),
+        endDate: formatDate(yesterdayEnd),
       };
     }
     case "Today": {
       const today = new Date(currentDate);
-      today.setDate(currentDate.getDate() + 1);
+      today.setDate(currentDate.getDate() - 1);
       return {
-        startDate: formatDate(currentDate),
-        endDate: formatDate(today),
+        startDate: formatDate(today),
+        endDate: formatDate(currentDate),
       };
     }
     case "Last 7 days": {
