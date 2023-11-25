@@ -104,11 +104,12 @@ const fetchOperations = async () => {
   try {
     if (userId.value !== undefined) {
       const response = await getOperations(userId.value);
-      operations.value = response.data;
+      operations.value = response.data || [];
     } else {
       console.error('User ID is undefined.');
     }
   } catch (error) {
+    operations.value = [];
     console.error('Error fetching operations:', error.response?.data);
   }
 };
@@ -117,12 +118,13 @@ const fetchGoals = async () => {
   try {
     if (userId.value !== undefined) {
       const response = await getGoals(userId.value);
-      goals.value = response.data;
+      goals.value = response.data || [];
     } else {
       console.error('User ID is undefined.');
     }
     updateCharts()
   } catch (error) {
+    goals.value = [];
     console.error('Error fetching goals:', error.response?.data);
   }
 };
