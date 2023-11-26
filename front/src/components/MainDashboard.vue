@@ -480,11 +480,15 @@ const deleteNotificationLocal = async (index) => {
       </div>
       <div class="w-full flex flex-wrap">
         <div class="w-full">
-          <ProfitChart class="mb-5"/>
+          <ProfitChart 
+          :operations="operations"
+          class="mb-5"/>
         </div>
         <div class="w-full md:flex md:flex-wrap md:space-x-0">
           <div class="w-full md:w-1/2 mb-2">
-            <SavingsChart class="w-full" />
+            <SavingsChart 
+            :operations="operations"
+            class="w-full" />
           </div>
           <div class="w-full md:w-1/2 mb-2">
             <CategoryChart

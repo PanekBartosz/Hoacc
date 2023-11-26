@@ -90,7 +90,7 @@ const options = [
   "Last 6 months",
   "Last year",
 ];
-const selectedOption = ref(options[0]);
+const selectedOption = ref(options[3]);
 const isDropdownOpen = ref(false);
 
 onMounted(async () => {
