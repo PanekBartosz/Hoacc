@@ -6,6 +6,7 @@ public class OperationsViewModel
 {
     public enum CategoryTypeViewModel
     {
+        Other,
         Bills,
         Food,
         Education,

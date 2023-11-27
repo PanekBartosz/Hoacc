@@ -2,6 +2,7 @@
 import { ref,computed, onMounted } from "vue";
 import Datepicker from 'vuejs3-datepicker';
 import { postOperation } from '../api';
+import dayjs from 'dayjs'
 
 const props = defineProps(['fetchOperations','userId']);
 
@@ -10,7 +11,7 @@ const open = ref(false);
 const selectedType = ref('income')
 const selectedDate = ref(new Date());
 const description = ref('');
-const category = ref('');
+const category = ref(0);
 const amount = ref('');
 
 const isButtonEnabled = computed(() => {
@@ -30,7 +31,7 @@ const addNewOperation = async () => {
   try {
     const newOperation = {
       type: selectedType.value,
-      date: selectedDate.value,
+      date: dayjs(selectedDate.value).format('YYYY-MM-DD'),
       description: description.value,
       category: category.value,
       amount: amount.value,
@@ -90,7 +91,7 @@ const addNewOperation = async () => {
                 type="radio"
                 class="w-5 h-5 text-blue-600 focus:ring-blue-500"
                 name="radio"
-                checked
+                :checked="selectedType === 'income'"
                 @change="selectedType = 'income'"
               ><span class="ml-2 mr-5 text-gray-700">Income</span>
               <input
@@ -98,6 +99,7 @@ const addNewOperation = async () => {
                 type="radio"
                 class="w-5 h-5 text-blue-600 focus:ring-blue-500"
                 name="radio"
+                :checked="selectedType === 'outcome'"
                 @change="selectedType = 'outcome'"
               ><span class="ml-2 text-gray-700">Outcome</span>
             </label>
@@ -106,10 +108,11 @@ const addNewOperation = async () => {
           <label class="block mt-5 mb-2 text-center text-sm font-medium text-gray-900">Select an Category</label>
           <div class="w-3/4 mx-auto">
             <select v-model="category" class="bg-gray-50 border text-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
-              <option selected value="0">Bills</option>
-              <option value="1">Food</option>
-              <option value="2">Education</option>
-              <option value="3">Entertaiment</option>
+              <option selected value="0">Other</option>
+              <option value="1">Bills</option>
+              <option value="2">Food</option>
+              <option value="3">Education</option>
+              <option value="4">Entertaiment</option>
             </select>
           </div>
 

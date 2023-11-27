@@ -122,10 +122,10 @@ public class DatabaseSeed
     {
         var operationsList = new List<DAO.Operations>();
         var userCount = userList.Count();
-        for (var i = 1; i <= 25; i++)
+        var startDate = new DateTime(2022, 1, 1);
+        var random = new Random();
+        for (var i = 0; i <= 720; i++)
         {
-            var random = new Random();
-
             // Get all values from CategoryType enum
             var allCategories = (
                 OperationsDTO.CategoryType[]) Enum
@@ -141,10 +141,10 @@ public class DatabaseSeed
             var operation = new DAO.Operations
             {
                 Type = type,
-                Date = new DateTime(2023, 11, i),
+                Date = startDate.AddDays(i),
                 Description = "description" + i,
                 Category = allCategories[randomIndex],
-                Amount = i * 10,
+                Amount = i*2,
                 UserId = 1
             };
             operationsList.Add(operation);

@@ -4,6 +4,7 @@ public class OperationsDTO
 {
     public enum CategoryType
     {
+        Other,
         Bills,
         Food,
         Education,

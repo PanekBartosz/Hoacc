@@ -14,9 +14,7 @@
 
     <div id="column-chart"></div>
 
-    <div
-      class="grid grid-cols-1 items-center border-gray-200 mt-5 border-t dark:border-gray-700"
-    >
+    <div class="grid grid-cols-1 items-center border-gray-200 mt-5 border-t">
       <div class="flex items-center justify-center pt-5 relative">
         <!-- Button -->
         <button
@@ -27,35 +25,34 @@
         >
           {{ selectedOption }}
           <svg
-            class="ml-2"
-            xmlns="http://www.w3.org/2000/svg"
-            height="1em"
-            viewBox="0 0 320 512"
-            fill="#6b7280"
-          >
-            <path
-              v-if="!isDropdownOpen"
-              d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
-            />
-            <path
-              v-else="!isDropdownOpen"
-              d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"
-            />
-          </svg>
+              class="ml-2"
+              xmlns="http://www.w3.org/2000/svg"
+              height="1em"
+              viewBox="0 0 320 512"
+              fill="#6b7280"
+            >
+              <path
+                v-if="!isDropdownOpen"
+                d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
+              />
+              <path
+                v-else="!isDropdownOpen"
+                d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"
+              />
+            </svg>
         </button>
-        <!-- Dropdown menu -->
         <div
           ref="dropdownMenu"
           :class="{
-            'absolute top-0 -mt-[16rem]': isDropdownOpen,
+            'absolute top-0 -mt-[7rem]': isDropdownOpen,
             hidden: !isDropdownOpen,
           }"
-          class="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700"
+          class="z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44"
         >
-          <ul class="py-2 text-sm text-gray-700 dark:text-gray-200">
+          <ul class="py-2 text-sm text-gray-700">
             <li v-for="(option, index) in optionsBtn" :key="index">
               <a
-                class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+                class="block px-4 py-2 hover:bg-gray-100"
                 @click="selectOption(index)"
               >
                 {{ option }}
@@ -70,7 +67,10 @@
 
 <script setup>
 import ApexCharts from "apexcharts";
-import { onMounted, ref, onUnmounted } from "vue";
+import { onMounted, ref, onUnmounted, watch } from "vue";
+import { getProfitDataByUser } from '../api'
+import { useRouter } from "vue-router";
+import dayjs from 'dayjs'
 
 const options = {
   colors: ["#1A56DB", "#FDBA8C"],
@@ -78,15 +78,7 @@ const options = {
     {
       name: "Savings",
       color: "#FDBA8C",
-      data: [
-        { x: "Mon", y: 231 },
-        { x: "Tue", y: 122 },
-        { x: "Wed", y: 63 },
-        { x: "Thu", y: 421 },
-        { x: "Fri", y: 122 },
-        { x: "Sat", y: 323 },
-        { x: "Sun", y: 111 },
-      ],
+      data: [],
     },
   ],
   chart: {
@@ -111,6 +103,11 @@ const options = {
     style: {
       fontFamily: "Inter, sans-serif",
     },
+    y: {
+      formatter: function (value) {
+        return value + " PLN"; // Append "PLN" to the hovered value
+      },
+    }
   },
   states: {
     hover: {
@@ -146,7 +143,7 @@ const options = {
       show: true,
       style: {
         fontFamily: "Inter, sans-serif",
-        cssClass: "text-xs font-normal fill-gray-500 dark:fill-gray-400",
+        cssClass: "text-[8px] font-normal fill-gray-500 dark:fill-gray-400",
       },
     },
     axisBorder: {
@@ -164,14 +161,82 @@ const options = {
   },
 };
 
+const router = useRouter();
+const userId = Number(router.currentRoute.value.params.id)
+let chart = null;
+const isDataLacking = ref(false);
+
+const operations = defineProps({
+  operations: {
+    type: Array,
+    required: true,
+  },
+});
+
+// Watch for changes in operations and update the chart
+watch(operations,async () => {
+  const lastThreeMonthsSavings = await getMonthlySavingsForLastYear(3);
+    renderChart(lastThreeMonthsSavings);
+});
+
+const getMonthlySavingsForLastYear = async (monthsToFetch) => {
+  const currentDate = new Date();
+  const months = [
+    "January", "February", "March", "April", "May", "June", 
+    "July", "August", "September", "October", "November", "December"
+  ];
+
+  const lastYearSavings = [];
+
+  for (let i = 0; i < monthsToFetch; i++) {
+    // Fetch data for each month
+    const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - i, 1);
+    const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - i + 1, 0);
+
+    const formattedStartDate = dayjs(startDate).format('YYYY-MM-DD');
+    const formattedEndDate = dayjs(endDate).format('YYYY-MM-DD');
+
+    const response = await getProfitDataByUser(userId, formattedStartDate, formattedEndDate);
+    const { totalIncome, totalExpense } = response.data;
+    const totalSavings = totalIncome - totalExpense;
+
+    // Adjust the month index to start from the current month
+    const monthIndex = (currentDate.getMonth() - i + 12) % 12;
+    const monthName = months[monthIndex];
+    lastYearSavings.push({ month: monthName, savings: totalSavings });
+  }
+
+  return lastYearSavings.reverse();
+};
+
+const renderChart = (data) => {
+  const barChart = document.getElementById("column-chart");
+  if (barChart && typeof ApexCharts !== "undefined") {
+    const chartData = {
+      series: [
+        {
+          name: "Savings",
+          color: "#FDBA8C",
+          data: data.map(item => ({ x: item.month, y: item.savings })),
+        },
+      ],
+    };
+    if (chart) {
+      chart.updateSeries(chartData.series);
+    } else {
+      chart = new ApexCharts(barChart, {
+        ...options,
+        ...chartData,
+      });
+      chart.render();
+    }
+  }
+};
+
 const dropdownButton = ref(null);
 const dropdownMenu = ref(null);
 const optionsBtn = [
-  "Yesterday",
-  "Today",
-  "Last 7 days",
-  "Last 30 days",
-  "Last 90 days",
+  "Last 3 months",
   "Last 6 months",
   "Last year",
 ];
@@ -187,10 +252,31 @@ const toggleDropdown = () => {
   }
 };
 
-const selectOption = (index) => {
+const selectOption = async (index) => {
   selectedOption.value = optionsBtn[index];
   isDropdownOpen.value = false;
-  dropdownMenu.value.style.display = "none";
+  if (dropdownMenu.value) {
+    dropdownMenu.value.style.display = "none";
+  }
+  
+  // Get data based on the selected option
+  let monthsToFetch = 3;
+  switch (index) {
+    case 0: // Last 3 months
+      monthsToFetch = 3;
+      break;
+    case 1: // Last 6 months
+      monthsToFetch = 6;
+      break;
+    case 2: // Last year
+      monthsToFetch = 12;
+      break;
+    default:
+      break;
+  }
+  
+  const lastYearSavings = await getMonthlySavingsForLastYear(monthsToFetch);
+  renderChart(lastYearSavings);
 };
 
 onUnmounted(() => {
@@ -207,17 +293,11 @@ const closeDropdownOnClick = (event) => {
   }
 };
 
-onMounted(() => {
+onMounted(async() => {
   document.addEventListener("click", closeDropdownOnClick);
-  if (
-    document.getElementById("column-chart") &&
-    typeof ApexCharts !== "undefined"
-  ) {
-    const chart = new ApexCharts(
-      document.getElementById("column-chart"),
-      options
-    );
-    chart.render();
+  if (document.getElementById("column-chart") && typeof ApexCharts !== "undefined") {
+    const lastThreeMonthsSavings = await getMonthlySavingsForLastYear(3);
+    renderChart(lastThreeMonthsSavings);
   }
 });
 </script>

@@ -47,10 +47,11 @@ interface Goal {
 }
 
 const categoryMappings: Category[] = [
-  { value: 0, name: 'Bills', color: 'red' },
-  { value: 1, name: 'Food', color: 'green' },
-  { value: 2, name: 'Education', color: 'blue' },
-  { value: 3, name: 'Entertainment', color: 'purple' },
+  { value: 0, name: 'Other', color: 'pink' },
+  { value: 1, name: 'Bills', color: 'red' },
+  { value: 2, name: 'Food', color: 'green' },
+  { value: 3, name: 'Education', color: 'blue' },
+  { value: 4, name: 'Entertainment', color: 'purple' },
 ]
 
 const currentPage = ref(1);
@@ -63,24 +64,30 @@ const router = useRouter();
 
 const totalIncome = computed(() => {
   const currentDate = new Date();
-  const currentMonth = currentDate.getMonth(); // Get the current month (0-indexed)
   
   return operations.value
     .filter(o => {
       const operationDate = new Date(o.date);
-      return operationDate.getMonth() === currentMonth && o.type.toLowerCase() === 'income';
+      return (
+        operationDate.getFullYear() === currentDate.getFullYear() &&
+        operationDate.getMonth() === currentDate.getMonth() &&
+        o.type.toLowerCase() === 'income'
+      );
     })
     .reduce((total, operation) => total + operation.amount, 0);
 });
 
 const totalOutcome = computed(() => {
   const currentDate = new Date();
-  const currentMonth = currentDate.getMonth(); // Get the current month (0-indexed)
   
   return operations.value
     .filter(o => {
       const operationDate = new Date(o.date);
-      return operationDate.getMonth() === currentMonth && o.type.toLowerCase() === 'outcome';
+      return (
+        operationDate.getFullYear() === currentDate.getFullYear() &&
+        operationDate.getMonth() === currentDate.getMonth() &&
+        o.type.toLowerCase() === 'outcome'
+      );
     })
     .reduce((total, operation) => total + operation.amount, 0);
 });
@@ -103,11 +110,12 @@ const fetchOperations = async () => {
   try {
     if (userId.value !== undefined) {
       const response = await getOperations(userId.value);
-      operations.value = response.data;
+      operations.value = response.data || [];
     } else {
       console.error('User ID is undefined.');
     }
   } catch (error) {
+    operations.value = [];
     console.error('Error fetching operations:', error.response?.data);
   }
 };
@@ -116,12 +124,13 @@ const fetchGoals = async () => {
   try {
     if (userId.value !== undefined) {
       const response = await getGoals(userId.value);
-      goals.value = response.data;
+      goals.value = response.data || [];
     } else {
       console.error('User ID is undefined.');
     }
     updateCharts()
   } catch (error) {
+    goals.value = [];
     console.error('Error fetching goals:', error.response?.data);
   }
 };
@@ -133,36 +142,45 @@ const generateRandomColor = () => {
         randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
       } while (randomColor === '#ffffff' || randomColor === '#000000');
       return randomColor;
-    };
+};
 
 // Function to calculate percentage completed
 const calculatePercentageCompleted = (currentAmount, goalAmount) => {
-  return ((currentAmount / goalAmount) * 100).toFixed(2) + '%';
+  return ((currentAmount / goalAmount) * 100) + '%';
 };
 
-const chartOptions: ChartOptions<'doughnut'> = {
-  elements: {
-    arc: {
-      spacing: 3,
-      borderRadius: 5,
-    },
-  },
-  plugins: {
-    tooltip: {
-      callbacks: {
-        label: (context) => {
-          const labelIndex = context.dataIndex;
-          const value = context.dataset.data[labelIndex];
+// Function to calculate percentage remaining
+const calculatePercentageRemaining = (currentAmount, goalAmount) => {
+  return ((currentAmount / goalAmount) * 100) + '%';
+};
 
-          if (labelIndex === 0) {
-            return `Remaining: ${value}`;
-          } else {
-            return `Completed: ${value}`;
-          }
+const chartOptions = (goalAmount) => {
+  return {
+    elements: {
+      arc: {
+        spacing: 3,
+        borderRadius: 5,
+      },
+    },
+    plugins: {
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            const labelIndex = context.dataIndex;
+            const value = context.dataset.data[labelIndex];
+
+            if (labelIndex === 0) {
+              const remainingPercentage = calculatePercentageRemaining(value, goalAmount);
+              return `Remaining: ${remainingPercentage}`;
+            } else {
+              const completedPercentage = calculatePercentageCompleted(value, goalAmount);
+              return `Completed: ${completedPercentage}`;
+            }
+          },
         },
       },
     },
-  },
+  };
 };
 
 const updateCharts = async () => {
@@ -177,9 +195,7 @@ const updateCharts = async () => {
       if (canvasRef) {
         const ctx = canvasRef.getContext('2d');
         if (ctx) {
-          console.log(`Creating or updating chart for goal ${goal.name}`);
-
-          const percentageCompleted = calculatePercentageCompleted(goal.currentAmount, goal.goalAmount);
+          const options = chartOptions(goal.goalAmount)
 
           // Check if chart already exists for this canvas
           const existingChart = Chart.getChart(ctx);
@@ -190,6 +206,7 @@ const updateCharts = async () => {
                 backgroundColor: ['#CCCCCC', generateRandomColor()],
               },
             ];
+            existingChart.options = options
             existingChart.update();
           } else {
             new Chart(ctx, {
@@ -202,7 +219,7 @@ const updateCharts = async () => {
                   },
                 ],
               },
-              options: chartOptions,
+              options: options,
             });
           }
         }
@@ -380,7 +397,7 @@ const deleteNotificationLocal = async (index) => {
                   </td>
 
                   <td
-                    class="px-6 py-4 text-sm leading-5 text-gray-900 border-b border-gray-200 whitespace-nowrap"
+                    class="px-6 py-4 text-sm font-bold leading-5 text-gray-900 border-b border-gray-200 whitespace-nowrap"
                     :style="{ color: (o.type.toLowerCase() === 'income' ? 'green' : 'red') as any }"
                   >
                     {{ o.amount + " PLN" }}
@@ -422,7 +439,7 @@ const deleteNotificationLocal = async (index) => {
           />
         </div>
         <div class="flex flex-row my-3 overflow-auto">
-            <div v-for="(notification, index) in notifications" :key="index" class="bg-white border border-t-4 border-t-blue-500 shadow-sm rounded-xl text-center shadow-md p-4 mx-3 my-3">
+            <div v-for="(notification, index) in notifications" :key="index" class="bg-white border border-t-4 border-t-blue-500 rounded-xl text-center shadow-md p-4 mx-3 my-3">
               <div class="font-bold text-gray-700">{{ notification.name }}</div>
               <div class="text-gray-500">{{ formatDateNotification(notification.date) }}</div>
               <div class="text-gray-900">{{ notification.amount + " PLN"}}</div>
@@ -469,14 +486,20 @@ const deleteNotificationLocal = async (index) => {
       </div>
       <div class="w-full flex flex-wrap">
         <div class="w-full">
-          <ProfitChart class="mb-5"/>
+          <ProfitChart 
+          :operations="operations"
+          class="mb-5"/>
         </div>
         <div class="w-full md:flex md:flex-wrap md:space-x-0">
           <div class="w-full md:w-1/2 mb-2">
-            <SavingsChart class="w-full" />
+            <SavingsChart 
+            :operations="operations"
+            class="w-full" />
           </div>
           <div class="w-full md:w-1/2 mb-2">
-            <CategoryChart class="w-full" />
+            <CategoryChart
+            :operations="operations"
+            class="w-full" />
           </div>
         </div>
       </div>

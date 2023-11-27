@@ -11,6 +11,10 @@ export const getOperations = async (id: number): Promise<AxiosResponse> => apiCl
 export const getNotifications= async (id: number): Promise<AxiosResponse> => apiClient.get(`/Notification/user/${id}`)
 export const getGoals = async (id: number): Promise<AxiosResponse> => apiClient.get(`/Goals/user/${id}`)
 export const getUserEmail = async (id: number): Promise<AxiosResponse> => apiClient.get(`/User/${id}/email`)
+export const getOperationsFiltered = async (id: number, startDate: string, endDate: string, type: string): Promise<AxiosResponse> =>
+ apiClient.get(`/Operations/user/${id}/filtered?startDate=${startDate}&endDate=${endDate}&type=${type}`)
+export const getProfitDataByUser = async (id: number, startDate: string, endDate: string): Promise<AxiosResponse> =>
+ apiClient.get(`/Operations/user/${id}/profit?startDate=${startDate}&endDate=${endDate}`)
 
 export const postGoal= async (data: any): Promise<AxiosResponse> => apiClient.post('/Goals', data)
 export const postNotification= async (data: any): Promise<AxiosResponse> => apiClient.post('/Notification', data)

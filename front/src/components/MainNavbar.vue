@@ -76,7 +76,7 @@ onMounted(async () => {
             v-for="item in navigation"
             :key="item.name"
             @click.prevent="scrollToSection(item.name.toLowerCase())"
-            class="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-500"
+            class="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-500 hover:cursor-pointer"
             >{{ item.name }}</a
           >
           <SettingsModal 
@@ -84,7 +84,7 @@ onMounted(async () => {
           />
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a @click="logout" class="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-500"
+          <a @click="logout" class="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-500 hover:cursor-pointer"
             >Log out <span aria-hidden="true">&rarr;</span></a
           >
         </div>
@@ -121,7 +121,7 @@ onMounted(async () => {
                   :key="item.name"
                   @click.prevent="scrollToSection(item.name.toLowerCase())"
                   @click="mobileMenuOpen = false"
-                  class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 hover:cursor-pointer"
                   >{{ item.name }}</a
                 >
                 <SettingsMobileModal 
@@ -132,7 +132,7 @@ onMounted(async () => {
               <div class="py-6">
                 <a
                   @click="logout"
-                  class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                  class="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 hover:cursor-pointer"
                   >Log out</a
                 >
               </div>
