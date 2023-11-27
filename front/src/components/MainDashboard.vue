@@ -64,24 +64,30 @@ const router = useRouter();
 
 const totalIncome = computed(() => {
   const currentDate = new Date();
-  const currentMonth = currentDate.getMonth(); // Get the current month (0-indexed)
   
   return operations.value
     .filter(o => {
       const operationDate = new Date(o.date);
-      return operationDate.getMonth() === currentMonth && o.type.toLowerCase() === 'income';
+      return (
+        operationDate.getFullYear() === currentDate.getFullYear() &&
+        operationDate.getMonth() === currentDate.getMonth() &&
+        o.type.toLowerCase() === 'income'
+      );
     })
     .reduce((total, operation) => total + operation.amount, 0);
 });
 
 const totalOutcome = computed(() => {
   const currentDate = new Date();
-  const currentMonth = currentDate.getMonth(); // Get the current month (0-indexed)
   
   return operations.value
     .filter(o => {
       const operationDate = new Date(o.date);
-      return operationDate.getMonth() === currentMonth && o.type.toLowerCase() === 'outcome';
+      return (
+        operationDate.getFullYear() === currentDate.getFullYear() &&
+        operationDate.getMonth() === currentDate.getMonth() &&
+        o.type.toLowerCase() === 'outcome'
+      );
     })
     .reduce((total, operation) => total + operation.amount, 0);
 });
