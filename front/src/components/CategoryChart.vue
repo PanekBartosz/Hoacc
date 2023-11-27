@@ -68,6 +68,7 @@ import { onMounted, ref, watch } from "vue";
 import Chart from "chart.js/auto";
 import { getOperationsFiltered } from "../api";
 import { useRouter } from "vue-router";
+import dayjs from 'dayjs'
 
 const router = useRouter();
 const userId = Number(router.currentRoute.value.params.id)
@@ -148,7 +149,8 @@ watch(operations, () => {
 });
 
 const formatDate = (date) => {
-  return date.toISOString().split('T')[0];
+  const newDate = dayjs(date).format('YYYY-MM-DD')
+  return newDate;
 };
 
 const calculateStartDate = (selected) => {
