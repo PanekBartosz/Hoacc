@@ -86,6 +86,7 @@ import ApexCharts from "apexcharts";
 import { onMounted, ref, watch } from "vue";
 import { getProfitDataByUser } from '../api'
 import { useRouter } from "vue-router";
+import dayjs from 'dayjs'
 
 const router = useRouter();
 
@@ -110,7 +111,8 @@ watch(operations, () => {
 });
 
 const formatDate = (date) => {
-  return date.toISOString().split('T')[0];
+  const newDate = dayjs(date).format('YYYY-MM-DD')
+  return newDate;
 };
 
 const fetchProfitData = async (selected) => {
@@ -357,6 +359,13 @@ const options = {
       style: {
         fontFamily: "Inter, sans-serif",
         cssClass: 'text-xs font-normal fill-gray-500',
+      },
+    },
+  },
+  tooltip: {
+    y: {
+      formatter: function (value) {
+        return value + " PLN"; // Append "PLN" to the tooltip values for Income and Expense
       },
     },
   },
