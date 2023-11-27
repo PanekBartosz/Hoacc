@@ -41,7 +41,7 @@ const updateOperationLocal = async () => {
   try {
     const newOperation = {
       type: selectedType.value,
-      date: dayjs(selectedDate.value).format('YYYY-MM-DD'),
+      date: dayjs(selectedDate.value),
       description: description.value,
       category: category.value,
       amount: amount.value,
