@@ -244,13 +244,22 @@ onMounted(async () => {
 const perPage = 5;
 
 const paginatedOperations = computed(() => {
+  // Sort operations by date from closest to the current date
+  const sortedOperations = operations.value.slice().sort((a, b) => {
+    const dateA = new Date(a.date).getTime();
+    const dateB = new Date(b.date).getTime();
+    return dateB - dateA;
+  });
+
   const startIndex = (currentPage.value - 1) * perPage;
   const endIndex = startIndex + perPage;
 
-  return operations.value.slice(startIndex, endIndex).map((o: Operation) => {
-    const categoryInfo = categoryMappings.find(c => c.value === o.category);
-    return { ...o, categoryInfo };
-  });
+  return sortedOperations
+    .slice(startIndex, endIndex)
+    .map((o: Operation) => {
+      const categoryInfo = categoryMappings.find(c => c.value === o.category);
+      return { ...o, categoryInfo };
+    });
 });
 
 const fetchNotifications = async () => {
