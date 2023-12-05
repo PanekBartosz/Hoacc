@@ -1,4 +1,5 @@
 ﻿using HoaccCommon.Operations;
+using Org.BouncyCastle.Crypto.Generators;
 
 namespace HoaccDataSql.Migrations;
 
@@ -51,17 +52,21 @@ public class DatabaseSeed
     private IEnumerable<DAO.User> BuildUserList()
     {
         var userList = new List<DAO.User>();
+        
+        // Hash the passwords before seeding
+        string hashedPassword = BCrypt.Net.BCrypt.HashPassword("passwd");
+        
         var user = new DAO.User
         {
             Email = "1xyz@gmail.com",
-            Password = "passwd"
+            Password = hashedPassword
         };
         userList.Add(user);
 
         var user2 = new DAO.User
         {
             Email = "2xyz@gmail.com",
-            Password = "passwd"
+            Password = hashedPassword
         };
         userList.Add(user2);
 
@@ -70,7 +75,7 @@ public class DatabaseSeed
             var user3 = new DAO.User
             {
                 Email = i + "xyz@gmail.com",
-                Password = "passwd"
+                Password = hashedPassword
             };
             userList.Add(user3);
         }

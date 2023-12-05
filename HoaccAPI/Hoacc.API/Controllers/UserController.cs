@@ -5,6 +5,7 @@ using HoaccIServices.Requests;
 using HoaccIServices.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using BCrypt.Net;
 
 namespace HoaccAPI.Controllers;
 
@@ -57,6 +58,11 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] CreateUser createUser)
     {
+        // Hash the password before saving
+        var hashedPassword = BCrypt.Net.BCrypt.HashPassword(createUser.Password);
+
+        // Update the createUser object's password with the hashed password
+        createUser.Password = hashedPassword;
         var user = await _userService.CreateUser(createUser);
         return Created(user.UserId.ToString(), UserToUserViewModelMapper.UserToUserViewModel(user));
     }
@@ -65,7 +71,10 @@ public class UserController : ControllerBase
     [HttpPatch("{userId:min(1)}/password", Name = "UpdateUserPassword")]
     public async Task<IActionResult> UpdateUserPassword(int userId, [FromBody] UpdateUserPassword user)
     {
-        await _userService.UpdateUserPassword(user, userId);
+        // Hash the new password before updating
+        var hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
+
+        await _userService.UpdateUserPassword(hashedPassword, userId);
         return NoContent();
     }
 }

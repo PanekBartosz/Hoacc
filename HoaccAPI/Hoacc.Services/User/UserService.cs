@@ -36,10 +36,10 @@ public class UserService : IUserService
         return user;
     }
 
-    public async Task UpdateUserPassword(UpdateUserPassword updateUserPassword, int userId)
+    public async Task UpdateUserPassword(string hashedPassword, int userId)
     {
         var user = await _userRepository.GetUser(userId);
-        user.Password = updateUserPassword.Password;
+        user.Password = hashedPassword;
 
         await _userRepository.UpdateUserPassword(userId, user);
     }

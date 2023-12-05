@@ -32,9 +32,9 @@ public class AuthenticationController : ControllerBase
         }
 
         var user = await _context.User
-            .FirstOrDefaultAsync(u => u.Email == model.Email && u.Password == model.Password);
+            .FirstOrDefaultAsync(u => u.Email == model.Email);
 
-        if (user == null)
+        if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
         {
             return Unauthorized("Invalid email or password");
         }
