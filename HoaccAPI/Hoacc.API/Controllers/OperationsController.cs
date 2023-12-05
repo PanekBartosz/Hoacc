@@ -3,6 +3,7 @@ using HoaccAPI.Validation;
 using HoaccDataSql;
 using HoaccIServices.Operations;
 using HoaccIServices.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HoaccAPI.Controllers;
@@ -20,6 +21,7 @@ public class OperationsController : ControllerBase
         _operationsService = operationsService;
     }
 
+    [Authorize]
     [HttpGet("{operationId:min(1)}", Name = "GetOperations")]
     public async Task<IActionResult> GetOperations(int operationId)
     {
@@ -29,6 +31,7 @@ public class OperationsController : ControllerBase
         return NotFound();
     }
     
+    [Authorize]
     [HttpGet("user/{userId}")]
     public async Task<IActionResult> GetOperationsByUser(int userId)
     {
@@ -42,6 +45,7 @@ public class OperationsController : ControllerBase
         return Ok(operations);
     }
     
+    [Authorize]
     [HttpGet("user/{userId}/filtered")]
     public async Task<IActionResult> GetFilteredOperationsByUser(
         int userId,
@@ -60,6 +64,7 @@ public class OperationsController : ControllerBase
         return Ok(operations);
     }
     
+    [Authorize]
     [HttpGet("user/{userId}/profit")]
     public async Task<IActionResult> GetProfitChartDataByUser(
         int userId,
@@ -86,6 +91,7 @@ public class OperationsController : ControllerBase
     }
 
     [ValidateModel]
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] CreateOperations createOperations)
     {
@@ -95,6 +101,7 @@ public class OperationsController : ControllerBase
     }
 
     [ValidateModel]
+    [Authorize]
     [HttpPut("{operationId:min(1)}", Name = "EditOperations")]
     public async Task<IActionResult> EditOperations([FromBody] EditOperations editOperations, int operationId)
     {
@@ -102,6 +109,7 @@ public class OperationsController : ControllerBase
         return NoContent();
     }
 
+    [Authorize]
     [HttpDelete("{operationId:min(1)}", Name = "RemoveOperations")]
     public async Task<IActionResult> RemoveOperations(int operationId)
     {

@@ -7,6 +7,17 @@ const apiClient = axios.create({
   },
 })
 
+// Function to set the Authorization header with the JWT token
+export const setAuthToken = (token: string | null) => {
+  if (token) {
+    localStorage.setItem('token', token);
+    apiClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  } else {
+    localStorage.removeItem('token');
+    delete apiClient.defaults.headers.common['Authorization'];
+  }
+};
+
 export const getOperations = async (id: number): Promise<AxiosResponse> => apiClient.get(`/Operations/user/${id}`)
 export const getNotifications= async (id: number): Promise<AxiosResponse> => apiClient.get(`/Notification/user/${id}`)
 export const getGoals = async (id: number): Promise<AxiosResponse> => apiClient.get(`/Goals/user/${id}`)

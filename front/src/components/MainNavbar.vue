@@ -40,6 +40,7 @@ const userId = ref<number | undefined>(undefined);
 
 const logout = () => {
   localStorage.setItem('isVisibleState', JSON.stringify(true));
+  localStorage.removeItem('token');
   router.push('/');
 }
 

@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { authenticateUser } from '../api'
+import { authenticateUser, setAuthToken } from '../api'
+
 
 const email = ref('')
 const password = ref('')
@@ -12,8 +13,11 @@ const loginUser = async () => {
   try {
     const response = await authenticateUser(email.value, password.value)
     
-    // If authentication is successful, navigate to the dashboard route
     const userId = response.data.userId
+    const token = response.data.token;
+    
+    // The token is now set in the Axios headers using setAuthToken function
+    setAuthToken(token);
     router.push({ name: 'Dashboard', params: { id: userId } });
   } catch (error) {
     // Handle authentication failure

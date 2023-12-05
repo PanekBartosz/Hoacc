@@ -4,6 +4,7 @@ using HoaccCommon.Notification;
 using HoaccDataSql;
 using HoaccIServices.Notification;
 using HoaccIServices.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HoaccAPI.Controllers;
@@ -20,7 +21,8 @@ public class NotificationController : ControllerBase
         _context = context;
         _notificationService = notificationService;
     }
-
+    
+    [Authorize]
     [HttpGet("{notificationId:min(1)}", Name = "GetNotification")]
     public async Task<IActionResult> GetNotification(int notificationId)
     {
@@ -30,6 +32,7 @@ public class NotificationController : ControllerBase
         return NotFound();
     }
     
+    [Authorize]
     [HttpGet("user/{userId}")]
     public async Task<IActionResult> GetNotificationsByUser(int userId)
     {
@@ -42,9 +45,9 @@ public class NotificationController : ControllerBase
 
         return Ok(notification);
     }
-
-
+    
     [ValidateModel]
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] CreateNotification createNotification)
     {
@@ -53,6 +56,7 @@ public class NotificationController : ControllerBase
             .NotificationToNotificationViewModel(notification));
     }
 
+    [Authorize]
     [ValidateModel]
     [HttpPut("{notificationId:min(1)}", Name = "EditNotification")]
     public async Task<IActionResult> EditNotification([FromBody] EditNotification editNotification, int notificationId)
@@ -61,6 +65,7 @@ public class NotificationController : ControllerBase
         return NoContent();
     }
 
+    [Authorize]
     [HttpDelete("{notificationId:min(1)}", Name = "RemoveNotification")]
     public async Task<IActionResult> RemoveNotification(int notificationId)
     {

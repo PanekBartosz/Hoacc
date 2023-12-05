@@ -46,6 +46,19 @@ public class Startup
         {
             setup.AddPolicy("default", options => { options.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin(); });
         });
+        services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidIssuer = Configuration["Jwt:Issuer"],
+                    ValidAudience = Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:SecretKey"]))
+                };
+            });
         services.AddSwaggerGen(options =>
         {
             options.SwaggerDoc("v1", new OpenApiInfo {Title = "Hoacc", Version = "v1"});
@@ -58,7 +71,6 @@ public class Startup
                 Type = SecuritySchemeType.ApiKey,
                 Scheme = "Bearer"
             });
-
             options.OperationFilter<SecurityRequirementsOperationFilter>();
         });
         
@@ -114,6 +126,7 @@ public class Startup
         app.UseMiddleware<ErrorHandlerMiddleware>();
         app.UseRouting();
         app.UseAuthentication();
+        app.UseAuthorization();
 
         app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
     }

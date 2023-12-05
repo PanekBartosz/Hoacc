@@ -40,9 +40,9 @@ public class AuthenticationController : ControllerBase
         }
 
         // Generate JWT token
-        //var token = GenerateJwtToken(user.UserId);
+        var token = GenerateJwtToken(user.UserId);
 
-        return Ok(new { user.UserId });
+        return Ok(new { user.UserId,token });
     }
 
     private string GenerateJwtToken(int userId)

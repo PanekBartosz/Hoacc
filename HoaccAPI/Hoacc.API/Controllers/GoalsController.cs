@@ -3,6 +3,7 @@ using HoaccAPI.Validation;
 using HoaccDataSql;
 using HoaccIServices.Goals;
 using HoaccIServices.Requests;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HoaccAPI.Controllers;
@@ -19,7 +20,8 @@ public class GoalsController : ControllerBase
         _context = context;
         _goalsService = goalsService;
     }
-
+    
+    [Authorize]
     [HttpGet("{goalsId:min(1)}", Name = "GetGoals")]
     public async Task<IActionResult> GetGoals(int goalsId)
     {
@@ -27,7 +29,7 @@ public class GoalsController : ControllerBase
         if (goals != null) return Ok(GoalsToGoalsViewModelMapper.GoalsToGoalsViewModel(goals));
         return NotFound();
     }
-    
+    [Authorize]
     [HttpGet("user/{userId}")]
     public async Task<IActionResult> GetGoalsByUser(int userId)
     {
@@ -42,6 +44,7 @@ public class GoalsController : ControllerBase
     }
 
     [ValidateModel]
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Post([FromBody] CreateGoals createGoals)
     {
@@ -51,6 +54,7 @@ public class GoalsController : ControllerBase
     }
 
     [ValidateModel]
+    [Authorize]
     [HttpPut("{goalsId:min(1)}", Name = "EditGoals")]
     public async Task<IActionResult> EditGoals([FromBody] EditGoals editGoals, int goalsId)
     {
@@ -58,6 +62,7 @@ public class GoalsController : ControllerBase
         return NoContent();
     }
 
+    [Authorize]
     [HttpDelete("{goalsId:min(1)}", Name = "RemoveGoals")]
     public async Task<IActionResult> RemoveGoals(int goalsId)
     {
