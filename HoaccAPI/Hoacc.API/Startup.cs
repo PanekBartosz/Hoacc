@@ -73,7 +73,7 @@ public class Startup
             });
             options.OperationFilter<SecurityRequirementsOperationFilter>();
         });
-        
+
         services.AddDbContext<HoaccDbContext>(options => options
             .UseMySQL(Configuration.GetConnectionString("HoaccDbContext")));
         services.AddTransient<DatabaseSeed>();

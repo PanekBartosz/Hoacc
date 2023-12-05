@@ -28,7 +28,7 @@ public class UserRepository : IUserRepositoryDTO
             user.Email,
             user.Password);
     }
-    
+
     public async Task<string?> GetUserEmail(int userId)
     {
         var userEmail = await _context.User
@@ -42,9 +42,7 @@ public class UserRepository : IUserRepositoryDTO
     public async Task<int> CreateUser(UserDTO user)
     {
         if (await _context.User.AnyAsync(u => u.Email == user.Email))
-        {
             throw new Exception("Email address is already in use.");
-        }
         var userDAO = new DAO.User
         {
             UserId = user.UserId,

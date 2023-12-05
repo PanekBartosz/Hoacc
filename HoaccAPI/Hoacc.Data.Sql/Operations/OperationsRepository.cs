@@ -33,6 +33,7 @@ public class OperationsRepository : IOperationsRepositoryDTO
 
         return operations.Select(MapOperationsToDTO);
     }
+
     public async Task<int> CreateOperations(OperationsDTO operations)
     {
         var operationsDAO = new DAO.Operations
@@ -61,13 +62,14 @@ public class OperationsRepository : IOperationsRepositoryDTO
         editOperations.Amount = operations.Amount;
         await _context.SaveChangesAsync();
     }
-    
-    public async Task<IEnumerable<OperationsDTO>> GetOperationsByUserAndDateRange(int userId, DateTime startDate, DateTime endDate)
+
+    public async Task<IEnumerable<OperationsDTO>> GetOperationsByUserAndDateRange(int userId, DateTime startDate,
+        DateTime endDate)
     {
         var operations = await _context.Operations
             .Where(op => op.UserId == userId && op.Date >= startDate && op.Date <= endDate)
             .ToListAsync();
-        
+
         return operations.Select(MapOperationsToDTO);
     }
 
@@ -80,7 +82,7 @@ public class OperationsRepository : IOperationsRepositoryDTO
         _context.Operations.Remove(operation);
         await _context.SaveChangesAsync();
     }
-    
+
     private OperationsDTO MapOperationsToDTO(DAO.Operations operation)
     {
         return new OperationsDTO(

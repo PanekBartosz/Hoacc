@@ -1,5 +1,4 @@
 ﻿using HoaccCommon.Operations;
-using Org.BouncyCastle.Crypto.Generators;
 
 namespace HoaccDataSql.Migrations;
 
@@ -52,10 +51,10 @@ public class DatabaseSeed
     private IEnumerable<DAO.User> BuildUserList()
     {
         var userList = new List<DAO.User>();
-        
+
         // Hash the passwords before seeding
-        string hashedPassword = BCrypt.Net.BCrypt.HashPassword("passwd");
-        
+        var hashedPassword = BCrypt.Net.BCrypt.HashPassword("passwd");
+
         var user = new DAO.User
         {
             Email = "1xyz@gmail.com",
@@ -138,18 +137,18 @@ public class DatabaseSeed
 
             // Generate a random index to select a category
             var randomIndex = random.Next(0, allCategories.Length);
-            
+
             // Generate a random boolean to determine the type
             var isIncome = random.Next(0, 2) == 0;
             var type = isIncome ? "income" : "outcome";
-            
+
             var operation = new DAO.Operations
             {
                 Type = type,
                 Date = startDate.AddDays(i),
                 Description = "description" + i,
                 Category = allCategories[randomIndex],
-                Amount = i*2,
+                Amount = i * 2,
                 UserId = 1
             };
             operationsList.Add(operation);

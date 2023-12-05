@@ -22,7 +22,7 @@ public class GoalsRepository : IGoalsRepositoryDTO
             goals.CurrentAmount,
             goals.UserId);
     }
-    
+
     public async Task<IEnumerable<GoalsDTO>> GetGoalsByUser(int userId)
     {
         var goal = await _context.Goals
@@ -66,7 +66,7 @@ public class GoalsRepository : IGoalsRepositoryDTO
         _context.Goals.Remove(goals);
         await _context.SaveChangesAsync();
     }
-    
+
     private GoalsDTO MapGoalsToDTO(DAO.Goals goals)
     {
         return new GoalsDTO(

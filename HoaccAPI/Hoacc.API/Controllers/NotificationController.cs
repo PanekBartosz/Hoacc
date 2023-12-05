@@ -1,6 +1,5 @@
 ﻿using HoaccAPI.Mappers;
 using HoaccAPI.Validation;
-using HoaccCommon.Notification;
 using HoaccDataSql;
 using HoaccIServices.Notification;
 using HoaccIServices.Requests;
@@ -21,7 +20,7 @@ public class NotificationController : ControllerBase
         _context = context;
         _notificationService = notificationService;
     }
-    
+
     [Authorize]
     [HttpGet("{notificationId:min(1)}", Name = "GetNotification")]
     public async Task<IActionResult> GetNotification(int notificationId)
@@ -31,21 +30,18 @@ public class NotificationController : ControllerBase
             return Ok(NotificationToNotificationViewModelMapper.NotificationToNotificationViewModel(notification));
         return NotFound();
     }
-    
+
     [Authorize]
     [HttpGet("user/{userId}")]
     public async Task<IActionResult> GetNotificationsByUser(int userId)
     {
         var notification = await _notificationService.GetNotificationByUser(userId);
 
-        if (notification == null || !notification.Any())
-        {
-            return NotFound($"No notification found for user ID {userId}");
-        }
+        if (notification == null || !notification.Any()) return NotFound($"No notification found for user ID {userId}");
 
         return Ok(notification);
     }
-    
+
     [ValidateModel]
     [Authorize]
     [HttpPost]

@@ -14,7 +14,7 @@ public class UserDTO
         Email = email;
         Password = password;
     }
-    
+
     public UserDTO(string email)
     {
         Email = email;

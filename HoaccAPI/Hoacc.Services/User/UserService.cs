@@ -22,7 +22,7 @@ public class UserService : IUserService
     {
         return _userRepository.GetUser(userId);
     }
-    
+
     public async Task<string?> GetEmailByUserId(int userId)
     {
         var user = await _userRepository.GetUser(userId);

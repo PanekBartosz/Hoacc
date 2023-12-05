@@ -22,7 +22,7 @@ public class NotificationRepository : INotificationRepositoryDTO
             notification.Amount,
             notification.UserId);
     }
-    
+
     public async Task<IEnumerable<NotificationDTO>> GetNotificationByUser(int userId)
     {
         var notifications = await _context.Notification
@@ -66,7 +66,7 @@ public class NotificationRepository : INotificationRepositoryDTO
         _context.Notification.Remove(notification);
         await _context.SaveChangesAsync();
     }
-    
+
     private NotificationDTO MapNotificationToDTO(DAO.Notification notification)
     {
         return new NotificationDTO(

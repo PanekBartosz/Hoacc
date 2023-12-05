@@ -20,7 +20,7 @@ public class GoalsController : ControllerBase
         _context = context;
         _goalsService = goalsService;
     }
-    
+
     [Authorize]
     [HttpGet("{goalsId:min(1)}", Name = "GetGoals")]
     public async Task<IActionResult> GetGoals(int goalsId)
@@ -29,16 +29,14 @@ public class GoalsController : ControllerBase
         if (goals != null) return Ok(GoalsToGoalsViewModelMapper.GoalsToGoalsViewModel(goals));
         return NotFound();
     }
+
     [Authorize]
     [HttpGet("user/{userId}")]
     public async Task<IActionResult> GetGoalsByUser(int userId)
     {
         var goal = await _goalsService.GetGoalsByUser(userId);
 
-        if (goal == null || !goal.Any())
-        {
-            return NotFound($"No notification found for user ID {userId}");
-        }
+        if (goal == null || !goal.Any()) return NotFound($"No notification found for user ID {userId}");
 
         return Ok(goal);
     }

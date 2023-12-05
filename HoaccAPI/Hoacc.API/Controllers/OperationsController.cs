@@ -30,21 +30,18 @@ public class OperationsController : ControllerBase
             return Ok(OperationsToOperationsViewModelMapper.OperationsToOperationsViewModel(operations));
         return NotFound();
     }
-    
+
     [Authorize]
     [HttpGet("user/{userId}")]
     public async Task<IActionResult> GetOperationsByUser(int userId)
     {
         var operations = await _operationsService.GetOperationsByUser(userId);
 
-        if (operations == null || !operations.Any())
-        {
-            return NotFound($"No operations found for user ID {userId}");
-        }
+        if (operations == null || !operations.Any()) return NotFound($"No operations found for user ID {userId}");
 
         return Ok(operations);
     }
-    
+
     [Authorize]
     [HttpGet("user/{userId}/filtered")]
     public async Task<IActionResult> GetFilteredOperationsByUser(
@@ -56,14 +53,11 @@ public class OperationsController : ControllerBase
     {
         var operations = await _operationsService.GetFilteredOperationsByUser(userId, startDate, endDate, type);
 
-        if (operations == null || !operations.Any())
-        {
-            return NotFound($"No operations found for user ID {userId}");
-        }
+        if (operations == null || !operations.Any()) return NotFound($"No operations found for user ID {userId}");
 
         return Ok(operations);
     }
-    
+
     [Authorize]
     [HttpGet("user/{userId}/profit")]
     public async Task<IActionResult> GetProfitChartDataByUser(
@@ -76,10 +70,7 @@ public class OperationsController : ControllerBase
         {
             var profitChartData = await _operationsService.GetProfitDataForUser(userId, startDate, endDate);
 
-            if (profitChartData == null)
-            {
-                return NotFound($"No profit data found for user ID {userId}");
-            }
+            if (profitChartData == null) return NotFound($"No profit data found for user ID {userId}");
 
             return Ok(profitChartData);
         }

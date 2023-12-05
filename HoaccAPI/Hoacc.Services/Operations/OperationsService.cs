@@ -17,7 +17,7 @@ public class OperationsService : IOperationsService
     {
         return _operationsRepository.GetOperations(operationsId);
     }
-    
+
     public async Task<IEnumerable<OperationsDTO>> GetOperationsByUser(int userId)
     {
         var operations = await _operationsRepository.GetOperationsByUser(userId);
@@ -34,18 +34,18 @@ public class OperationsService : IOperationsService
                                       op.Date <= endDate &&
                                       op.Type == type);
     }
-    
+
     public async Task<ProfitChartData> GetProfitDataForUser(int userId, DateTime startDate, DateTime endDate)
     {
         var operations = await _operationsRepository.GetOperationsByUserAndDateRange(userId, startDate, endDate);
 
-        decimal totalIncome = operations
+        var totalIncome = operations
             .Where(op => op.UserId == userId && op.Date >= startDate && op.Date <= endDate && op.Type == "income")
-            .Sum(op => (decimal)op.Amount);
+            .Sum(op => (decimal) op.Amount);
 
-        decimal totalExpense = operations
+        var totalExpense = operations
             .Where(op => op.UserId == userId && op.Date >= startDate && op.Date <= endDate && op.Type == "outcome")
-            .Sum(op => (decimal)op.Amount);
+            .Sum(op => (decimal) op.Amount);
 
         return new ProfitChartData
         {

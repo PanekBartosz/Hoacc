@@ -5,7 +5,6 @@ using HoaccIServices.Requests;
 using HoaccIServices.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using BCrypt.Net;
 
 namespace HoaccAPI.Controllers;
 
@@ -21,7 +20,7 @@ public class UserController : ControllerBase
         _context = context;
         _userService = userService;
     }
-    
+
     [Authorize]
     [HttpGet("email/{email}", Name = "GetUserByEmail")]
     public async Task<IActionResult> GetUserByEmail(string email)
@@ -32,7 +31,7 @@ public class UserController : ControllerBase
 
         return NotFound();
     }
-    
+
     [Authorize]
     [HttpGet("{userId:min(1)}", Name = "GetUserByUserId")]
     public async Task<IActionResult> GetUserByUserId(int userId)
@@ -41,16 +40,13 @@ public class UserController : ControllerBase
         if (user != null) return Ok(UserToUserViewModelMapper.UserToUserViewModel(user));
         return NotFound();
     }
-    
+
     [Authorize]
     [HttpGet("{userId:min(1)}/email", Name = "GetEmailByUserId")]
     public async Task<IActionResult> GetEmailByUserId(int userId)
     {
         var email = await _userService.GetEmailByUserId(userId);
-        if (email != null) 
-        {
-            return Ok(email);
-        }
+        if (email != null) return Ok(email);
         return NotFound();
     }
 
@@ -66,7 +62,7 @@ public class UserController : ControllerBase
         var user = await _userService.CreateUser(createUser);
         return Created(user.UserId.ToString(), UserToUserViewModelMapper.UserToUserViewModel(user));
     }
-    
+
     [Authorize]
     [HttpPatch("{userId:min(1)}/password", Name = "UpdateUserPassword")]
     public async Task<IActionResult> UpdateUserPassword(int userId, [FromBody] UpdateUserPassword user)
