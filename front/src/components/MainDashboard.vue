@@ -146,12 +146,12 @@ const generateRandomColor = () => {
 
 // Function to calculate percentage completed
 const calculatePercentageCompleted = (currentAmount, goalAmount) => {
-  return ((currentAmount / goalAmount) * 100) + '%';
+  return ((currentAmount / goalAmount) * 100).toFixed(0) + '%';
 };
 
 // Function to calculate percentage remaining
 const calculatePercentageRemaining = (currentAmount, goalAmount) => {
-  return ((currentAmount / goalAmount) * 100) + '%';
+  return ((currentAmount / goalAmount) * 100).toFixed(0) + '%';
 };
 
 const chartOptions = (goalAmount) => {
