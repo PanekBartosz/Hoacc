@@ -1,5 +1,5 @@
 <script setup>
-import StartingPage from './components/StartingPage.vue'
+import StartingPage from "./components/StartingPage.vue";
 </script>
 
 <template>
@@ -9,5 +9,4 @@ import StartingPage from './components/StartingPage.vue'
   <router-view></router-view>
 </template>
 
-<style scoped>
-</style>
+<style scoped></style>

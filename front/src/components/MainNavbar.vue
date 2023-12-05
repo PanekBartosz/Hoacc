@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue"
-import { Dialog, DialogPanel } from "@headlessui/vue"
-import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline"
-import SettingsModal from "./SettingsModal.vue"
-import SettingsMobileModal from "./SettingsMobileModal.vue"
-import { useRouter } from 'vue-router'
+import { ref, onMounted } from "vue";
+import { Dialog, DialogPanel } from "@headlessui/vue";
+import { Bars3Icon, XMarkIcon } from "@heroicons/vue/24/outline";
+import SettingsModal from "./SettingsModal.vue";
+import SettingsMobileModal from "./SettingsMobileModal.vue";
+import { useRouter } from "vue-router";
 
 const navigation = [
   { name: "Home", href: "#" },
   { name: "Operations", href: "#" },
   { name: "Notifications", href: "#" },
   { name: "Goals", href: "#" },
-  { name: "Statics", href: "#" }
-]
+  { name: "Statics", href: "#" },
+];
 
-const mobileMenuOpen = ref(false)
+const mobileMenuOpen = ref(false);
 
 const scrollToSection = (sectionId) => {
   if (sectionId === "home") {
@@ -26,7 +26,7 @@ const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
 
     if (element) {
-      const offset = 20
+      const offset = 20;
       window.scrollTo({
         top: element.offsetTop - offset,
         behavior: "smooth",
@@ -39,15 +39,14 @@ const router = useRouter();
 const userId = ref<number | undefined>(undefined);
 
 const logout = () => {
-  localStorage.setItem('isVisibleState', JSON.stringify(true));
-  localStorage.removeItem('token');
-  router.push('/');
-}
+  localStorage.setItem("isVisibleState", JSON.stringify(true));
+  localStorage.removeItem("token");
+  router.push("/");
+};
 
 onMounted(async () => {
   userId.value = Number(router.currentRoute.value.params.id);
 });
-
 </script>
 <template>
   <div class="bg-white mb-5 absolute top-0 w-full">
@@ -80,12 +79,12 @@ onMounted(async () => {
             class="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-500 hover:cursor-pointer"
             >{{ item.name }}</a
           >
-          <SettingsModal 
-          :userId="userId"
-          />
+          <SettingsModal :userId="userId" />
         </div>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-          <a @click="logout" class="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-500 hover:cursor-pointer"
+          <a
+            @click="logout"
+            class="text-sm font-semibold leading-6 text-gray-900 hover:text-gray-500 hover:cursor-pointer"
             >Log out <span aria-hidden="true">&rarr;</span></a
           >
         </div>
@@ -125,9 +124,9 @@ onMounted(async () => {
                   class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50 hover:cursor-pointer"
                   >{{ item.name }}</a
                 >
-                <SettingsMobileModal 
-                :mobileMenuOpen="mobileMenuOpen"
-                :userId="userId"
+                <SettingsMobileModal
+                  :mobileMenuOpen="mobileMenuOpen"
+                  :userId="userId"
                 />
               </div>
               <div class="py-6">

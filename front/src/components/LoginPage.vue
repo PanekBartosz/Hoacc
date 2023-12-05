@@ -1,29 +1,28 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { authenticateUser, setAuthToken } from '../api'
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { authenticateUser, setAuthToken } from "../api";
 
-
-const email = ref('')
-const password = ref('')
-const router = useRouter()
-const errorMessage = ref('')
+const email = ref("");
+const password = ref("");
+const router = useRouter();
+const errorMessage = ref("");
 
 const loginUser = async () => {
   try {
-    const response = await authenticateUser(email.value, password.value)
-    
-    const userId = response.data.userId
+    const response = await authenticateUser(email.value, password.value);
+
+    const userId = response.data.userId;
     const token = response.data.token;
-    
+
     // The token is now set in the Axios headers using setAuthToken function
     setAuthToken(token);
-    router.push({ name: 'Dashboard', params: { id: userId } });
+    router.push({ name: "Dashboard", params: { id: userId } });
   } catch (error) {
     // Handle authentication failure
-    errorMessage.value = 'Invalid email or password.';
+    errorMessage.value = "Invalid email or password.";
   }
-}
+};
 </script>
 <template>
   <div class="flex min-h-[90vh] justify-center items-center">
@@ -39,7 +38,12 @@ const loginUser = async () => {
       </div>
 
       <div class="mt-10 mx-auto w-full max-w-sm">
-        <form @submit.prevent="loginUser" class="space-y-6" action="#" method="POST">
+        <form
+          @submit.prevent="loginUser"
+          class="space-y-6"
+          action="#"
+          method="POST"
+        >
           <div>
             <label
               for="email"
@@ -94,7 +98,9 @@ const loginUser = async () => {
           </div> -->
 
           <div>
-            <p v-if="errorMessage" class="text-red-500 text-center">{{ errorMessage }}</p>
+            <p v-if="errorMessage" class="text-red-500 text-center">
+              {{ errorMessage }}
+            </p>
             <button
               type="submit"
               class="flex w-full justify-center rounded-md bg-button-blue px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-button-blue-hover focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-button-blue-hover"

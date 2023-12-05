@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { ref,computed, onMounted } from "vue";
-import Datepicker from 'vuejs3-datepicker';
-import { postOperation } from '../api';
-import dayjs from 'dayjs'
+import { ref, computed, onMounted } from "vue";
+import Datepicker from "vuejs3-datepicker";
+import { postOperation } from "../api";
+import dayjs from "dayjs";
 
-const props = defineProps(['fetchOperations','userId']);
+const props = defineProps(["fetchOperations", "userId"]);
 
 const open = ref(false);
 
-const selectedType = ref('income')
+const selectedType = ref("income");
 const selectedDate = ref(new Date());
-const description = ref('');
+const description = ref("");
 const category = ref(0);
-const amount = ref('');
+const amount = ref("");
 
 const isButtonEnabled = computed(() => {
-  return description.value !== '' && amount.value !== '';
+  return description.value !== "" && amount.value !== "";
 });
 
 const validateInput = (event) => {
@@ -23,15 +23,15 @@ const validateInput = (event) => {
   const inputValue = event.target.value;
 
   if (!pattern.test(inputValue)) {
-    amount.value = '';
+    amount.value = "";
   }
-}
+};
 
 const addNewOperation = async () => {
   try {
     const newOperation = {
       type: selectedType.value,
-      date: dayjs(selectedDate.value).format('YYYY-MM-DD'),
+      date: dayjs(selectedDate.value).format("YYYY-MM-DD"),
       description: description.value,
       category: category.value,
       amount: amount.value,
@@ -44,11 +44,10 @@ const addNewOperation = async () => {
     // Close the modal
     open.value = false;
   } catch (error) {
-    console.error('Error adding new operation:', error.response?.data);
-    alert('Error adding new operation')
+    console.error("Error adding new operation:", error.response?.data);
+    alert("Error adding new operation");
   }
 };
-
 </script>
 
 <template>
@@ -72,8 +71,10 @@ const addNewOperation = async () => {
 
       <div
         class="z-50 w-11/12 bg-white rounded shadow-lg modal-container md:max-w-md"
+      >
+        <div
+          class="max-h-[90vh] overflow-auto px-6 py-4 text-left modal-content"
         >
-        <div class="max-h-[90vh] overflow-auto px-6 py-4 text-left modal-content">
           <!-- Title -->
           <div class="flex items-center justify-between pb-3">
             <p class="text-2xl font-bold">Add operation</p>
@@ -83,7 +84,10 @@ const addNewOperation = async () => {
           </div>
 
           <!-- Body -->
-          <label class="block mt-5 mb-2 text-center text-sm font-medium text-gray-900">Select Type</label>
+          <label
+            class="block mt-5 mb-2 text-center text-sm font-medium text-gray-900"
+            >Select Type</label
+          >
           <div class="text-center">
             <label>
               <input
@@ -93,7 +97,7 @@ const addNewOperation = async () => {
                 name="radio"
                 :checked="selectedType === 'income'"
                 @change="selectedType = 'income'"
-              ><span class="ml-2 mr-5 text-gray-700">Income</span>
+              /><span class="ml-2 mr-5 text-gray-700">Income</span>
               <input
                 id="outcome"
                 type="radio"
@@ -101,13 +105,19 @@ const addNewOperation = async () => {
                 name="radio"
                 :checked="selectedType === 'outcome'"
                 @change="selectedType = 'outcome'"
-              ><span class="ml-2 text-gray-700">Outcome</span>
+              /><span class="ml-2 text-gray-700">Outcome</span>
             </label>
           </div>
 
-          <label class="block mt-5 mb-2 text-center text-sm font-medium text-gray-900">Select an Category</label>
+          <label
+            class="block mt-5 mb-2 text-center text-sm font-medium text-gray-900"
+            >Select an Category</label
+          >
           <div class="w-3/4 mx-auto">
-            <select v-model="category" class="bg-gray-50 border text-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 ">
+            <select
+              v-model="category"
+              class="bg-gray-50 border text-center border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            >
               <option selected value="0">Other</option>
               <option value="1">Bills</option>
               <option value="2">Food</option>
@@ -116,41 +126,44 @@ const addNewOperation = async () => {
             </select>
           </div>
 
-          <label class="block mt-5 mb-2 text-center text-sm font-medium text-gray-900">Select Date</label>
+          <label
+            class="block mt-5 mb-2 text-center text-sm font-medium text-gray-900"
+            >Select Date</label
+          >
           <div class="text-center">
             <Datepicker
-                      v-model="selectedDate"
-                      inline
-                      monday-first
-                      placeholder="DD-MM-YYYY"
-                      :typeable="false"
-                      :hideInput="true"
-              />
+              v-model="selectedDate"
+              inline
+              monday-first
+              placeholder="DD-MM-YYYY"
+              :typeable="false"
+              :hideInput="true"
+            />
           </div>
 
           <div class="items-center justify-center text-center">
-                <div class="mt-4 w-3/4 mx-auto">
-                    <input
-                    placeholder="Enter Description"
-                    name="title"
-                    type="text"
-                    maxlength="50"
-                    class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
-                    v-model="description"
-                    />
-                </div>
-                <div class="mt-4 w-3/4 mx-auto">
-                    <input
-                    placeholder="Enter amount"
-                    name="amount"
-                    type="text"
-                    maxlength="10"
-                    class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
-                    v-model="amount"
-                    @input="validateInput"
-                    />
-                </div>
+            <div class="mt-4 w-3/4 mx-auto">
+              <input
+                placeholder="Enter Description"
+                name="title"
+                type="text"
+                maxlength="50"
+                class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
+                v-model="description"
+              />
             </div>
+            <div class="mt-4 w-3/4 mx-auto">
+              <input
+                placeholder="Enter amount"
+                name="amount"
+                type="text"
+                maxlength="10"
+                class="block w-full text-center rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-gray-300 ring-inset placeholder:text-gray-400 focus:ring-1 focus:ring-inset sm:text-sm sm:leading-6"
+                v-model="amount"
+                @input="validateInput"
+              />
+            </div>
+          </div>
           <!-- Footer -->
           <div class="flex justify-center pt-2">
             <button

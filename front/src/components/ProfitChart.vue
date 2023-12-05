@@ -1,5 +1,7 @@
 <template>
-    <div class="w-full bg-white border-2 border-slate-50 rounded-lg shadow-lg p-4 md:p-6">
+  <div
+    class="w-full bg-white border-2 border-slate-50 rounded-lg shadow-lg p-4 md:p-6"
+  >
     <div class="flex justify-center border-gray-200 border-b pb-3">
       <dl>
         <dt class="leading-none text-xl font-medium text-gray-700 pb-1">
@@ -10,17 +12,13 @@
 
     <div class="grid grid-cols-2 py-3 text-center">
       <dl>
-        <dt class="text-base font-normal text-gray-500">
-          Income
-        </dt>
+        <dt class="text-base font-normal text-gray-500">Income</dt>
         <dd class="leading-none text-xl font-bold text-green-500">
           {{ totalIncome }} PLN
         </dd>
       </dl>
       <dl>
-        <dt class="text-base font-normal text-gray-500">
-          Expense
-        </dt>
+        <dt class="text-base font-normal text-gray-500">Expense</dt>
         <dd class="leading-none text-xl font-bold text-red-600">
           {{ totalExpense }} PLN
         </dd>
@@ -28,8 +26,10 @@
     </div>
 
     <div id="bar-chart"></div>
-    <p v-if="isDataLacking" class="text-center text-xl mt-10 mb-10">Lack of data</p>
-    
+    <p v-if="isDataLacking" class="text-center text-xl mt-10 mb-10">
+      Lack of data
+    </p>
+
     <div class="grid grid-cols-1 items-center border-gray-200 mt-5 border-t">
       <div class="flex items-center justify-center pt-5 relative">
         <!-- Button -->
@@ -41,21 +41,21 @@
         >
           {{ selectedOption }}
           <svg
-              class="ml-2"
-              xmlns="http://www.w3.org/2000/svg"
-              height="1em"
-              viewBox="0 0 320 512"
-              fill="#6b7280"
-            >
-              <path
-                v-if="!isDropdownOpen"
-                d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
-              />
-              <path
-                v-else="!isDropdownOpen"
-                d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"
-              />
-            </svg>
+            class="ml-2"
+            xmlns="http://www.w3.org/2000/svg"
+            height="1em"
+            viewBox="0 0 320 512"
+            fill="#6b7280"
+          >
+            <path
+              v-if="!isDropdownOpen"
+              d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
+            />
+            <path
+              v-else="!isDropdownOpen"
+              d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"
+            />
+          </svg>
         </button>
         <div
           ref="dropdownMenu"
@@ -84,19 +84,19 @@
 <script setup>
 import ApexCharts from "apexcharts";
 import { onMounted, ref, watch } from "vue";
-import { getProfitDataByUser } from '../api'
+import { getProfitDataByUser } from "../api";
 import { useRouter } from "vue-router";
-import dayjs from 'dayjs'
+import dayjs from "dayjs";
 
 const router = useRouter();
 
 const totalIncome = ref(0);
 const totalExpense = ref(0);
-const userId = Number(router.currentRoute.value.params.id)
+const userId = Number(router.currentRoute.value.params.id);
 
 let chart = null;
 const isDataLacking = ref(false);
-const chartHeight = 250
+const chartHeight = 250;
 
 const operations = defineProps({
   operations: {
@@ -111,27 +111,27 @@ watch(operations, () => {
 });
 
 const formatDate = (date) => {
-  const newDate = dayjs(date).format('YYYY-MM-DD')
+  const newDate = dayjs(date).format("YYYY-MM-DD");
   return newDate;
 };
 
 const fetchProfitData = async (selected) => {
   try {
     const { startDate, endDate } = calculateStartDate(selected);
-    const response = await getProfitDataByUser(userId, startDate, endDate)
-    const data  = response.data;
+    const response = await getProfitDataByUser(userId, startDate, endDate);
+    const data = response.data;
     totalIncome.value = data.totalIncome;
     totalExpense.value = data.totalExpense;
     initOrUpdateChart(); // Update the chart after data fetch
   } catch (error) {
-    console.error('Error fetching profit data:', error);
+    console.error("Error fetching profit data:", error);
   }
 };
 
 // Function to initialize or update the chart
 const initOrUpdateChart = () => {
   const barChart = document.getElementById("bar-chart");
-  if (barChart && typeof ApexCharts !== 'undefined') {
+  if (barChart && typeof ApexCharts !== "undefined") {
     if (isDataLacking.value) {
       if (chart) {
         chart.destroy(); // Destroy the existing chart instance if present
@@ -142,7 +142,7 @@ const initOrUpdateChart = () => {
       chart.render();
       const seriesData = [
         { data: [totalIncome.value] },
-        { data: [totalExpense.value] }
+        { data: [totalExpense.value] },
       ];
 
       if (chart) {
@@ -168,7 +168,7 @@ onMounted(async () => {
   await fetchProfitData(selectedOption.value);
   checkDataAvailability();
   initOrUpdateChart();
-})
+});
 
 const calculateStartDate = (selected) => {
   const currentDate = new Date();
@@ -231,7 +231,7 @@ const calculateStartDate = (selected) => {
     default: {
       return {
         startDate: formatDate(currentDate),
-        endDate: formatDate(currentDate)
+        endDate: formatDate(currentDate),
       };
     }
   }
@@ -257,7 +257,7 @@ const toggleDropdown = () => {
   if (dropdownMenu.value) {
     dropdownMenu.value.style.display = isDropdownOpen.value ? "block" : "none";
   }
-}
+};
 
 const selectOption = (index) => {
   selectedOption.value = optionsBtn[index];
@@ -339,13 +339,13 @@ const options = {
       show: true,
       style: {
         fontFamily: "Inter, sans-serif",
-        cssClass: 'text-[11px] font-normal fill-gray-500',
+        cssClass: "text-[11px] font-normal fill-gray-500",
       },
       formatter: function (value) {
         return value + " PLN";
       },
     },
-    categories: [''],
+    categories: [""],
     axisTicks: {
       show: false,
     },
@@ -358,7 +358,7 @@ const options = {
       show: true,
       style: {
         fontFamily: "Inter, sans-serif",
-        cssClass: 'text-xs font-normal fill-gray-500',
+        cssClass: "text-xs font-normal fill-gray-500",
       },
     },
   },

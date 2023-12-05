@@ -1,5 +1,7 @@
 <template>
-  <div class="w-full bg-white border-2 border-slate-50 rounded-lg shadow-lg p-4 md:p-6">
+  <div
+    class="w-full bg-white border-2 border-slate-50 rounded-lg shadow-lg p-4 md:p-6"
+  >
     <div class="flex justify-center border-gray-200 border-b pb-3">
       <dl>
         <dt class="leading-none text-xl font-medium text-gray-700 pb-1">
@@ -10,10 +12,15 @@
 
     <div class="mt-8">
       <div class="flex items-center justify-center">
-        <canvas ref="pieChart" style="max-width: 320px; max-height: 319px;"></canvas>
+        <canvas
+          ref="pieChart"
+          style="max-width: 320px; max-height: 319px"
+        ></canvas>
       </div>
 
-      <div class="grid grid-cols-1 items-center border-gray-200 mt-5 border-t dark:border-gray-700">
+      <div
+        class="grid grid-cols-1 items-center border-gray-200 mt-5 border-t dark:border-gray-700"
+      >
         <div class="flex items-center justify-center pt-5 relative">
           <button
             @click="toggleDropdown"
@@ -68,17 +75,17 @@ import { onMounted, ref, watch } from "vue";
 import Chart from "chart.js/auto";
 import { getOperationsFiltered } from "../api";
 import { useRouter } from "vue-router";
-import dayjs from 'dayjs'
+import dayjs from "dayjs";
 
 const router = useRouter();
-const userId = Number(router.currentRoute.value.params.id)
+const userId = Number(router.currentRoute.value.params.id);
 
 const categoryMappings = [
-  { value: 0, name: 'Other', color: 'pink' },
-  { value: 1, name: 'Bills', color: 'red' },
-  { value: 2, name: 'Food', color: 'green' },
-  { value: 3, name: 'Education', color: 'blue' },
-  { value: 4, name: 'Entertainment', color: 'purple' },
+  { value: 0, name: "Other", color: "pink" },
+  { value: 1, name: "Bills", color: "red" },
+  { value: 2, name: "Food", color: "green" },
+  { value: 3, name: "Education", color: "blue" },
+  { value: 4, name: "Entertainment", color: "purple" },
 ];
 
 const pieChart = ref(null);
@@ -98,11 +105,15 @@ onMounted(async () => {
   await fetchData(selectedOption.value);
 });
 
-
 const fetchData = async (selected) => {
   try {
     const { startDate, endDate } = calculateStartDate(selected);
-    const response = await getOperationsFiltered(userId, startDate, endDate, 'outcome');
+    const response = await getOperationsFiltered(
+      userId,
+      startDate,
+      endDate,
+      "outcome"
+    );
     const { data } = response;
 
     if (data.length > 0) {
@@ -121,19 +132,23 @@ const fetchData = async (selected) => {
     }
   } catch (error) {
     if (pieChart.value.chart) {
-        pieChart.value.chart.destroy();
-      }
+      pieChart.value.chart.destroy();
+    }
     showNoDataMessage();
   }
 };
 
 const showNoDataMessage = () => {
-  const ctx = pieChart.value.getContext('2d');
+  const ctx = pieChart.value.getContext("2d");
   ctx.clearRect(0, 0, pieChart.value.width, pieChart.value.height);
-  ctx.font = '20px Arial';
-  ctx.fillStyle = 'black';
-  ctx.textAlign = 'center';
-  ctx.fillText('Lack of data', pieChart.value.width / 2, pieChart.value.height / 2);
+  ctx.font = "20px Arial";
+  ctx.fillStyle = "black";
+  ctx.textAlign = "center";
+  ctx.fillText(
+    "Lack of data",
+    pieChart.value.width / 2,
+    pieChart.value.height / 2
+  );
 };
 
 const operations = defineProps({
@@ -149,7 +164,7 @@ watch(operations, () => {
 });
 
 const formatDate = (date) => {
-  const newDate = dayjs(date).format('YYYY-MM-DD')
+  const newDate = dayjs(date).format("YYYY-MM-DD");
   return newDate;
 };
 
@@ -214,7 +229,7 @@ const calculateStartDate = (selected) => {
     default: {
       return {
         startDate: formatDate(currentDate),
-        endDate: formatDate(currentDate)
+        endDate: formatDate(currentDate),
       };
     }
   }
@@ -224,13 +239,13 @@ const transformDataForChart = (data) => {
   const categoryAmounts = {};
 
   data.forEach((operation) => {
-      const category = operation.category;
+    const category = operation.category;
 
-      if (!categoryAmounts[category]) {
-        categoryAmounts[category] = 0;
-      }
+    if (!categoryAmounts[category]) {
+      categoryAmounts[category] = 0;
+    }
 
-      categoryAmounts[category] += operation.amount;
+    categoryAmounts[category] += operation.amount;
   });
 
   const labels = [];
@@ -238,7 +253,9 @@ const transformDataForChart = (data) => {
   const colors = [];
 
   Object.entries(categoryAmounts).forEach(([categoryId, totalAmount]) => {
-    const categoryMapping = categoryMappings.find((cat) => cat.value === parseInt(categoryId));
+    const categoryMapping = categoryMappings.find(
+      (cat) => cat.value === parseInt(categoryId)
+    );
 
     if (categoryMapping) {
       labels.push(categoryMapping.name);
@@ -251,7 +268,7 @@ const transformDataForChart = (data) => {
 };
 
 const updateChart = (labels, values, colors) => {
-  const ctx = pieChart.value.getContext('2d');
+  const ctx = pieChart.value.getContext("2d");
   const data = {
     labels: labels,
     datasets: [
@@ -267,7 +284,7 @@ const updateChart = (labels, values, colors) => {
   }
 
   pieChart.value.chart = new Chart(ctx, {
-    type: 'pie',
+    type: "pie",
     data: data,
     options: {
       elements: {
@@ -275,13 +292,13 @@ const updateChart = (labels, values, colors) => {
           spacing: 0,
           borderRadius: 15,
           offset: 20,
-          },
+        },
       },
       plugins: {
         tooltip: {
           callbacks: {
             label: (context) => {
-              const label = context.label || '';
+              const label = context.label || "";
               const value = context.parsed || 0;
               return `${label}: ${value.toFixed(2)} PLN`;
             },

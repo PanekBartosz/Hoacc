@@ -1,19 +1,24 @@
 <script setup lang="ts">
-import { computed, ref, onMounted, Ref, nextTick  } from "vue";
+import { computed, ref, onMounted, Ref, nextTick } from "vue";
 import MainNavbar from "./MainNavbar.vue";
 import { Pagination } from "flowbite-vue";
-import ProfitChart from "./ProfitChart.vue"
+import ProfitChart from "./ProfitChart.vue";
 import SavingsChart from "./SavingsChart.vue";
 import CategoryChart from "./CategoryChart.vue";
 import OperationsModal from "./OperationsModal.vue";
 import NotificationsModal from "./NotificationsModal.vue";
 import EditOperationsModal from "./EditOperationsModal.vue";
 import GoalsModal from "./GoalsModal.vue";
-import EditGoalsModal from "./EditGoalsModal.vue"
-import { getOperations,getNotifications,deleteNotification,getGoals } from '../api';
-import { format } from 'date-fns';
-import { enUS } from 'date-fns/locale';
-import Chart, { ChartOptions } from 'chart.js/auto';
+import EditGoalsModal from "./EditGoalsModal.vue";
+import {
+  getOperations,
+  getNotifications,
+  deleteNotification,
+  getGoals,
+} from "../api";
+import { format } from "date-fns";
+import { enUS } from "date-fns/locale";
+import Chart, { ChartOptions } from "chart.js/auto";
 import { useRouter } from "vue-router";
 
 interface Operation {
@@ -47,12 +52,12 @@ interface Goal {
 }
 
 const categoryMappings: Category[] = [
-  { value: 0, name: 'Other', color: 'pink' },
-  { value: 1, name: 'Bills', color: 'red' },
-  { value: 2, name: 'Food', color: 'green' },
-  { value: 3, name: 'Education', color: 'blue' },
-  { value: 4, name: 'Entertainment', color: 'purple' },
-]
+  { value: 0, name: "Other", color: "pink" },
+  { value: 1, name: "Bills", color: "red" },
+  { value: 2, name: "Food", color: "green" },
+  { value: 3, name: "Education", color: "blue" },
+  { value: 4, name: "Entertainment", color: "purple" },
+];
 
 const currentPage = ref(1);
 const operations = ref<Operation[]>([]);
@@ -64,14 +69,14 @@ const router = useRouter();
 
 const totalIncome = computed(() => {
   const currentDate = new Date();
-  
+
   return operations.value
-    .filter(o => {
+    .filter((o) => {
       const operationDate = new Date(o.date);
       return (
         operationDate.getFullYear() === currentDate.getFullYear() &&
         operationDate.getMonth() === currentDate.getMonth() &&
-        o.type.toLowerCase() === 'income'
+        o.type.toLowerCase() === "income"
       );
     })
     .reduce((total, operation) => total + operation.amount, 0);
@@ -79,14 +84,14 @@ const totalIncome = computed(() => {
 
 const totalOutcome = computed(() => {
   const currentDate = new Date();
-  
+
   return operations.value
-    .filter(o => {
+    .filter((o) => {
       const operationDate = new Date(o.date);
       return (
         operationDate.getFullYear() === currentDate.getFullYear() &&
         operationDate.getMonth() === currentDate.getMonth() &&
-        o.type.toLowerCase() === 'outcome'
+        o.type.toLowerCase() === "outcome"
       );
     })
     .reduce((total, operation) => total + operation.amount, 0);
@@ -98,12 +103,12 @@ const totalSavings = computed(() => {
 
 const formatDate = (dateString: Date): string => {
   const date = new Date(dateString);
-  return format(date, 'dd MMMM yyyy', { locale: enUS }).toUpperCase();
+  return format(date, "dd MMMM yyyy", { locale: enUS }).toUpperCase();
 };
 
 const formatDateNotification = (dateString: Date): string => {
   const date = new Date(dateString);
-  return format(date, 'dd.MM.yyyy').toUpperCase();
+  return format(date, "dd.MM.yyyy").toUpperCase();
 };
 
 const fetchOperations = async () => {
@@ -112,11 +117,11 @@ const fetchOperations = async () => {
       const response = await getOperations(userId.value);
       operations.value = response.data || [];
     } else {
-      console.error('User ID is undefined.');
+      console.error("User ID is undefined.");
     }
   } catch (error) {
     operations.value = [];
-    console.error('Error fetching operations:', error.response?.data);
+    console.error("Error fetching operations:", error.response?.data);
   }
 };
 
@@ -126,32 +131,32 @@ const fetchGoals = async () => {
       const response = await getGoals(userId.value);
       goals.value = response.data || [];
     } else {
-      console.error('User ID is undefined.');
+      console.error("User ID is undefined.");
     }
-    updateCharts()
+    updateCharts();
   } catch (error) {
     goals.value = [];
-    console.error('Error fetching goals:', error.response?.data);
+    console.error("Error fetching goals:", error.response?.data);
   }
 };
 
 // Function to generate a random color excluding white and black
 const generateRandomColor = () => {
-      let randomColor;
-      do {
-        randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
-      } while (randomColor === '#ffffff' || randomColor === '#000000');
-      return randomColor;
+  let randomColor;
+  do {
+    randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+  } while (randomColor === "#ffffff" || randomColor === "#000000");
+  return randomColor;
 };
 
 // Function to calculate percentage completed
 const calculatePercentageCompleted = (currentAmount, goalAmount) => {
-  return ((currentAmount / goalAmount) * 100).toFixed(0) + '%';
+  return ((currentAmount / goalAmount) * 100).toFixed(0) + "%";
 };
 
 // Function to calculate percentage remaining
 const calculatePercentageRemaining = (currentAmount, goalAmount) => {
-  return ((currentAmount / goalAmount) * 100).toFixed(0) + '%';
+  return ((currentAmount / goalAmount) * 100).toFixed(0) + "%";
 };
 
 const chartOptions = (goalAmount) => {
@@ -170,10 +175,16 @@ const chartOptions = (goalAmount) => {
             const value = context.dataset.data[labelIndex];
 
             if (labelIndex === 0) {
-              const remainingPercentage = calculatePercentageRemaining(value, goalAmount);
+              const remainingPercentage = calculatePercentageRemaining(
+                value,
+                goalAmount
+              );
               return `Remaining: ${remainingPercentage}`;
             } else {
-              const completedPercentage = calculatePercentageCompleted(value, goalAmount);
+              const completedPercentage = calculatePercentageCompleted(
+                value,
+                goalAmount
+              );
               return `Completed: ${completedPercentage}`;
             }
           },
@@ -185,37 +196,47 @@ const chartOptions = (goalAmount) => {
 
 const updateCharts = async () => {
   try {
-    const response = await getGoals(Number(router.currentRoute.value.params.id));
+    const response = await getGoals(
+      Number(router.currentRoute.value.params.id)
+    );
     goals.value = response.data;
 
     await nextTick();
 
     goals.value.forEach(async (goal, index) => {
-      const canvasRef = document.querySelector(`#goalChart_${index}`) as HTMLCanvasElement;
+      const canvasRef = document.querySelector(
+        `#goalChart_${index}`
+      ) as HTMLCanvasElement;
       if (canvasRef) {
-        const ctx = canvasRef.getContext('2d');
+        const ctx = canvasRef.getContext("2d");
         if (ctx) {
-          const options = chartOptions(goal.goalAmount)
+          const options = chartOptions(goal.goalAmount);
 
           // Check if chart already exists for this canvas
           const existingChart = Chart.getChart(ctx);
           if (existingChart) {
             existingChart.data.datasets = [
               {
-                data: [goal.goalAmount - goal.currentAmount, goal.currentAmount],
-                backgroundColor: ['#CCCCCC', generateRandomColor()],
+                data: [
+                  goal.goalAmount - goal.currentAmount,
+                  goal.currentAmount,
+                ],
+                backgroundColor: ["#CCCCCC", generateRandomColor()],
               },
             ];
-            existingChart.options = options
+            existingChart.options = options;
             existingChart.update();
           } else {
             new Chart(ctx, {
-              type: 'doughnut',
+              type: "doughnut",
               data: {
                 datasets: [
                   {
-                    data: [goal.goalAmount - goal.currentAmount, goal.currentAmount],
-                    backgroundColor: ['#CCCCCC', generateRandomColor()],
+                    data: [
+                      goal.goalAmount - goal.currentAmount,
+                      goal.currentAmount,
+                    ],
+                    backgroundColor: ["#CCCCCC", generateRandomColor()],
                   },
                 ],
               },
@@ -226,7 +247,7 @@ const updateCharts = async () => {
       }
     });
   } catch (error) {
-    console.error('Error fetching goals:', error.response?.data);
+    console.error("Error fetching goals:", error.response?.data);
   }
 };
 
@@ -237,7 +258,7 @@ onMounted(async () => {
     await fetchOperations();
     await fetchGoals();
   } catch (error) {
-    console.error('Error fetching goals:', error.response?.data);
+    console.error("Error fetching goals:", error.response?.data);
   }
 });
 
@@ -254,12 +275,10 @@ const paginatedOperations = computed(() => {
   const startIndex = (currentPage.value - 1) * perPage;
   const endIndex = startIndex + perPage;
 
-  return sortedOperations
-    .slice(startIndex, endIndex)
-    .map((o: Operation) => {
-      const categoryInfo = categoryMappings.find(c => c.value === o.category);
-      return { ...o, categoryInfo };
-    });
+  return sortedOperations.slice(startIndex, endIndex).map((o: Operation) => {
+    const categoryInfo = categoryMappings.find((c) => c.value === o.category);
+    return { ...o, categoryInfo };
+  });
 });
 
 const fetchNotifications = async () => {
@@ -268,10 +287,10 @@ const fetchNotifications = async () => {
       const response = await getNotifications(userId.value);
       notifications.value = response.data;
     } else {
-      console.error('User ID is undefined.');
+      console.error("User ID is undefined.");
     }
   } catch (error) {
-    console.error('Error fetching notifications:', error.response?.data);
+    console.error("Error fetching notifications:", error.response?.data);
   }
 };
 
@@ -281,16 +300,18 @@ const deleteNotificationLocal = async (index) => {
     await deleteNotification(notificationId);
     notifications.value.splice(index, 1);
   } catch (error) {
-    alert('Error deleting notification')
+    alert("Error deleting notification");
   }
 };
-
 </script>
 <template>
   <MainNavbar class="" />
   <div class="w-full h-full flex flex-col p-5">
     <!-- Container 1-->
-    <div id="home" class="w-full h-full mt-10 bg-white rounded-lg shadow-lg p-4 mb-5">
+    <div
+      id="home"
+      class="w-full h-full mt-10 bg-white rounded-lg shadow-lg p-4 mb-5"
+    >
       <h3 class="text-xl font-medium text-gray-700">Monthly balance</h3>
       <div class="mt-3">
         <div class="flex flex-wrap -mx-6">
@@ -336,10 +357,7 @@ const deleteNotificationLocal = async (index) => {
     >
       <div id="operations" class="flex flex-row justify-between">
         <h3 class="text-xl font-medium text-gray-700">Operations</h3>
-        <OperationsModal 
-        :fetchOperations="fetchOperations"
-        :userId="userId"
-        />
+        <OperationsModal :fetchOperations="fetchOperations" :userId="userId" />
       </div>
       <div class="flex flex-col mt-3">
         <div
@@ -400,9 +418,10 @@ const deleteNotificationLocal = async (index) => {
                   <td
                     class="px-6 py-4 border-b border-gray-200 whitespace-nowrap"
                   >
-                  <span
-                    :class="`inline-flex px-2 text-xs font-semibold leading-5 text-${o.categoryInfo?.color}-800 bg-${o.categoryInfo?.color}-200 rounded-full`"
-                    >{{ o.categoryInfo?.name }}</span>
+                    <span
+                      :class="`inline-flex px-2 text-xs font-semibold leading-5 text-${o.categoryInfo?.color}-800 bg-${o.categoryInfo?.color}-200 rounded-full`"
+                      >{{ o.categoryInfo?.name }}</span
+                    >
                   </td>
 
                   <td
@@ -415,10 +434,10 @@ const deleteNotificationLocal = async (index) => {
                   <td
                     class="px-6 py-4 leading-5 text-right border-b border-gray-200"
                   >
-                  <EditOperationsModal 
-                    :operation="o"
-                    :fetchOperations="fetchOperations"
-                  />
+                    <EditOperationsModal
+                      :operation="o"
+                      :fetchOperations="fetchOperations"
+                    />
                   </td>
                 </tr>
               </tbody>
@@ -439,76 +458,87 @@ const deleteNotificationLocal = async (index) => {
 
     <!-- Container 3 & 4  -->
     <div class="w-full h-full lg:flex">
-      <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2 lg:mr-5">
+      <div
+        class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2 lg:mr-5"
+      >
         <div id="notifications" class="flex flex-row justify-between">
           <h3 class="text-xl font-medium text-gray-700">Notifications</h3>
-          <NotificationsModal 
-            :userId="userId" 
+          <NotificationsModal
+            :userId="userId"
             :fetchNotifications="fetchNotifications"
           />
         </div>
         <div class="flex flex-row my-3 overflow-auto">
-            <div v-for="(notification, index) in notifications" :key="index" class="bg-white border border-t-4 border-t-blue-500 rounded-xl text-center shadow-md p-4 mx-3 my-3">
-              <div class="font-bold text-gray-700">{{ notification.name }}</div>
-              <div class="text-gray-500">{{ formatDateNotification(notification.date) }}</div>
-              <div class="text-gray-900">{{ notification.amount + " PLN"}}</div>
-              <button @click="deleteNotificationLocal(index)" class="text-red-600 hover:text-red-900 mt-2">Delete</button>
+          <div
+            v-for="(notification, index) in notifications"
+            :key="index"
+            class="bg-white border border-t-4 border-t-blue-500 rounded-xl text-center shadow-md p-4 mx-3 my-3"
+          >
+            <div class="font-bold text-gray-700">{{ notification.name }}</div>
+            <div class="text-gray-500">
+              {{ formatDateNotification(notification.date) }}
             </div>
+            <div class="text-gray-900">{{ notification.amount + " PLN" }}</div>
+            <button
+              @click="deleteNotificationLocal(index)"
+              class="text-red-600 hover:text-red-900 mt-2"
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
-      
 
-      <div class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2 overflow-x-auto">
-    <div id="goals" class="flex flex-row justify-between mb-6">
-      <h3 class="text-xl font-medium text-gray-700">Goals</h3>
-      <GoalsModal 
-        :userId="userId" 
-        :fetchGoals="fetchGoals"
-      />
-    </div>
-
-    <div class="flex flex-no-wrap space-x-4 overflow-x-auto">
-      <!-- Loop through goals and create a chart for each one -->
-      <div v-for="(goal, index) in goals" :key="index" class="rounded-lg w-min flex items-center shadow-lg p-1 border-2 border-slate-50 mb-4">
-        <div class="w-32">
-          <!-- Use ref to create a reactive reference for the chart -->
-          <canvas :id="`goalChart_${index}`" class="h-[120px] w-[120px]"></canvas>
+      <div
+        class="flex-grow bg-white rounded-lg shadow-lg p-4 mb-5 lg:w-1/2 overflow-x-auto"
+      >
+        <div id="goals" class="flex flex-row justify-between mb-6">
+          <h3 class="text-xl font-medium text-gray-700">Goals</h3>
+          <GoalsModal :userId="userId" :fetchGoals="fetchGoals" />
         </div>
-        <div class="text-center mr-2">
-          <h3 class="text-3xl mx-5 font-medium mb-2">{{ goal.name }}</h3>
-          <EditGoalsModal 
-            :userId="userId"
-            :goal="goal"
-            :fetchGoals="fetchGoals"
-          />
+
+        <div class="flex flex-no-wrap space-x-4 overflow-x-auto">
+          <!-- Loop through goals and create a chart for each one -->
+          <div
+            v-for="(goal, index) in goals"
+            :key="index"
+            class="rounded-lg w-min flex items-center shadow-lg p-1 border-2 border-slate-50 mb-4"
+          >
+            <div class="w-32">
+              <!-- Use ref to create a reactive reference for the chart -->
+              <canvas
+                :id="`goalChart_${index}`"
+                class="h-[120px] w-[120px]"
+              ></canvas>
+            </div>
+            <div class="text-center mr-2">
+              <h3 class="text-3xl mx-5 font-medium mb-2">{{ goal.name }}</h3>
+              <EditGoalsModal
+                :userId="userId"
+                :goal="goal"
+                :fetchGoals="fetchGoals"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  </div >
 
     <!-- Container 5  -->
     <div id="statics" class="w-full h-full bg-white rounded-lg shadow-lg p-4">
-      <div  class="flex flex-row mb-3">
+      <div class="flex flex-row mb-3">
         <h3 class="text-xl font-medium text-gray-700">Statics</h3>
       </div>
       <div class="w-full flex flex-wrap">
         <div class="w-full">
-          <ProfitChart 
-          :operations="operations"
-          class="mb-5"/>
+          <ProfitChart :operations="operations" class="mb-5" />
         </div>
         <div class="w-full md:flex md:flex-wrap md:space-x-0">
           <div class="w-full md:w-1/2 mb-2">
-            <SavingsChart 
-            :operations="operations"
-            class="w-full" />
+            <SavingsChart :operations="operations" class="w-full" />
           </div>
           <div class="w-full md:w-1/2 mb-2">
-            <CategoryChart
-            :operations="operations"
-            class="w-full" />
+            <CategoryChart :operations="operations" class="w-full" />
           </div>
         </div>
       </div>

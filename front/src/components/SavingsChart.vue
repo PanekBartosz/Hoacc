@@ -25,21 +25,21 @@
         >
           {{ selectedOption }}
           <svg
-              class="ml-2"
-              xmlns="http://www.w3.org/2000/svg"
-              height="1em"
-              viewBox="0 0 320 512"
-              fill="#6b7280"
-            >
-              <path
-                v-if="!isDropdownOpen"
-                d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
-              />
-              <path
-                v-else="!isDropdownOpen"
-                d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"
-              />
-            </svg>
+            class="ml-2"
+            xmlns="http://www.w3.org/2000/svg"
+            height="1em"
+            viewBox="0 0 320 512"
+            fill="#6b7280"
+          >
+            <path
+              v-if="!isDropdownOpen"
+              d="M137.4 374.6c12.5 12.5 32.8 12.5 45.3 0l128-128c9.2-9.2 11.9-22.9 6.9-34.9s-16.6-19.8-29.6-19.8L32 192c-12.9 0-24.6 7.8-29.6 19.8s-2.2 25.7 6.9 34.9l128 128z"
+            />
+            <path
+              v-else="!isDropdownOpen"
+              d="M182.6 137.4c-12.5-12.5-32.8-12.5-45.3 0l-128 128c-9.2 9.2-11.9 22.9-6.9 34.9s16.6 19.8 29.6 19.8H288c12.9 0 24.6-7.8 29.6-19.8s2.2-25.7-6.9-34.9l-128-128z"
+            />
+          </svg>
         </button>
         <div
           ref="dropdownMenu"
@@ -68,9 +68,9 @@
 <script setup>
 import ApexCharts from "apexcharts";
 import { onMounted, ref, onUnmounted, watch } from "vue";
-import { getProfitDataByUser } from '../api'
+import { getProfitDataByUser } from "../api";
 import { useRouter } from "vue-router";
-import dayjs from 'dayjs'
+import dayjs from "dayjs";
 
 const options = {
   colors: ["#1A56DB", "#FDBA8C"],
@@ -107,7 +107,7 @@ const options = {
       formatter: function (value) {
         return value + " PLN"; // Append "PLN" to the hovered value
       },
-    }
+    },
   },
   states: {
     hover: {
@@ -162,7 +162,7 @@ const options = {
 };
 
 const router = useRouter();
-const userId = Number(router.currentRoute.value.params.id)
+const userId = Number(router.currentRoute.value.params.id);
 let chart = null;
 const isDataLacking = ref(false);
 
@@ -174,29 +174,51 @@ const operations = defineProps({
 });
 
 // Watch for changes in operations and update the chart
-watch(operations,async () => {
+watch(operations, async () => {
   const lastThreeMonthsSavings = await getMonthlySavingsForLastYear(3);
-    renderChart(lastThreeMonthsSavings);
+  renderChart(lastThreeMonthsSavings);
 });
 
 const getMonthlySavingsForLastYear = async (monthsToFetch) => {
   const currentDate = new Date();
   const months = [
-    "January", "February", "March", "April", "May", "June", 
-    "July", "August", "September", "October", "November", "December"
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   const lastYearSavings = [];
 
   for (let i = 0; i < monthsToFetch; i++) {
     // Fetch data for each month
-    const startDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - i, 1);
-    const endDate = new Date(currentDate.getFullYear(), currentDate.getMonth() - i + 1, 0);
+    const startDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() - i,
+      1
+    );
+    const endDate = new Date(
+      currentDate.getFullYear(),
+      currentDate.getMonth() - i + 1,
+      0
+    );
 
-    const formattedStartDate = dayjs(startDate).format('YYYY-MM-DD');
-    const formattedEndDate = dayjs(endDate).format('YYYY-MM-DD');
+    const formattedStartDate = dayjs(startDate).format("YYYY-MM-DD");
+    const formattedEndDate = dayjs(endDate).format("YYYY-MM-DD");
 
-    const response = await getProfitDataByUser(userId, formattedStartDate, formattedEndDate);
+    const response = await getProfitDataByUser(
+      userId,
+      formattedStartDate,
+      formattedEndDate
+    );
     const { totalIncome, totalExpense } = response.data;
     const totalSavings = totalIncome - totalExpense;
 
@@ -217,7 +239,7 @@ const renderChart = (data) => {
         {
           name: "Savings",
           color: "#FDBA8C",
-          data: data.map(item => ({ x: item.month, y: item.savings })),
+          data: data.map((item) => ({ x: item.month, y: item.savings })),
         },
       ],
     };
@@ -235,11 +257,7 @@ const renderChart = (data) => {
 
 const dropdownButton = ref(null);
 const dropdownMenu = ref(null);
-const optionsBtn = [
-  "Last 3 months",
-  "Last 6 months",
-  "Last year",
-];
+const optionsBtn = ["Last 3 months", "Last 6 months", "Last year"];
 const selectedOption = ref(optionsBtn[0]);
 const isDropdownOpen = ref(false);
 
@@ -258,7 +276,7 @@ const selectOption = async (index) => {
   if (dropdownMenu.value) {
     dropdownMenu.value.style.display = "none";
   }
-  
+
   // Get data based on the selected option
   let monthsToFetch = 3;
   switch (index) {
@@ -274,7 +292,7 @@ const selectOption = async (index) => {
     default:
       break;
   }
-  
+
   const lastYearSavings = await getMonthlySavingsForLastYear(monthsToFetch);
   renderChart(lastYearSavings);
 };
@@ -293,9 +311,12 @@ const closeDropdownOnClick = (event) => {
   }
 };
 
-onMounted(async() => {
+onMounted(async () => {
   document.addEventListener("click", closeDropdownOnClick);
-  if (document.getElementById("column-chart") && typeof ApexCharts !== "undefined") {
+  if (
+    document.getElementById("column-chart") &&
+    typeof ApexCharts !== "undefined"
+  ) {
     const lastThreeMonthsSavings = await getMonthlySavingsForLastYear(3);
     renderChart(lastThreeMonthsSavings);
   }
