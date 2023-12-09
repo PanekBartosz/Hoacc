@@ -220,7 +220,7 @@ const getMonthlySavingsForLastYear = async (monthsToFetch) => {
       formattedEndDate
     );
     const { totalIncome, totalExpense } = response.data;
-    const totalSavings = totalIncome - totalExpense;
+    const totalSavings = (totalIncome - totalExpense).toFixed(2);
 
     // Adjust the month index to start from the current month
     const monthIndex = (currentDate.getMonth() - i + 12) % 12;
