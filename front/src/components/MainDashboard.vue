@@ -98,7 +98,7 @@ const totalOutcome = computed(() => {
 });
 
 const totalSavings = computed(() => {
-  return totalIncome.value - totalOutcome.value;
+  return (totalIncome.value - totalOutcome.value).toFixed(2);
 });
 
 const formatDate = (dateString: Date): string => {
