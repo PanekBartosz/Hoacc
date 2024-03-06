@@ -31,7 +31,7 @@ public class AuthenticationController : ControllerBase
         if (user == null || !BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
             return Unauthorized("Invalid email or password");
 
-        // Generate JWT token
+        // Generate JWT Token
         var token = GenerateJwtToken(user.UserId);
 
         return Ok(new {user.UserId, token});
@@ -44,7 +44,8 @@ public class AuthenticationController : ControllerBase
 
         var claims = new[]
         {
-            new Claim(ClaimTypes.NameIdentifier, userId.ToString())
+            new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
+            new Claim("UserIdentity", "User:" + userId) // Custom claim representing user's identity
         };
 
         var token = new JwtSecurityToken(

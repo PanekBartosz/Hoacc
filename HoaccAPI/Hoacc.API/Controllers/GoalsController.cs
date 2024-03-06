@@ -34,6 +34,15 @@ public class GoalsController : ControllerBase
     [HttpGet("user/{userId}")]
     public async Task<IActionResult> GetGoalsByUser(int userId)
     {
+        // Extract user identity claim from the JWT token
+        var userIdentityClaim = User.Claims.FirstOrDefault(c => c.Type == "UserIdentity")?.Value;
+
+        // Ensure the user identity claim matches the requested user's identity
+        if (userIdentityClaim != $"User:{userId}")
+        {
+            return Forbid(); // Return 403 Forbidden if the user is not authorized
+        }
+        
         var goal = await _goalsService.GetGoalsByUser(userId);
 
         if (goal == null || !goal.Any()) return NotFound($"No notification found for user ID {userId}");

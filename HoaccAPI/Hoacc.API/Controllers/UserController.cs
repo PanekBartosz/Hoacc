@@ -36,6 +36,15 @@ public class UserController : ControllerBase
     [HttpGet("{userId:min(1)}", Name = "GetUserByUserId")]
     public async Task<IActionResult> GetUserByUserId(int userId)
     {
+        // Extract user identity claim from the JWT token
+        var userIdentityClaim = User.Claims.FirstOrDefault(c => c.Type == "UserIdentity")?.Value;
+
+        // Ensure the user identity claim matches the requested user's identity
+        if (userIdentityClaim != $"User:{userId}")
+        {
+            return Forbid(); // Return 403 Forbidden if the user is not authorized
+        }
+
         var user = await _userService.GetUserByUserId(userId);
         if (user != null) return Ok(UserToUserViewModelMapper.UserToUserViewModel(user));
         return NotFound();
@@ -45,6 +54,15 @@ public class UserController : ControllerBase
     [HttpGet("{userId:min(1)}/email", Name = "GetEmailByUserId")]
     public async Task<IActionResult> GetEmailByUserId(int userId)
     {
+        // Extract user identity claim from the JWT token
+        var userIdentityClaim = User.Claims.FirstOrDefault(c => c.Type == "UserIdentity")?.Value;
+
+        // Ensure the user identity claim matches the requested user's identity
+        if (userIdentityClaim != $"User:{userId}")
+        {
+            return Forbid(); // Return 403 Forbidden if the user is not authorized
+        }
+
         var email = await _userService.GetEmailByUserId(userId);
         if (email != null) return Ok(email);
         return NotFound();
@@ -67,6 +85,15 @@ public class UserController : ControllerBase
     [HttpPatch("{userId:min(1)}/password", Name = "UpdateUserPassword")]
     public async Task<IActionResult> UpdateUserPassword(int userId, [FromBody] UpdateUserPassword user)
     {
+        // Extract user identity claim from the JWT token
+        var userIdentityClaim = User.Claims.FirstOrDefault(c => c.Type == "UserIdentity")?.Value;
+
+        // Ensure the user identity claim matches the requested user's identity
+        if (userIdentityClaim != $"User:{userId}")
+        {
+            return Forbid(); // Return 403 Forbidden if the user is not authorized
+        }
+
         // Hash the new password before updating
         var hashedPassword = BCrypt.Net.BCrypt.HashPassword(user.Password);
 

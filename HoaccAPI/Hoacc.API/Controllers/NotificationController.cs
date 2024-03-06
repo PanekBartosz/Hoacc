@@ -35,6 +35,15 @@ public class NotificationController : ControllerBase
     [HttpGet("user/{userId}")]
     public async Task<IActionResult> GetNotificationsByUser(int userId)
     {
+        // Extract user identity claim from the JWT token
+        var userIdentityClaim = User.Claims.FirstOrDefault(c => c.Type == "UserIdentity")?.Value;
+
+        // Ensure the user identity claim matches the requested user's identity
+        if (userIdentityClaim != $"User:{userId}")
+        {
+            return Forbid(); // Return 403 Forbidden if the user is not authorized
+        }
+
         var notification = await _notificationService.GetNotificationByUser(userId);
 
         if (notification == null || !notification.Any()) return NotFound($"No notification found for user ID {userId}");

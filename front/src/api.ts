@@ -1,4 +1,5 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse, AxiosError } from "axios";
+import router from './router/index.ts'
 
 const apiClient = axios.create({
   baseURL: "https://localhost:5001/api",
@@ -18,8 +19,28 @@ export const setAuthToken = (token: string | null) => {
   }
 };
 
-export const getOperations = async (id: number): Promise<AxiosResponse> =>
-  apiClient.get(`/Operations/user/${id}`);
+export const getOperations = async (id: number): Promise<AxiosResponse> => {
+  try {
+    const response = await apiClient.get(`/Operations/user/${id}`);
+    return response;
+  } catch (error) {
+    if (axios.isAxiosError(error)) {
+      const axiosError = error as AxiosError;
+      if (axiosError.response?.status === 403) {
+        // Handle 403 Forbidden response
+        router.push('/dashboard/notFound');
+      } else {
+        // Handle other errors
+        console.error('An error occurred while fetching operations:', error.message);
+      }
+    } else {
+      // Handle network errors or other exceptions
+      console.error('An unexpected error occurred while fetching operations:', error);
+    }
+    // Rethrow the error to propagate it further if needed
+    throw error;
+  }
+};
 export const getNotifications = async (id: number): Promise<AxiosResponse> =>
   apiClient.get(`/Notification/user/${id}`);
 export const getGoals = async (id: number): Promise<AxiosResponse> =>

@@ -35,6 +35,15 @@ public class OperationsController : ControllerBase
     [HttpGet("user/{userId}")]
     public async Task<IActionResult> GetOperationsByUser(int userId)
     {
+        // Extract user identity claim from the JWT token
+        var userIdentityClaim = User.Claims.FirstOrDefault(c => c.Type == "UserIdentity")?.Value;
+
+        // Ensure the user identity claim matches the requested user's identity
+        if (userIdentityClaim != $"User:{userId}")
+        {
+            return Forbid(); // Return 403 Forbidden if the user is not authorized
+        }
+
         var operations = await _operationsService.GetOperationsByUser(userId);
 
         if (operations == null || !operations.Any()) return NotFound($"No operations found for user ID {userId}");
@@ -51,6 +60,15 @@ public class OperationsController : ControllerBase
         [FromQuery] string type = "outcome" // Default to "outcome"
     )
     {
+        // Extract user identity claim from the JWT token
+        var userIdentityClaim = User.Claims.FirstOrDefault(c => c.Type == "UserIdentity")?.Value;
+
+        // Ensure the user identity claim matches the requested user's identity
+        if (userIdentityClaim != $"User:{userId}")
+        {
+            return Forbid(); // Return 403 Forbidden if the user is not authorized
+        }
+
         var operations = await _operationsService.GetFilteredOperationsByUser(userId, startDate, endDate, type);
 
         if (operations == null || !operations.Any()) return NotFound($"No operations found for user ID {userId}");
@@ -68,6 +86,15 @@ public class OperationsController : ControllerBase
     {
         try
         {
+            // Extract user identity claim from the JWT token
+            var userIdentityClaim = User.Claims.FirstOrDefault(c => c.Type == "UserIdentity")?.Value;
+
+            // Ensure the user identity claim matches the requested user's identity
+            if (userIdentityClaim != $"User:{userId}")
+            {
+                return Forbid(); // Return 403 Forbidden if the user is not authorized
+            }
+
             var profitChartData = await _operationsService.GetProfitDataForUser(userId, startDate, endDate);
 
             if (profitChartData == null) return NotFound($"No profit data found for user ID {userId}");
