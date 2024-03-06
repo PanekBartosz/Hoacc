@@ -128,7 +128,7 @@ const deleteOperationLocal = async () => {
           </div>
 
           <label
-            class="block mt-5 mb-2 text-center text-sm font-medium text-gray-900"
+            class="block mt-5 mb-0 text-center text-sm font-medium text-gray-900"
             >Select an Category</label
           >
           <div class="w-3/4 mx-auto">
@@ -146,7 +146,7 @@ const deleteOperationLocal = async () => {
           </div>
 
           <label
-            class="block mt-5 mb-2 text-center text-sm font-medium text-gray-900"
+            class="block mt-3 mb-0 text-center text-sm font-medium text-gray-900"
             >Select Date</label
           >
           <div class="text-center">
@@ -194,14 +194,14 @@ const deleteOperationLocal = async () => {
           <!-- Footer -->
           <div class="text-center justify-center pt-2">
             <button
-              class="rounded-lg w-3/4 mt-5 bg-red-700 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              class="rounded-lg w-3/4 mt-1 bg-red-700 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               data-ripple-light="true"
               @click="deleteOperationLocal"
             >
               Delete
             </button>
             <button
-              class="rounded-lg w-3/4 mt-5 bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              class="rounded-lg w-3/4 mt-1 bg-slate-900 py-2 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-slate-500/20 transition-all hover:shadow-lg hover:shadow-slate-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
               data-ripple-light="true"
               @click="updateOperationLocal"
               :disabled="!isButtonEnabled"

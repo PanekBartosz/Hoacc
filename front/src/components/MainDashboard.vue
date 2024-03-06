@@ -85,7 +85,7 @@ const totalIncome = computed(() => {
 const totalOutcome = computed(() => {
   const currentDate = new Date();
 
-  return operations.value
+  const filteredOutcome = operations.value
     .filter((o) => {
       const operationDate = new Date(o.date);
       return (
@@ -93,8 +93,14 @@ const totalOutcome = computed(() => {
         operationDate.getMonth() === currentDate.getMonth() &&
         o.type.toLowerCase() === "outcome"
       );
-    })
-    .reduce((total, operation) => total + operation.amount, 0);
+    });
+
+  const totalAmount = filteredOutcome.reduce(
+    (total, operation) => total + operation.amount,
+    0
+  );
+
+  return Number(totalAmount.toFixed(2));
 });
 
 const totalSavings = computed(() => {
